@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "486354809018",
+    "project_id": "u22-2024",
+    "storage_bucket": "u22-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486354809018:android:303dec296107fa212b9283",
+        "android_client_info": {
+          "package_name": "jp.kosen_ac.kagawa.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2pyd51G15siy7seu2zYQQ81AjeTFzM_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
