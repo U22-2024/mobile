@@ -169,6 +169,106 @@ class TodoServiceCreateResponse extends $pb.GeneratedMessage {
   void clearDone() => clearField(4);
 }
 
+class TodoServiceDeleteRequest extends $pb.GeneratedMessage {
+  factory TodoServiceDeleteRequest({
+    $core.int? id,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    return $result;
+  }
+  TodoServiceDeleteRequest._() : super();
+  factory TodoServiceDeleteRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TodoServiceDeleteRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TodoServiceDeleteRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'proto.todo.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TodoServiceDeleteRequest clone() => TodoServiceDeleteRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TodoServiceDeleteRequest copyWith(void Function(TodoServiceDeleteRequest) updates) => super.copyWith((message) => updates(message as TodoServiceDeleteRequest)) as TodoServiceDeleteRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TodoServiceDeleteRequest create() => TodoServiceDeleteRequest._();
+  TodoServiceDeleteRequest createEmptyInstance() => create();
+  static $pb.PbList<TodoServiceDeleteRequest> createRepeated() => $pb.PbList<TodoServiceDeleteRequest>();
+  @$core.pragma('dart2js:noInline')
+  static TodoServiceDeleteRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TodoServiceDeleteRequest>(create);
+  static TodoServiceDeleteRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+}
+
+class TodoServiceDeleteResponse extends $pb.GeneratedMessage {
+  factory TodoServiceDeleteResponse({
+    $core.bool? succeded,
+  }) {
+    final $result = create();
+    if (succeded != null) {
+      $result.succeded = succeded;
+    }
+    return $result;
+  }
+  TodoServiceDeleteResponse._() : super();
+  factory TodoServiceDeleteResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TodoServiceDeleteResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TodoServiceDeleteResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'proto.todo.v1'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'succeded')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TodoServiceDeleteResponse clone() => TodoServiceDeleteResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TodoServiceDeleteResponse copyWith(void Function(TodoServiceDeleteResponse) updates) => super.copyWith((message) => updates(message as TodoServiceDeleteResponse)) as TodoServiceDeleteResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TodoServiceDeleteResponse create() => TodoServiceDeleteResponse._();
+  TodoServiceDeleteResponse createEmptyInstance() => create();
+  static $pb.PbList<TodoServiceDeleteResponse> createRepeated() => $pb.PbList<TodoServiceDeleteResponse>();
+  @$core.pragma('dart2js:noInline')
+  static TodoServiceDeleteResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TodoServiceDeleteResponse>(create);
+  static TodoServiceDeleteResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get succeded => $_getBF(0);
+  @$pb.TagNumber(1)
+  set succeded($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSucceded() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSucceded() => clearField(1);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

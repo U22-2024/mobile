@@ -25,6 +25,10 @@ class TodoServiceClient extends $grpc.Client {
       '/proto.todo.v1.TodoService/Create',
       ($0.TodoServiceCreateRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.TodoServiceCreateResponse.fromBuffer(value));
+  static final _$delete = $grpc.ClientMethod<$0.TodoServiceDeleteRequest, $0.TodoServiceDeleteResponse>(
+      '/proto.todo.v1.TodoService/Delete',
+      ($0.TodoServiceDeleteRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.TodoServiceDeleteResponse.fromBuffer(value));
 
   TodoServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -34,6 +38,10 @@ class TodoServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.TodoServiceCreateResponse> create($0.TodoServiceCreateRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$create, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.TodoServiceDeleteResponse> delete($0.TodoServiceDeleteRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$delete, request, options: options);
   }
 }
 
@@ -49,11 +57,23 @@ abstract class TodoServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.TodoServiceCreateRequest.fromBuffer(value),
         ($0.TodoServiceCreateResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.TodoServiceDeleteRequest, $0.TodoServiceDeleteResponse>(
+        'Delete',
+        delete_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.TodoServiceDeleteRequest.fromBuffer(value),
+        ($0.TodoServiceDeleteResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.TodoServiceCreateResponse> create_Pre($grpc.ServiceCall call, $async.Future<$0.TodoServiceCreateRequest> request) async {
     return create(call, await request);
   }
 
+  $async.Future<$0.TodoServiceDeleteResponse> delete_Pre($grpc.ServiceCall call, $async.Future<$0.TodoServiceDeleteRequest> request) async {
+    return delete(call, await request);
+  }
+
   $async.Future<$0.TodoServiceCreateResponse> create($grpc.ServiceCall call, $0.TodoServiceCreateRequest request);
+  $async.Future<$0.TodoServiceDeleteResponse> delete($grpc.ServiceCall call, $0.TodoServiceDeleteRequest request);
 }

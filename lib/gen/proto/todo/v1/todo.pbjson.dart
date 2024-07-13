@@ -44,3 +44,28 @@ final $typed_data.Uint8List todoServiceCreateResponseDescriptor = $convert.base6
     'EoCVIFdGl0bGUSIAoLZGVzY3JpcHRpb24YAyABKAlSC2Rlc2NyaXB0aW9uEhIKBGRvbmUYBCAB'
     'KAhSBGRvbmU=');
 
+@$core.Deprecated('Use todoServiceDeleteRequestDescriptor instead')
+const TodoServiceDeleteRequest$json = {
+  '1': 'TodoServiceDeleteRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `TodoServiceDeleteRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List todoServiceDeleteRequestDescriptor = $convert.base64Decode(
+    'ChhUb2RvU2VydmljZURlbGV0ZVJlcXVlc3QSDgoCaWQYASABKAVSAmlk');
+
+@$core.Deprecated('Use todoServiceDeleteResponseDescriptor instead')
+const TodoServiceDeleteResponse$json = {
+  '1': 'TodoServiceDeleteResponse',
+  '2': [
+    {'1': 'succeded', '3': 1, '4': 1, '5': 8, '10': 'succeded'},
+  ],
+};
+
+/// Descriptor for `TodoServiceDeleteResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List todoServiceDeleteResponseDescriptor = $convert.base64Decode(
+    'ChlUb2RvU2VydmljZURlbGV0ZVJlc3BvbnNlEhoKCHN1Y2NlZGVkGAEgASgIUghzdWNjZWRlZA'
+    '==');
+

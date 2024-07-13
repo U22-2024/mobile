@@ -11,6 +11,8 @@ if (-not (Test-Path $CMD)) {
     Write-Output "Downloaded buf"
 }
 
+remove-item -Recurse -Force ./lib/gen
+
 Write-Output "Exporting proto..."
 ./tools/bin/buf.exe export $REPO -o .
 
