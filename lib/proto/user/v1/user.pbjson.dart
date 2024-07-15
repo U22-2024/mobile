@@ -42,3 +42,30 @@ final $typed_data.Uint8List userServiceCreateResponseDescriptor = $convert.base6
     'ChlVc2VyU2VydmljZUNyZWF0ZVJlc3BvbnNlEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgAS'
     'gJUgRuYW1lEhQKBWVtYWlsGAMgASgJUgVlbWFpbA==');
 
+@$core.Deprecated('Use userServiceReadRequestDescriptor instead')
+const UserServiceReadRequest$json = {
+  '1': 'UserServiceReadRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `UserServiceReadRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userServiceReadRequestDescriptor = $convert.base64Decode(
+    'ChZVc2VyU2VydmljZVJlYWRSZXF1ZXN0Eg4KAmlkGAEgASgFUgJpZA==');
+
+@$core.Deprecated('Use userServiceReadResponseDescriptor instead')
+const UserServiceReadResponse$json = {
+  '1': 'UserServiceReadResponse',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'email', '3': 3, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `UserServiceReadResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userServiceReadResponseDescriptor = $convert.base64Decode(
+    'ChdVc2VyU2VydmljZVJlYWRSZXNwb25zZRIOCgJpZBgBIAEoBVICaWQSEgoEbmFtZRgCIAEoCV'
+    'IEbmFtZRIUCgVlbWFpbBgDIAEoCVIFZW1haWw=');
+
