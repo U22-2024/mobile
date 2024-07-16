@@ -1,0 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'auth.g.dart';
+
+@riverpod
+FirebaseAuth firebaseAuth(FirebaseAuthRef ref) {
+  return FirebaseAuth.instance;
+}
+
+@riverpod
+class AuthStateChange extends _$AuthStateChange {
+  @override
+  Stream<User?> build() {
+    final auth = ref.watch(firebaseAuthProvider);
+    return auth.authStateChanges();
+  }
+}
