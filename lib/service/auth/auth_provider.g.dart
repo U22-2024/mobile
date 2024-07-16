@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth.dart';
+part of 'auth_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseAuthHash() => r'7791bf70ce0f01bf991a53a76abc915478673c0b';
+String _$firebaseAuthHash() => r'46c40b7c5cf8ab936c0daa96a6af106bd2ae5d51';
 
 /// See also [firebaseAuth].
 @ProviderFor(firebaseAuth)
-final firebaseAuthProvider = AutoDisposeProvider<FirebaseAuth>.internal(
+final firebaseAuthProvider = Provider<FirebaseAuth>.internal(
   firebaseAuth,
   name: r'firebaseAuthProvider',
   debugGetCreateSourceHash:
@@ -19,22 +19,21 @@ final firebaseAuthProvider = AutoDisposeProvider<FirebaseAuth>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef FirebaseAuthRef = AutoDisposeProviderRef<FirebaseAuth>;
-String _$authStateChangeHash() => r'172d5af3469b3cc79dd95e9cb0c7872aab0d87e3';
+typedef FirebaseAuthRef = ProviderRef<FirebaseAuth>;
+String _$authStateChangesHash() => r'9dbb9d7d7d5588dec9ae0bd1dcfb7241ad1c22ec';
 
-/// See also [AuthStateChange].
-@ProviderFor(AuthStateChange)
-final authStateChangeProvider =
-    AutoDisposeStreamNotifierProvider<AuthStateChange, User?>.internal(
-  AuthStateChange.new,
-  name: r'authStateChangeProvider',
+/// See also [authStateChanges].
+@ProviderFor(authStateChanges)
+final authStateChangesProvider = StreamProvider<User?>.internal(
+  authStateChanges,
+  name: r'authStateChangesProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$authStateChangeHash,
+      : _$authStateChangesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AuthStateChange = AutoDisposeStreamNotifier<User?>;
+typedef AuthStateChangesRef = StreamProviderRef<User?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

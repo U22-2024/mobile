@@ -4,6 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
 
+  static const routeName = "/";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
