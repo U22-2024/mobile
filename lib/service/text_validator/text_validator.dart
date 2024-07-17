@@ -2,9 +2,12 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 
 class TextValidator {
-  static String? email(String? value) {
+  static String? email(String? value, bool isDuplicate) {
     if (value == null || value.isEmpty) {
       return "メールアドレスを入力してください";
+    }
+    if (isDuplicate) {
+      return "このメールアドレスは既に登録されています";
     }
     if (!EmailValidator.validate(value)) {
       return "メールアドレスの形式が正しくありません";
@@ -19,16 +22,20 @@ class TextValidator {
 
     final validLength = password.length >= 8 && password.length <= 64;
 
-    const pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,64}$";
+    const pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d.?/!-]{8,64}$";
     final regExp = RegExp(pattern);
     final validCharacter = regExp.hasMatch(password);
+
+    final invalidPasswords = ["password", "Password"];
+    final validSafe =
+        validLength && validCharacter && !invalidPasswords.contains(password);
 
     final validReconfirm = password == rePassword;
 
     return PasswordValidateResult(
         validLength: validLength,
         validCharacter: validCharacter,
-        validSafe: true,
+        validSafe: validSafe,
         validReconfirm: validReconfirm);
   }
 }
@@ -52,7 +59,8 @@ class PasswordValidateResult {
   static const safeMsg = "安全なパスワード";
   static const reconfirmMsg = "パスワードが一致";
 
-  bool isValid() => validLength && validCharacter && validSafe && validReconfirm;
+  bool isValid() =>
+      validLength && validCharacter && validSafe && validReconfirm;
 
   @override
   bool operator ==(Object other) {

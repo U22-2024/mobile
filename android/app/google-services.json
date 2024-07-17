@@ -12,7 +12,12 @@
           "package_name": "jp.kosen_ac.kagawa.mobile"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "486354809018-erkrpbav8pabdo0p5e7mkd13mrc438vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB2pyd51G15siy7seu2zYQQ81AjeTFzM_A"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486354809018-erkrpbav8pabdo0p5e7mkd13mrc438vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

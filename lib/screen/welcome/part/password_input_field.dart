@@ -5,7 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../service/text_validator/text_validator.dart';
 
 class PasswordInputField extends HookConsumerWidget {
-  const PasswordInputField({super.key});
+  const PasswordInputField({
+    super.key,
+    required this.controller,
+  });
+
+  final TextEditingController controller;
 
   InputDecoration _getDecoration(
     BuildContext context,
@@ -62,6 +67,7 @@ class PasswordInputField extends HookConsumerWidget {
     return Column(
       children: [
         TextFormField(
+          controller: controller,
           decoration: _getDecoration(context, "パスワード", hidePassword),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: TextInputType.visiblePassword,

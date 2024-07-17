@@ -4,13 +4,21 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/service/text_validator/text_validator.dart';
 
 class EmailInputField extends HookConsumerWidget {
-  const EmailInputField({super.key});
+  const EmailInputField({
+    super.key,
+    this.isDuplicateEmail = false,
+    required this.controller,
+  });
+
+  final bool isDuplicateEmail;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final validationError = useState<String?>(null);
 
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         labelText: "メールアドレス",
         border: const OutlineInputBorder(borderSide: BorderSide.none),
@@ -30,7 +38,7 @@ class EmailInputField extends HookConsumerWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
-        validationError.value = TextValidator.email(value);
+        validationError.value = TextValidator.email(value, isDuplicateEmail);
         if (validationError.value != null) {
           return "";
         }

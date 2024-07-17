@@ -66,4 +66,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'u22-2024.appspot.com',
     measurementId: 'G-DQS70582WW',
   );
+
 }

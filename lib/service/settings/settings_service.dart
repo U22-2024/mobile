@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
-import 'package:mobile/models/settings_model.dart';
+import 'package:mobile/models/settings/settings_model.dart';
 
 class SettingsService {
   const SettingsService(this.isar);
