@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -5,6 +8,7 @@ import 'package:mobile/common/reducer.dart';
 import 'package:mobile/screen/welcome/part/password_input_field.dart';
 import 'package:mobile/screen/welcome/part/store.dart';
 import 'package:mobile/service/auth/auth_provider.dart';
+import 'package:mobile/service/router/router_provider.dart';
 
 import 'email_input_field.dart';
 
@@ -27,13 +31,34 @@ class _Form extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = StateModel.of<EmailPasswordFormState>(context);
-
-    final isWaiting = state.pendingSubmit?.isLoading == true;
-    final hasError = !isWaiting && state.pendingSubmit?.hasError == true;
+    final isLoading = state.signUpResult?.isLoading == true;
+    final hasError = !isLoading && state.signUpResult?.hasError == true;
 
     void validate() {
       if (state.formKey.currentState?.validate() == true) {
         state.formKey.currentState?.save();
+      }
+    }
+
+    Future<void> signup() async {
+      final dispatcher = Dispatcher.of<EmailPasswordFormAction>(context);
+      if (dispatcher == null) {
+        return;
+      }
+
+      dispatcher.dispatch(SignUpStartAction());
+      try {
+        await ref.read(
+          createUserWithEmailAndPasswordProvider
+              .call(state.emailController.text, state.passwordController.text)
+              .future,
+        );
+        dispatcher.dispatch(SignUpSuccessAction());
+
+        if (!context.mounted) return;
+        const HomeRoute().go(context);
+      } on FirebaseAuthException catch (e) {
+        dispatcher.dispatch(SignUpFailureAction(e));
       }
     }
 
@@ -57,23 +82,14 @@ class _Form extends ConsumerWidget {
             width: double.infinity,
             height: 48,
             child: ElevatedButton(
-              onPressed: isWaiting || !EmailPasswordFormState.isValid(state)
+              onPressed: isLoading || !EmailPasswordFormState.isValid(state)
                   ? null
-                  : () {
-                      Dispatcher.of<EmailPasswordFormAction>(context)?.dispatch(
-                        SubmitAction(
-                          ref.read(createUserWithEmailAndPasswordProvider.call(
-                            state.emailController.text,
-                            state.passwordController.text,
-                          )),
-                        ),
-                      );
-                    },
+                  : signup,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 overlayColor: Theme.of(context).colorScheme.onPrimary,
               ),
-              child: isWaiting
+              child: isLoading
                   ? CircularProgressIndicator(
                       color: (EmailPasswordFormState.isValid(state)
                               ? Theme.of(context).colorScheme.onPrimary

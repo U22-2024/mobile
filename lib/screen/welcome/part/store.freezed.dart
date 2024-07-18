@@ -31,7 +31,7 @@ mixin _$EmailPasswordFormState {
       throw _privateConstructorUsedError;
   PasswordValidateResult get passwordValidateResult =>
       throw _privateConstructorUsedError; // api
-  AsyncValue<dynamic>? get pendingSubmit => throw _privateConstructorUsedError;
+  AsyncValue<void>? get signUpResult => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EmailPasswordFormStateCopyWith<EmailPasswordFormState> get copyWith =>
@@ -53,7 +53,7 @@ abstract class $EmailPasswordFormStateCopyWith<$Res> {
       bool visibleRePassword,
       EmailValidateResult emailValidateResult,
       PasswordValidateResult passwordValidateResult,
-      AsyncValue<dynamic>? pendingSubmit});
+      AsyncValue<void>? signUpResult});
 
   $EmailValidateResultCopyWith<$Res> get emailValidateResult;
   $PasswordValidateResultCopyWith<$Res> get passwordValidateResult;
@@ -81,7 +81,7 @@ class _$EmailPasswordFormStateCopyWithImpl<$Res,
     Object? visibleRePassword = null,
     Object? emailValidateResult = null,
     Object? passwordValidateResult = null,
-    Object? pendingSubmit = freezed,
+    Object? signUpResult = freezed,
   }) {
     return _then(_value.copyWith(
       formKey: null == formKey
@@ -116,10 +116,10 @@ class _$EmailPasswordFormStateCopyWithImpl<$Res,
           ? _value.passwordValidateResult
           : passwordValidateResult // ignore: cast_nullable_to_non_nullable
               as PasswordValidateResult,
-      pendingSubmit: freezed == pendingSubmit
-          ? _value.pendingSubmit
-          : pendingSubmit // ignore: cast_nullable_to_non_nullable
-              as AsyncValue<dynamic>?,
+      signUpResult: freezed == signUpResult
+          ? _value.signUpResult
+          : signUpResult // ignore: cast_nullable_to_non_nullable
+              as AsyncValue<void>?,
     ) as $Val);
   }
 
@@ -160,7 +160,7 @@ abstract class _$$EmailPasswordFormStateImplCopyWith<$Res>
       bool visibleRePassword,
       EmailValidateResult emailValidateResult,
       PasswordValidateResult passwordValidateResult,
-      AsyncValue<dynamic>? pendingSubmit});
+      AsyncValue<void>? signUpResult});
 
   @override
   $EmailValidateResultCopyWith<$Res> get emailValidateResult;
@@ -189,7 +189,7 @@ class __$$EmailPasswordFormStateImplCopyWithImpl<$Res>
     Object? visibleRePassword = null,
     Object? emailValidateResult = null,
     Object? passwordValidateResult = null,
-    Object? pendingSubmit = freezed,
+    Object? signUpResult = freezed,
   }) {
     return _then(_$EmailPasswordFormStateImpl(
       formKey: null == formKey
@@ -224,10 +224,10 @@ class __$$EmailPasswordFormStateImplCopyWithImpl<$Res>
           ? _value.passwordValidateResult
           : passwordValidateResult // ignore: cast_nullable_to_non_nullable
               as PasswordValidateResult,
-      pendingSubmit: freezed == pendingSubmit
-          ? _value.pendingSubmit
-          : pendingSubmit // ignore: cast_nullable_to_non_nullable
-              as AsyncValue<dynamic>?,
+      signUpResult: freezed == signUpResult
+          ? _value.signUpResult
+          : signUpResult // ignore: cast_nullable_to_non_nullable
+              as AsyncValue<void>?,
     ));
   }
 }
@@ -244,7 +244,7 @@ class _$EmailPasswordFormStateImpl implements _EmailPasswordFormState {
       this.visibleRePassword = false,
       required this.emailValidateResult,
       required this.passwordValidateResult,
-      required this.pendingSubmit});
+      this.signUpResult});
 
 // form
   @override
@@ -269,11 +269,11 @@ class _$EmailPasswordFormStateImpl implements _EmailPasswordFormState {
   final PasswordValidateResult passwordValidateResult;
 // api
   @override
-  final AsyncValue<dynamic>? pendingSubmit;
+  final AsyncValue<void>? signUpResult;
 
   @override
   String toString() {
-    return 'EmailPasswordFormState(formKey: $formKey, emailController: $emailController, passwordController: $passwordController, rePasswordController: $rePasswordController, visiblePassword: $visiblePassword, visibleRePassword: $visibleRePassword, emailValidateResult: $emailValidateResult, passwordValidateResult: $passwordValidateResult, pendingSubmit: $pendingSubmit)';
+    return 'EmailPasswordFormState(formKey: $formKey, emailController: $emailController, passwordController: $passwordController, rePasswordController: $rePasswordController, visiblePassword: $visiblePassword, visibleRePassword: $visibleRePassword, emailValidateResult: $emailValidateResult, passwordValidateResult: $passwordValidateResult, signUpResult: $signUpResult)';
   }
 
   @override
@@ -296,8 +296,8 @@ class _$EmailPasswordFormStateImpl implements _EmailPasswordFormState {
                 other.emailValidateResult == emailValidateResult) &&
             (identical(other.passwordValidateResult, passwordValidateResult) ||
                 other.passwordValidateResult == passwordValidateResult) &&
-            (identical(other.pendingSubmit, pendingSubmit) ||
-                other.pendingSubmit == pendingSubmit));
+            (identical(other.signUpResult, signUpResult) ||
+                other.signUpResult == signUpResult));
   }
 
   @override
@@ -311,7 +311,7 @@ class _$EmailPasswordFormStateImpl implements _EmailPasswordFormState {
       visibleRePassword,
       emailValidateResult,
       passwordValidateResult,
-      pendingSubmit);
+      signUpResult);
 
   @JsonKey(ignore: true)
   @override
@@ -323,16 +323,15 @@ class _$EmailPasswordFormStateImpl implements _EmailPasswordFormState {
 
 abstract class _EmailPasswordFormState implements EmailPasswordFormState {
   const factory _EmailPasswordFormState(
-          {required final GlobalKey<FormState> formKey,
-          required final TextEditingController emailController,
-          required final TextEditingController passwordController,
-          required final TextEditingController rePasswordController,
-          final bool visiblePassword,
-          final bool visibleRePassword,
-          required final EmailValidateResult emailValidateResult,
-          required final PasswordValidateResult passwordValidateResult,
-          required final AsyncValue<dynamic>? pendingSubmit}) =
-      _$EmailPasswordFormStateImpl;
+      {required final GlobalKey<FormState> formKey,
+      required final TextEditingController emailController,
+      required final TextEditingController passwordController,
+      required final TextEditingController rePasswordController,
+      final bool visiblePassword,
+      final bool visibleRePassword,
+      required final EmailValidateResult emailValidateResult,
+      required final PasswordValidateResult passwordValidateResult,
+      final AsyncValue<void>? signUpResult}) = _$EmailPasswordFormStateImpl;
 
   @override // form
   GlobalKey<FormState> get formKey;
@@ -351,7 +350,7 @@ abstract class _EmailPasswordFormState implements EmailPasswordFormState {
   @override
   PasswordValidateResult get passwordValidateResult;
   @override // api
-  AsyncValue<dynamic>? get pendingSubmit;
+  AsyncValue<void>? get signUpResult;
   @override
   @JsonKey(ignore: true)
   _$$EmailPasswordFormStateImplCopyWith<_$EmailPasswordFormStateImpl>

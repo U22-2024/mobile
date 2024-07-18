@@ -28,7 +28,7 @@ class EmailPasswordFormState with _$EmailPasswordFormState {
     required PasswordValidateResult passwordValidateResult,
 
     // api
-    required AsyncValue? pendingSubmit,
+    AsyncValue<void>? signUpResult,
   }) = _EmailPasswordFormState;
 
   factory EmailPasswordFormState.init() => EmailPasswordFormState(
@@ -38,12 +38,11 @@ class EmailPasswordFormState with _$EmailPasswordFormState {
         rePasswordController: useTextEditingController(),
         emailValidateResult: EmailValidateResult.init(),
         passwordValidateResult: PasswordValidateResult.init(),
-        pendingSubmit: null,
       );
 
   static bool isDuplicateEmail(EmailPasswordFormState state) {
-    if (state.pendingSubmit?.hasError == true) {
-      final error = state.pendingSubmit?.error;
+    if (state.signUpResult?.hasError == true) {
+      final error = state.signUpResult?.error;
       if (error is FirebaseAuthException) {
         return error.code == "email-already-in-use";
       }
@@ -71,18 +70,16 @@ class PasswordChangedAction extends EmailPasswordFormAction {
   PasswordChangedAction();
 }
 
-class SubmitAction extends EmailPasswordFormAction {
-  SubmitAction(this.pendingSubmit);
-
-  final AsyncValue pendingSubmit;
+class SignUpStartAction extends EmailPasswordFormAction {
+  SignUpStartAction();
 }
 
-class SubmitSuccessAction extends EmailPasswordFormAction {
-  SubmitSuccessAction();
+class SignUpSuccessAction extends EmailPasswordFormAction {
+  SignUpSuccessAction();
 }
 
-class SubmitFailureAction extends EmailPasswordFormAction {
-  SubmitFailureAction(this.exception);
+class SignUpFailureAction extends EmailPasswordFormAction {
+  SignUpFailureAction(this.exception);
 
   final FirebaseAuthException exception;
 }
@@ -122,16 +119,18 @@ EmailPasswordFormState reducer(
             state.rePasswordController.text,
           ),
         ),
-      (_, SubmitSuccessAction()) => state.copyWith(
-          pendingSubmit: const AsyncValue.data(null),
+      (_, SignUpStartAction()) => state.copyWith(
+          signUpResult: const AsyncValue.loading(),
         ),
-      (_, SubmitAction(:final pendingSubmit)) => state.copyWith(
-          pendingSubmit: pendingSubmit,
+      (_, SignUpSuccessAction()) => state.copyWith(
+          signUpResult: const AsyncValue.data(null),
         ),
-      (_, SubmitFailureAction(:final exception)) => state.copyWith(
+      (_, SignUpFailureAction(:final exception)) => state.copyWith(
           emailValidateResult: state.emailValidateResult.copyWith(
             isDuplicate: exception.code == "email-already-in-use",
           ),
+          signUpResult: AsyncValue.error(
+              exception, exception.stackTrace ?? StackTrace.current),
         ),
       (
         _,
@@ -147,6 +146,6 @@ EmailPasswordFormState reducer(
       (_, ResetAction()) => state.copyWith(
           emailValidateResult: EmailValidateResult.init(),
           passwordValidateResult: PasswordValidateResult.init(),
-          pendingSubmit: null,
+          signUpResult: null,
         )
     };
