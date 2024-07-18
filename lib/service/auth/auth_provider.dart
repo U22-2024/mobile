@@ -15,14 +15,14 @@ Stream<User?> authStateChanges(AuthStateChangesRef ref) {
 }
 
 @riverpod
-Future<void> signInWithEmailAndPassword(
-  SignInWithEmailAndPasswordRef ref,
+Future<void> createUserWithEmailAndPassword(
+  CreateUserWithEmailAndPasswordRef ref,
   String email,
   String password,
 ) async {
   final auth = ref.read(firebaseAuthProvider);
 
-  await auth.signInWithEmailAndPassword(
+  await auth.createUserWithEmailAndPassword(
     email: email,
     password: password,
   );

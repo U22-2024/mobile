@@ -35,8 +35,8 @@ final authStateChangesProvider = StreamProvider<User?>.internal(
 );
 
 typedef AuthStateChangesRef = StreamProviderRef<User?>;
-String _$signInWithEmailAndPasswordHash() =>
-    r'3d270d456618d07ccda3bc8c169aa3adf3659edd';
+String _$createUserWithEmailAndPasswordHash() =>
+    r'243b563e66fe5be0135185bf9d227f65f55e71f6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -59,29 +59,30 @@ class _SystemHash {
   }
 }
 
-/// See also [signInWithEmailAndPassword].
-@ProviderFor(signInWithEmailAndPassword)
-const signInWithEmailAndPasswordProvider = SignInWithEmailAndPasswordFamily();
+/// See also [createUserWithEmailAndPassword].
+@ProviderFor(createUserWithEmailAndPassword)
+const createUserWithEmailAndPasswordProvider =
+    CreateUserWithEmailAndPasswordFamily();
 
-/// See also [signInWithEmailAndPassword].
-class SignInWithEmailAndPasswordFamily extends Family<AsyncValue<void>> {
-  /// See also [signInWithEmailAndPassword].
-  const SignInWithEmailAndPasswordFamily();
+/// See also [createUserWithEmailAndPassword].
+class CreateUserWithEmailAndPasswordFamily extends Family<AsyncValue<void>> {
+  /// See also [createUserWithEmailAndPassword].
+  const CreateUserWithEmailAndPasswordFamily();
 
-  /// See also [signInWithEmailAndPassword].
-  SignInWithEmailAndPasswordProvider call(
+  /// See also [createUserWithEmailAndPassword].
+  CreateUserWithEmailAndPasswordProvider call(
     String email,
     String password,
   ) {
-    return SignInWithEmailAndPasswordProvider(
+    return CreateUserWithEmailAndPasswordProvider(
       email,
       password,
     );
   }
 
   @override
-  SignInWithEmailAndPasswordProvider getProviderOverride(
-    covariant SignInWithEmailAndPasswordProvider provider,
+  CreateUserWithEmailAndPasswordProvider getProviderOverride(
+    covariant CreateUserWithEmailAndPasswordProvider provider,
   ) {
     return call(
       provider.email,
@@ -101,36 +102,36 @@ class SignInWithEmailAndPasswordFamily extends Family<AsyncValue<void>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'signInWithEmailAndPasswordProvider';
+  String? get name => r'createUserWithEmailAndPasswordProvider';
 }
 
-/// See also [signInWithEmailAndPassword].
-class SignInWithEmailAndPasswordProvider
+/// See also [createUserWithEmailAndPassword].
+class CreateUserWithEmailAndPasswordProvider
     extends AutoDisposeFutureProvider<void> {
-  /// See also [signInWithEmailAndPassword].
-  SignInWithEmailAndPasswordProvider(
+  /// See also [createUserWithEmailAndPassword].
+  CreateUserWithEmailAndPasswordProvider(
     String email,
     String password,
   ) : this._internal(
-          (ref) => signInWithEmailAndPassword(
-            ref as SignInWithEmailAndPasswordRef,
+          (ref) => createUserWithEmailAndPassword(
+            ref as CreateUserWithEmailAndPasswordRef,
             email,
             password,
           ),
-          from: signInWithEmailAndPasswordProvider,
-          name: r'signInWithEmailAndPasswordProvider',
+          from: createUserWithEmailAndPasswordProvider,
+          name: r'createUserWithEmailAndPasswordProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$signInWithEmailAndPasswordHash,
-          dependencies: SignInWithEmailAndPasswordFamily._dependencies,
+                  : _$createUserWithEmailAndPasswordHash,
+          dependencies: CreateUserWithEmailAndPasswordFamily._dependencies,
           allTransitiveDependencies:
-              SignInWithEmailAndPasswordFamily._allTransitiveDependencies,
+              CreateUserWithEmailAndPasswordFamily._allTransitiveDependencies,
           email: email,
           password: password,
         );
 
-  SignInWithEmailAndPasswordProvider._internal(
+  CreateUserWithEmailAndPasswordProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -146,12 +147,12 @@ class SignInWithEmailAndPasswordProvider
 
   @override
   Override overrideWith(
-    FutureOr<void> Function(SignInWithEmailAndPasswordRef provider) create,
+    FutureOr<void> Function(CreateUserWithEmailAndPasswordRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: SignInWithEmailAndPasswordProvider._internal(
-        (ref) => create(ref as SignInWithEmailAndPasswordRef),
+      override: CreateUserWithEmailAndPasswordProvider._internal(
+        (ref) => create(ref as CreateUserWithEmailAndPasswordRef),
         from: from,
         name: null,
         dependencies: null,
@@ -165,12 +166,12 @@ class SignInWithEmailAndPasswordProvider
 
   @override
   AutoDisposeFutureProviderElement<void> createElement() {
-    return _SignInWithEmailAndPasswordProviderElement(this);
+    return _CreateUserWithEmailAndPasswordProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is SignInWithEmailAndPasswordProvider &&
+    return other is CreateUserWithEmailAndPasswordProvider &&
         other.email == email &&
         other.password == password;
   }
@@ -185,7 +186,7 @@ class SignInWithEmailAndPasswordProvider
   }
 }
 
-mixin SignInWithEmailAndPasswordRef on AutoDisposeFutureProviderRef<void> {
+mixin CreateUserWithEmailAndPasswordRef on AutoDisposeFutureProviderRef<void> {
   /// The parameter `email` of this provider.
   String get email;
 
@@ -193,16 +194,16 @@ mixin SignInWithEmailAndPasswordRef on AutoDisposeFutureProviderRef<void> {
   String get password;
 }
 
-class _SignInWithEmailAndPasswordProviderElement
+class _CreateUserWithEmailAndPasswordProviderElement
     extends AutoDisposeFutureProviderElement<void>
-    with SignInWithEmailAndPasswordRef {
-  _SignInWithEmailAndPasswordProviderElement(super.provider);
+    with CreateUserWithEmailAndPasswordRef {
+  _CreateUserWithEmailAndPasswordProviderElement(super.provider);
 
   @override
-  String get email => (origin as SignInWithEmailAndPasswordProvider).email;
+  String get email => (origin as CreateUserWithEmailAndPasswordProvider).email;
   @override
   String get password =>
-      (origin as SignInWithEmailAndPasswordProvider).password;
+      (origin as CreateUserWithEmailAndPasswordProvider).password;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -72,9 +72,11 @@ class EmailPasswdForm extends HookConsumerWidget {
               onPressed: !isValid.value || isWaiting
                   ? null
                   : () async {
-                      final future = ref.read(signInWithEmailAndPasswordProvider
-                          .call(emailController.text, passwordController.text)
-                          .future);
+                      final future = ref.read(
+                        createUserWithEmailAndPasswordProvider
+                            .call(emailController.text, passwordController.text)
+                            .future,
+                      );
                       pendingSignIn.value = future;
 
                       await future;
