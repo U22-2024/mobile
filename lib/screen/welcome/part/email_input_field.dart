@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile/service/text_validator/text_validator.dart';
+import 'package:mobile/common/reducer.dart';
+import 'package:mobile/screen/welcome/part/store.dart';
+import 'package:mobile/service/validator/text_validator/email_validate_result.dart';
 
-class EmailInputField extends HookConsumerWidget {
-  const EmailInputField({
-    super.key,
-    this.isDuplicateEmail = false,
-    required this.controller,
-  });
-
-  final bool isDuplicateEmail;
-  final TextEditingController controller;
+class EmailInputField extends StatelessWidget {
+  const EmailInputField({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final validationError = useState<String?>(null);
+  Widget build(BuildContext context) {
+    final validateResult =
+        StateModel.selectOf<EmailPasswordFormState, EmailValidateResult>(
+            context,
+            select: (state) => state.emailValidateResult);
+    final controller =
+        StateModel.selectOf<EmailPasswordFormState, TextEditingController>(
+            context,
+            select: (state) => state.emailController);
 
     return TextFormField(
       controller: controller,
@@ -25,24 +25,28 @@ class EmailInputField extends HookConsumerWidget {
         fillColor: Theme.of(context).hoverColor,
         filled: true,
         errorStyle: const TextStyle(height: 0),
-        suffixIcon: validationError.value == null
+        suffixIcon: EmailValidateResult.isValid(validateResult)
             ? null
             : Tooltip(
-                message: validationError.value!,
+                message: EmailValidateResult.message(validateResult),
                 child: Icon(
                   Icons.error,
                   color: Theme.of(context).colorScheme.error,
                 ),
               ),
       ),
+      onChanged: (value) {
+        Dispatcher.of<EmailPasswordFormAction>(context)
+            ?.dispatch(EmailChangedAction());
+      },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
-        validationError.value = TextValidator.email(value, isDuplicateEmail);
-        if (validationError.value != null) {
-          return "";
+        if (EmailValidateResult.isValid(validateResult)) {
+          return null;
         }
-        return null;
+
+        return "";
       },
     );
   }

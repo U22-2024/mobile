@@ -1,39 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile/common/reducer.dart';
+import 'package:mobile/screen/welcome/part/store.dart';
+import 'package:mobile/service/validator/text_validator/password_validate_result.dart';
 
-import '../../../service/text_validator/text_validator.dart';
+class PasswordInputField extends StatelessWidget {
+  const PasswordInputField({super.key});
 
-class PasswordInputField extends HookConsumerWidget {
-  const PasswordInputField({
-    super.key,
+  @override
+  Widget build(BuildContext context) {
+    final (passwordController, rePasswordController) = StateModel.selectOf<
+        EmailPasswordFormState, (TextEditingController, TextEditingController)>(
+      context,
+      select: (state) => (state.passwordController, state.rePasswordController),
+    );
+
+    return Column(
+      children: [
+        _PasswordForm(
+          isRePassword: false,
+          controller: passwordController,
+        ),
+        _PasswordForm(
+          isRePassword: true,
+          controller: rePasswordController,
+        ),
+        const SizedBox(height: 16),
+        _PasswordValidateText(),
+      ],
+    );
+  }
+}
+
+class _PasswordForm extends StatelessWidget {
+  const _PasswordForm({
+    required this.isRePassword,
     required this.controller,
   });
 
+  final bool isRePassword;
   final TextEditingController controller;
 
-  InputDecoration _getDecoration(
-    BuildContext context,
-    String labelText,
-    ValueNotifier<bool> visiblePassword,
-  ) {
-    return InputDecoration(
-      labelText: labelText,
-      border: const OutlineInputBorder(borderSide: BorderSide.none),
-      fillColor: Theme.of(context).hoverColor,
-      filled: true,
-      errorStyle: const TextStyle(height: 0),
-      suffixIcon: IconButton(
-        icon: Icon(
-          visiblePassword.value ? Icons.visibility_off : Icons.visibility,
+  @override
+  Widget build(BuildContext context) {
+    final visiblePassword = StateModel.selectOf<EmailPasswordFormState, bool>(
+        context, select: (state) {
+      return isRePassword ? state.visibleRePassword : state.visiblePassword;
+    });
+    final validateResult =
+        StateModel.selectOf<EmailPasswordFormState, PasswordValidateResult>(
+      context,
+      select: (state) => state.passwordValidateResult,
+    );
+
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: isRePassword ? "パスワードの確認" : "パスワード",
+        border: const OutlineInputBorder(borderSide: BorderSide.none),
+        fillColor: Theme.of(context).hoverColor,
+        filled: true,
+        errorStyle: const TextStyle(height: 0),
+        suffixIcon: IconButton(
+          icon: Icon(visiblePassword ? Icons.visibility_off : Icons.visibility),
+          onPressed: () {
+            final dispatcher = Dispatcher.of<EmailPasswordFormAction>(context);
+            dispatcher?.dispatch(
+              isRePassword
+                  ? PasswordVisibleAction(visibleRePassword: !visiblePassword)
+                  : PasswordVisibleAction(visiblePassword: !visiblePassword),
+            );
+          },
         ),
-        onPressed: () {
-          visiblePassword.value = !visiblePassword.value;
-        },
       ),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      keyboardType: TextInputType.visiblePassword,
+      obscureText: !visiblePassword,
+      onChanged: (value) {
+        Dispatcher.of<EmailPasswordFormAction>(context)
+            ?.dispatch(PasswordChangedAction());
+      },
+      validator: (value) {
+        if (PasswordValidateResult.isValid(validateResult)) {
+          return null;
+        }
+
+        return "";
+      },
     );
   }
+}
 
+class _PasswordValidateText extends StatelessWidget {
   Widget _passwordValidateText(BuildContext context, String msg, bool isValid) {
     final iconColor = isValid
         ? Theme.of(context).colorScheme.primary
@@ -58,66 +115,34 @@ class PasswordInputField extends HookConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final validationError =
-        useState<PasswordValidateResult>(const PasswordValidateResult());
-    final hidePassword = useState<bool>(true);
-    final rePasswordController = useTextEditingController();
-
-    return Column(
-      children: [
-        TextFormField(
-          controller: controller,
-          decoration: _getDecoration(context, "パスワード", hidePassword),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          keyboardType: TextInputType.visiblePassword,
-          obscureText: hidePassword.value,
-          validator: (value) {
-            validationError.value = TextValidator.password(
-              value,
-              rePasswordController.text,
-            );
-            if (!validationError.value.isValid()) {
-              return "";
-            }
-            return null;
-          },
-        ),
-        TextFormField(
-          controller: rePasswordController,
-          decoration: _getDecoration(context, "パスワードの確認", hidePassword),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          keyboardType: TextInputType.visiblePassword,
-          obscureText: hidePassword.value,
-          validator: (value) {
-            if (!validationError.value.isValid()) {
-              return "";
-            }
-            return null;
-          },
-        ),
-        const SizedBox(height: 16),
-        _passwordValidateText(
-          context,
-          PasswordValidateResult.lengthMsg,
-          validationError.value.validLength,
-        ),
-        _passwordValidateText(
-          context,
-          PasswordValidateResult.characterMsg,
-          validationError.value.validCharacter,
-        ),
-        _passwordValidateText(
-          context,
-          PasswordValidateResult.safeMsg,
-          validationError.value.validSafe,
-        ),
-        _passwordValidateText(
-          context,
-          PasswordValidateResult.reconfirmMsg,
-          validationError.value.validReconfirm,
-        ),
-      ],
+  Widget build(BuildContext context) {
+    final validateResult =
+        StateModel.selectOf<EmailPasswordFormState, PasswordValidateResult>(
+      context,
+      select: (state) => state.passwordValidateResult,
     );
+
+    return Column(children: [
+      _passwordValidateText(
+        context,
+        PasswordValidateResult.lengthMsg,
+        validateResult.validLength,
+      ),
+      _passwordValidateText(
+        context,
+        PasswordValidateResult.characterMsg,
+        validateResult.validCharacter,
+      ),
+      _passwordValidateText(
+        context,
+        PasswordValidateResult.safeMsg,
+        validateResult.validSafe,
+      ),
+      _passwordValidateText(
+        context,
+        PasswordValidateResult.reconfirmMsg,
+        validateResult.validReconfirm,
+      ),
+    ]);
   }
 }
