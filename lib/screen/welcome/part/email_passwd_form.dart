@@ -55,6 +55,9 @@ class _Form extends ConsumerWidget {
         );
         dispatcher.dispatch(SignUpSuccessAction());
 
+        await ref.read(signInWithEmailAndPasswordProvider
+            .call(state.emailController.text, state.passwordController.text)
+            .future);
         if (!context.mounted) return;
         const HomeRoute().go(context);
       } on FirebaseAuthException catch (e) {
