@@ -11,23 +11,24 @@ class AuthRegisterScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-        appBar: AppBar(
-            leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => GoRouter.of(context).pop(),
-        )),
-        body: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Text(
-                "アカウントを作成",
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              const SizedBox(height: 16),
-              const RegisterForm(),
-            ],
-          ),
-        ));
+      appBar: AppBar(
+          leading: IconButton(
+        icon: const Icon(Icons.close),
+        onPressed: () => GoRouter.of(context).pop(),
+      )),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(
+              "アカウントを作成",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const SizedBox(height: 16),
+            const RegisterForm(),
+          ],
+        ),
+      ),
+    );
   }
 }

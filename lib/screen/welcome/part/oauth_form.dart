@@ -19,14 +19,7 @@ class OauthForm extends HookConsumerWidget {
               if (!context.mounted) return;
               const HomeRoute().go(context);
             },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/google.png", width: 20, height: 20),
-                const SizedBox(width: 16),
-                const Text("Googleで登録"),
-              ],
-            ),
+            child: const Text("Googleで登録"),
           ),
         )
       ],

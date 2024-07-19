@@ -10,12 +10,20 @@ import 'package:mobile/app.dart';
 import 'package:mobile/firebase_options.dart';
 
 Future<bool> _isEnableAuthEmulator(String projectId) async {
+  final host = switch (defaultTargetPlatform) {
+    TargetPlatform.android => "10.0.2.2",
+    TargetPlatform.windows => "localhost",
+    _ => "localhost"
+  };
+
   try {
-    final response = await http.get(Uri.parse(
-        "http://localhost:9099/emulator/v1/projects/$projectId/config"));
+    final response = await http.get(Uri.http(
+      "$host:9099",
+      "/emulator/v1/projects/$projectId/config",
+    ));
     return response.statusCode == 200;
   } catch (e) {
-    return false;
+    rethrow;
   }
 }
 

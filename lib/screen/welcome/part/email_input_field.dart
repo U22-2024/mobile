@@ -29,6 +29,7 @@ class EmailInputField extends StatelessWidget {
             ? null
             : Tooltip(
                 message: EmailValidateResult.message(validateResult),
+                triggerMode: TooltipTriggerMode.tap,
                 child: Icon(
                   Icons.error,
                   color: Theme.of(context).colorScheme.error,
@@ -41,6 +42,7 @@ class EmailInputField extends StatelessWidget {
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.emailAddress,
+      enableSuggestions: true,
       validator: (value) {
         if (EmailValidateResult.isValid(validateResult)) {
           return null;
