@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -46,12 +47,22 @@ Future<void> signInWithEmailAndPassword(
 @riverpod
 Future<void> signInWithGoogle(SignInWithGoogleRef ref) async {
   final auth = ref.read(firebaseAuthProvider);
-  final googleUser = await GoogleSignIn().signIn();
-  final googleAuth = await googleUser?.authentication;
-  final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-
-  await auth.signInWithCredential(credential);
+  switch (defaultTargetPlatform) {
+    case TargetPlatform.android:
+    case TargetPlatform.iOS:
+      final googleSignIn = GoogleSignIn();
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser == null) {
+        return;
+      }
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await auth.signInWithCredential(credential);
+      break;
+    default:
+      throw UnsupportedError("Unsupported platform");
+  }
 }

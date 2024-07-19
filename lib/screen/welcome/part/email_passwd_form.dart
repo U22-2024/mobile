@@ -101,11 +101,15 @@ class _Form extends ConsumerWidget {
                     )
                   : Text(
                       "登録",
-                      style: TextStyle(
-                        color: EmailPasswordFormState.isValid(state)
-                            ? Theme.of(context).colorScheme.onPrimary
-                            : Theme.of(context).colorScheme.inversePrimary,
-                      ),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: EmailPasswordFormState.isValid(state)
+                                ? Theme.of(context).colorScheme.onPrimary
+                                : Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.color
+                                    ?.withOpacity(0.5),
+                          ),
                     ),
             ),
           ),

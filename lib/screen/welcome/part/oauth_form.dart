@@ -15,11 +15,45 @@ class OauthForm extends HookConsumerWidget {
           height: 50,
           child: ElevatedButton(
             onPressed: () async {
-              await ref.read(signInWithGoogleProvider.future);
-              if (!context.mounted) return;
-              const HomeRoute().go(context);
+              try {
+                await ref.read(signInWithGoogleProvider.future);
+
+                if (!context.mounted) return;
+                const HomeRoute().go(context);
+              } catch (err) {
+                if (!context.mounted) return;
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("アカウント作成エラー"),
+                    content: const Text("Googleアカウントでの登録に失敗しました"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("OK"),
+                      )
+                    ],
+                  ),
+                );
+              }
             },
-            child: const Text("Googleで登録"),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Image(
+                  image: AssetImage("assets/images/google.png"),
+                  width: 20,
+                  height: 20,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  "Googleでログイン",
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+              ],
+            ),
           ),
         )
       ],
