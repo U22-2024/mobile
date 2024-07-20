@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/common/reducer.dart';
-import 'package:mobile/components/custom_input_field/custom_input_field.dart';
+import 'package:mobile/ui/components/custom_input_field/custom_input_field.dart';
 import 'package:mobile/service/validator/text_validator/email_validate_result.dart';
 
 import 'store.dart';
@@ -21,7 +21,7 @@ class EmailInputField extends StatelessWidget {
 
     return CustomInputField(
       controller: controller,
-      validateMessage: EmailValidateResult.message(validateResult),
+      validateMessage: validateResult.message(),
       label: "メールアドレス",
       onChanged: (value) {
         Dispatcher.of<EmailPasswordFormAction>(context)

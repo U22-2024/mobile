@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile/extensions/firebase_auth/firebase_auth_extension.dart';
 import 'package:mobile/service/validator/text_validator/email_validate_result.dart';
 import 'package:mobile/service/validator/text_validator/password_validate_result.dart';
 import 'package:mobile/service/validator/text_validator/text_validator.dart';
@@ -52,8 +53,8 @@ class EmailPasswordFormState with _$EmailPasswordFormState {
   }
 
   static bool isValid(EmailPasswordFormState state) {
-    return EmailValidateResult.isValid(state.emailValidateResult) &&
-        PasswordValidateResult.isValid(state.passwordValidateResult);
+    return state.emailValidateResult.isValid() &&
+        state.passwordValidateResult.isValid();
   }
 }
 
@@ -108,10 +109,7 @@ EmailPasswordFormState reducer(
 ) =>
     switch ((state, action)) {
       (_, EmailChangedAction()) => state.copyWith(
-          emailValidateResult: TextValidator.email(
-            state.emailController.text,
-            false,
-          ),
+          emailValidateResult: TextValidator.email(state.emailController.text),
         ),
       (_, PasswordChangedAction()) => state.copyWith(
           passwordValidateResult: TextValidator.password(
@@ -127,7 +125,8 @@ EmailPasswordFormState reducer(
         ),
       (_, SignUpFailureAction(:final exception)) => state.copyWith(
           emailValidateResult: state.emailValidateResult.copyWith(
-            isDuplicate: exception.code == "email-already-in-use",
+            isDuplicate: exception.resultStatus() ==
+                FirebaseAuthResultStatus.emailAlreadyExists,
           ),
           signUpResult: AsyncValue.error(
               exception, exception.stackTrace ?? StackTrace.current),

@@ -20,6 +20,7 @@ mixin _$PasswordValidateResult {
   bool get validCharacter => throw _privateConstructorUsedError;
   bool get validSafe => throw _privateConstructorUsedError;
   bool get validReconfirm => throw _privateConstructorUsedError;
+  bool get correctPassword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PasswordValidateResultCopyWith<PasswordValidateResult> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $PasswordValidateResultCopyWith<$Res> {
       {bool validLength,
       bool validCharacter,
       bool validSafe,
-      bool validReconfirm});
+      bool validReconfirm,
+      bool correctPassword});
 }
 
 /// @nodoc
@@ -57,6 +59,7 @@ class _$PasswordValidateResultCopyWithImpl<$Res,
     Object? validCharacter = null,
     Object? validSafe = null,
     Object? validReconfirm = null,
+    Object? correctPassword = null,
   }) {
     return _then(_value.copyWith(
       validLength: null == validLength
@@ -75,6 +78,10 @@ class _$PasswordValidateResultCopyWithImpl<$Res,
           ? _value.validReconfirm
           : validReconfirm // ignore: cast_nullable_to_non_nullable
               as bool,
+      correctPassword: null == correctPassword
+          ? _value.correctPassword
+          : correctPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -92,7 +99,8 @@ abstract class _$$PasswordValidateResultImplCopyWith<$Res>
       {bool validLength,
       bool validCharacter,
       bool validSafe,
-      bool validReconfirm});
+      bool validReconfirm,
+      bool correctPassword});
 }
 
 /// @nodoc
@@ -112,6 +120,7 @@ class __$$PasswordValidateResultImplCopyWithImpl<$Res>
     Object? validCharacter = null,
     Object? validSafe = null,
     Object? validReconfirm = null,
+    Object? correctPassword = null,
   }) {
     return _then(_$PasswordValidateResultImpl(
       validLength: null == validLength
@@ -130,18 +139,24 @@ class __$$PasswordValidateResultImplCopyWithImpl<$Res>
           ? _value.validReconfirm
           : validReconfirm // ignore: cast_nullable_to_non_nullable
               as bool,
+      correctPassword: null == correctPassword
+          ? _value.correctPassword
+          : correctPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$PasswordValidateResultImpl implements _PasswordValidateResult {
+class _$PasswordValidateResultImpl extends _PasswordValidateResult {
   _$PasswordValidateResultImpl(
       {required this.validLength,
       required this.validCharacter,
       required this.validSafe,
-      required this.validReconfirm});
+      required this.validReconfirm,
+      required this.correctPassword})
+      : super._();
 
   @override
   final bool validLength;
@@ -151,10 +166,12 @@ class _$PasswordValidateResultImpl implements _PasswordValidateResult {
   final bool validSafe;
   @override
   final bool validReconfirm;
+  @override
+  final bool correctPassword;
 
   @override
   String toString() {
-    return 'PasswordValidateResult(validLength: $validLength, validCharacter: $validCharacter, validSafe: $validSafe, validReconfirm: $validReconfirm)';
+    return 'PasswordValidateResult(validLength: $validLength, validCharacter: $validCharacter, validSafe: $validSafe, validReconfirm: $validReconfirm, correctPassword: $correctPassword)';
   }
 
   @override
@@ -169,12 +186,14 @@ class _$PasswordValidateResultImpl implements _PasswordValidateResult {
             (identical(other.validSafe, validSafe) ||
                 other.validSafe == validSafe) &&
             (identical(other.validReconfirm, validReconfirm) ||
-                other.validReconfirm == validReconfirm));
+                other.validReconfirm == validReconfirm) &&
+            (identical(other.correctPassword, correctPassword) ||
+                other.correctPassword == correctPassword));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, validLength, validCharacter, validSafe, validReconfirm);
+  int get hashCode => Object.hash(runtimeType, validLength, validCharacter,
+      validSafe, validReconfirm, correctPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -184,12 +203,14 @@ class _$PasswordValidateResultImpl implements _PasswordValidateResult {
           _$PasswordValidateResultImpl>(this, _$identity);
 }
 
-abstract class _PasswordValidateResult implements PasswordValidateResult {
+abstract class _PasswordValidateResult extends PasswordValidateResult {
   factory _PasswordValidateResult(
       {required final bool validLength,
       required final bool validCharacter,
       required final bool validSafe,
-      required final bool validReconfirm}) = _$PasswordValidateResultImpl;
+      required final bool validReconfirm,
+      required final bool correctPassword}) = _$PasswordValidateResultImpl;
+  _PasswordValidateResult._() : super._();
 
   @override
   bool get validLength;
@@ -199,6 +220,8 @@ abstract class _PasswordValidateResult implements PasswordValidateResult {
   bool get validSafe;
   @override
   bool get validReconfirm;
+  @override
+  bool get correctPassword;
   @override
   @JsonKey(ignore: true)
   _$$PasswordValidateResultImplCopyWith<_$PasswordValidateResultImpl>

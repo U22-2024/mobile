@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'sign_in_part/password_sign_in_form.dart';
+
 class PasswordSignInScreen extends HookConsumerWidget {
   const PasswordSignInScreen({super.key});
 
@@ -25,7 +27,7 @@ class PasswordSignInScreen extends HookConsumerWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
-
+            const PasswordSignInForm(),
           ],
         ),
       ),

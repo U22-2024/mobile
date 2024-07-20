@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile/components/text_divider/text_divider.dart';
+import 'package:mobile/ui/components/text_divider/text_divider.dart';
 
 import 'password_signup_form.dart';
 import 'social_signup_form.dart';

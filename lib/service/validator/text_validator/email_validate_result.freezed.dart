@@ -19,6 +19,7 @@ mixin _$EmailValidateResult {
   bool get isDuplicate => throw _privateConstructorUsedError;
   bool get isValidFormat => throw _privateConstructorUsedError;
   bool get isEmpty => throw _privateConstructorUsedError;
+  bool get emailNotFound => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EmailValidateResultCopyWith<EmailValidateResult> get copyWith =>
@@ -31,7 +32,8 @@ abstract class $EmailValidateResultCopyWith<$Res> {
           EmailValidateResult value, $Res Function(EmailValidateResult) then) =
       _$EmailValidateResultCopyWithImpl<$Res, EmailValidateResult>;
   @useResult
-  $Res call({bool isDuplicate, bool isValidFormat, bool isEmpty});
+  $Res call(
+      {bool isDuplicate, bool isValidFormat, bool isEmpty, bool emailNotFound});
 }
 
 /// @nodoc
@@ -50,6 +52,7 @@ class _$EmailValidateResultCopyWithImpl<$Res, $Val extends EmailValidateResult>
     Object? isDuplicate = null,
     Object? isValidFormat = null,
     Object? isEmpty = null,
+    Object? emailNotFound = null,
   }) {
     return _then(_value.copyWith(
       isDuplicate: null == isDuplicate
@@ -64,6 +67,10 @@ class _$EmailValidateResultCopyWithImpl<$Res, $Val extends EmailValidateResult>
           ? _value.isEmpty
           : isEmpty // ignore: cast_nullable_to_non_nullable
               as bool,
+      emailNotFound: null == emailNotFound
+          ? _value.emailNotFound
+          : emailNotFound // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -76,7 +83,8 @@ abstract class _$$EmailValidateResultImplCopyWith<$Res>
       __$$EmailValidateResultImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isDuplicate, bool isValidFormat, bool isEmpty});
+  $Res call(
+      {bool isDuplicate, bool isValidFormat, bool isEmpty, bool emailNotFound});
 }
 
 /// @nodoc
@@ -93,6 +101,7 @@ class __$$EmailValidateResultImplCopyWithImpl<$Res>
     Object? isDuplicate = null,
     Object? isValidFormat = null,
     Object? isEmpty = null,
+    Object? emailNotFound = null,
   }) {
     return _then(_$EmailValidateResultImpl(
       isDuplicate: null == isDuplicate
@@ -107,17 +116,23 @@ class __$$EmailValidateResultImplCopyWithImpl<$Res>
           ? _value.isEmpty
           : isEmpty // ignore: cast_nullable_to_non_nullable
               as bool,
+      emailNotFound: null == emailNotFound
+          ? _value.emailNotFound
+          : emailNotFound // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$EmailValidateResultImpl implements _EmailValidateResult {
+class _$EmailValidateResultImpl extends _EmailValidateResult {
   _$EmailValidateResultImpl(
       {required this.isDuplicate,
       required this.isValidFormat,
-      required this.isEmpty});
+      required this.isEmpty,
+      required this.emailNotFound})
+      : super._();
 
   @override
   final bool isDuplicate;
@@ -125,10 +140,12 @@ class _$EmailValidateResultImpl implements _EmailValidateResult {
   final bool isValidFormat;
   @override
   final bool isEmpty;
+  @override
+  final bool emailNotFound;
 
   @override
   String toString() {
-    return 'EmailValidateResult(isDuplicate: $isDuplicate, isValidFormat: $isValidFormat, isEmpty: $isEmpty)';
+    return 'EmailValidateResult(isDuplicate: $isDuplicate, isValidFormat: $isValidFormat, isEmpty: $isEmpty, emailNotFound: $emailNotFound)';
   }
 
   @override
@@ -140,12 +157,14 @@ class _$EmailValidateResultImpl implements _EmailValidateResult {
                 other.isDuplicate == isDuplicate) &&
             (identical(other.isValidFormat, isValidFormat) ||
                 other.isValidFormat == isValidFormat) &&
-            (identical(other.isEmpty, isEmpty) || other.isEmpty == isEmpty));
+            (identical(other.isEmpty, isEmpty) || other.isEmpty == isEmpty) &&
+            (identical(other.emailNotFound, emailNotFound) ||
+                other.emailNotFound == emailNotFound));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isDuplicate, isValidFormat, isEmpty);
+  int get hashCode => Object.hash(
+      runtimeType, isDuplicate, isValidFormat, isEmpty, emailNotFound);
 
   @JsonKey(ignore: true)
   @override
@@ -155,11 +174,13 @@ class _$EmailValidateResultImpl implements _EmailValidateResult {
           this, _$identity);
 }
 
-abstract class _EmailValidateResult implements EmailValidateResult {
+abstract class _EmailValidateResult extends EmailValidateResult {
   factory _EmailValidateResult(
       {required final bool isDuplicate,
       required final bool isValidFormat,
-      required final bool isEmpty}) = _$EmailValidateResultImpl;
+      required final bool isEmpty,
+      required final bool emailNotFound}) = _$EmailValidateResultImpl;
+  _EmailValidateResult._() : super._();
 
   @override
   bool get isDuplicate;
@@ -167,6 +188,8 @@ abstract class _EmailValidateResult implements EmailValidateResult {
   bool get isValidFormat;
   @override
   bool get isEmpty;
+  @override
+  bool get emailNotFound;
   @override
   @JsonKey(ignore: true)
   _$$EmailValidateResultImplCopyWith<_$EmailValidateResultImpl> get copyWith =>

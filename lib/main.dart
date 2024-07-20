@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:mobile/app.dart';
+import 'package:mobile/ui/app.dart';
 import 'package:mobile/firebase_options.dart';
 
 Future<bool> _isEnableAuthEmulator(String projectId) async {

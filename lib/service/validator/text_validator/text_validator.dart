@@ -3,18 +3,15 @@ import 'package:mobile/service/validator/text_validator/email_validate_result.da
 import 'package:mobile/service/validator/text_validator/password_validate_result.dart';
 
 class TextValidator {
-  static EmailValidateResult email(String? value, bool isDuplicate) {
+  static EmailValidateResult email(String? value) {
     if (value == null || value.isEmpty) {
-      return EmailValidateResult(
-        isDuplicate: isDuplicate,
-        isValidFormat: false,
-        isEmpty: true,
-      );
+      return EmailValidateResult.init();
     }
 
     final isValidFormat = EmailValidator.validate(value);
     return EmailValidateResult(
-      isDuplicate: isDuplicate,
+      isDuplicate: false,
+      emailNotFound: false,
       isValidFormat: isValidFormat,
       isEmpty: false,
     );
@@ -38,9 +35,11 @@ class TextValidator {
     final validReconfirm = password == rePassword;
 
     return PasswordValidateResult(
-        validLength: validLength,
-        validCharacter: validCharacter,
-        validSafe: validSafe,
-        validReconfirm: validReconfirm);
+      validLength: validLength,
+      validCharacter: validCharacter,
+      validSafe: validSafe,
+      validReconfirm: validReconfirm,
+      correctPassword: true,
+    );
   }
 }

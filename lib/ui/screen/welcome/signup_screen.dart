@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile/screen/welcome/signup_part/signup_form.dart';
+
+import 'signup_part/signup_form.dart';
 
 class SignUpScreen extends HookConsumerWidget {
   const SignUpScreen({super.key});

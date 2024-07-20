@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile/screen/welcome/sign_in_part/sign_in_modal.dart';
 import 'package:mobile/service/router/router_provider.dart';
+
+import 'sign_in_part/sign_in_modal.dart';
 
 class WelcomeScreen extends HookConsumerWidget {
   const WelcomeScreen({super.key});

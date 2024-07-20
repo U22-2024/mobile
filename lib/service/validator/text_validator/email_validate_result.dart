@@ -3,31 +3,38 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'email_validate_result.freezed.dart';
 
 @freezed
-class EmailValidateResult with _$EmailValidateResult {
+abstract class EmailValidateResult implements _$EmailValidateResult {
+  const EmailValidateResult._();
+
   factory EmailValidateResult({
     required bool isDuplicate,
     required bool isValidFormat,
     required bool isEmpty,
+    required bool emailNotFound,
   }) = _EmailValidateResult;
 
   factory EmailValidateResult.init() => EmailValidateResult(
         isDuplicate: false,
         isValidFormat: false,
         isEmpty: false,
+        emailNotFound: false, // 初期状態ではメールアドレスは存在するものとして扱う
       );
 
-  static bool isValid(EmailValidateResult result) {
-    return result.isValidFormat && !result.isDuplicate && !result.isEmpty;
+  bool isValid() {
+    return isValidFormat && !isDuplicate && !isEmpty && !emailNotFound;
   }
 
-  static String? message(EmailValidateResult result) {
-    if (result.isEmpty) {
+  String? message() {
+    if (isEmpty) {
       return "メールアドレスを入力してください";
     }
-    if (result.isDuplicate) {
+    if (emailNotFound) {
+      return "このメールアドレスは登録されていません";
+    }
+    if (isDuplicate) {
       return "このメールアドレスは既に登録されています";
     }
-    if (!result.isValidFormat) {
+    if (!isValidFormat) {
       return "メールアドレスの形式が正しくありません";
     }
     return null;

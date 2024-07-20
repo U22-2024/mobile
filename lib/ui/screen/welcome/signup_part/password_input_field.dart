@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/common/reducer.dart';
-import 'package:mobile/components/custom_input_field/custom_input_field.dart';
+import 'package:mobile/ui/components/custom_input_field/custom_input_field.dart';
 import 'package:mobile/service/validator/text_validator/password_validate_result.dart';
 
 import 'store.dart';
@@ -58,8 +58,7 @@ class _PasswordForm extends StatelessWidget {
     return CustomInputField(
       controller: controller,
       label: isRePassword ? "パスワードの確認" : "パスワード",
-      validateMessage:
-          PasswordValidateResult.isValid(validateResult) ? null : "",
+      validateMessage: validateResult.message(),
       suffixIcon: IconButton(
         icon: Icon(visiblePassword ? Icons.visibility_off : Icons.visibility),
         onPressed: () {

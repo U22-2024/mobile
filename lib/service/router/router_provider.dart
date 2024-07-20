@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/screen/welcome/password_signin_screen.dart';
-import 'package:mobile/screen/welcome/signup_screen.dart';
-import 'package:mobile/screen/welcome/welcome_screen.dart';
+import 'package:mobile/ui/screen/welcome/password_signin_screen.dart';
+import 'package:mobile/ui/screen/welcome/signup_screen.dart';
+import 'package:mobile/ui/screen/home/home_screen.dart';
+import 'package:mobile/ui/screen/welcome/welcome_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../screen/home/home_screen.dart';
 
 part 'router_provider.g.dart';
 

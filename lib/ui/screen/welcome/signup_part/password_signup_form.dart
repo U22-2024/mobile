@@ -34,13 +34,11 @@ class _Form extends ConsumerWidget {
     final isLoading = state.signUpResult?.isLoading == true;
     final hasError = !isLoading && state.signUpResult?.hasError == true;
 
-    void validate() {
-      if (state.formKey.currentState?.validate() == true) {
-        state.formKey.currentState?.save();
-      }
-    }
-
     Future<void> signup() async {
+      if (state.formKey.currentState?.validate() != true) {
+        return;
+      }
+
       final dispatcher = Dispatcher.of<EmailPasswordFormAction>(context);
       if (dispatcher == null) {
         return;
@@ -67,7 +65,6 @@ class _Form extends ConsumerWidget {
 
     return Form(
       key: state.formKey,
-      onChanged: validate,
       child: Column(
         children: [
           const EmailInputField(),

@@ -10,6 +10,7 @@ class CustomInputField extends StatelessWidget {
     this.validateMessage,
     this.keyboardType,
     this.suffixIcon,
+    this.focusNode,
     this.obscureText = false,
   });
 
@@ -20,6 +21,7 @@ class CustomInputField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final FocusNode? focusNode;
 
   Widget? _suffixIcon(BuildContext context) {
     if (suffixIcon != null) {
@@ -41,6 +43,7 @@ class CustomInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      focusNode: focusNode,
       decoration: InputDecoration(
         labelText: label,
         border: const OutlineInputBorder(borderSide: BorderSide.none),
