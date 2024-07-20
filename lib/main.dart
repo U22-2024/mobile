@@ -43,7 +43,7 @@ Future<bool> _isEnableAuthEmulator(String projectId) async {
     ));
     return response.statusCode == 200;
   } catch (e) {
-    rethrow;
+    return false;
   }
 }
 
