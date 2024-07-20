@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/screen/welcome/auth_register_screen.dart';
+import 'package:mobile/screen/welcome/password_signin_screen.dart';
+import 'package:mobile/screen/welcome/signup_screen.dart';
 import 'package:mobile/screen/welcome/welcome_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -36,7 +37,8 @@ class HomeRoute extends GoRouteData {
 @TypedGoRoute<WelcomeRoute>(
   path: WelcomeScreen.routeName,
   routes: [
-    TypedGoRoute<AuthRegisterRoute>(path: AuthRegisterScreen.routeName),
+    TypedGoRoute<SignupRoute>(path: SignUpScreen.routeName),
+    TypedGoRoute<PasswordSignInRoute>(path: PasswordSignInScreen.routeName),
   ],
 )
 class WelcomeRoute extends GoRouteData {
@@ -48,12 +50,21 @@ class WelcomeRoute extends GoRouteData {
   }
 }
 
-class AuthRegisterRoute extends GoRouteData {
-  const AuthRegisterRoute();
+class SignupRoute extends GoRouteData {
+  const SignupRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const AuthRegisterScreen();
+    return const SignUpScreen();
+  }
+}
+
+class PasswordSignInRoute extends GoRouteData {
+  const PasswordSignInRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PasswordSignInScreen();
   }
 }
 //#endregion

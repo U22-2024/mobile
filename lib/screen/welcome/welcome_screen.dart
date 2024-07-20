@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile/screen/welcome/sign_in_part/sign_in_modal.dart';
 import 'package:mobile/service/router/router_provider.dart';
 
 class WelcomeScreen extends HookConsumerWidget {
@@ -10,54 +11,7 @@ class WelcomeScreen extends HookConsumerWidget {
   void _showLoginMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(16),
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.email),
-                    const SizedBox(width: 16),
-                    Text(
-                      "Emailでログイン",
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Image(
-                      image: AssetImage("assets/images/google.png"),
-                      width: 20,
-                      height: 20,
-                    ),
-                    const SizedBox(width: 16),
-                    Text(
-                      "Googleでログイン",
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      builder: (context) => const SignInModal(),
     );
   }
 
@@ -74,7 +28,7 @@ class WelcomeScreen extends HookConsumerWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () => const AuthRegisterRoute().go(context),
+                onPressed: () => const SignupRoute().go(context),
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(
                     color: Theme.of(context).colorScheme.primary,

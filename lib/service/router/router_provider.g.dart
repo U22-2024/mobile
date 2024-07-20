@@ -38,8 +38,12 @@ RouteBase get $welcomeRoute => GoRouteData.$route(
       factory: $WelcomeRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
-          path: 'register',
-          factory: $AuthRegisterRouteExtension._fromState,
+          path: 'signup',
+          factory: $SignupRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: 'password_sign_in',
+          factory: $PasswordSignInRouteExtension._fromState,
         ),
       ],
     );
@@ -61,12 +65,29 @@ extension $WelcomeRouteExtension on WelcomeRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $AuthRegisterRouteExtension on AuthRegisterRoute {
-  static AuthRegisterRoute _fromState(GoRouterState state) =>
-      const AuthRegisterRoute();
+extension $SignupRouteExtension on SignupRoute {
+  static SignupRoute _fromState(GoRouterState state) => const SignupRoute();
 
   String get location => GoRouteData.$location(
-        '/welcome/register',
+        '/welcome/signup',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PasswordSignInRouteExtension on PasswordSignInRoute {
+  static PasswordSignInRoute _fromState(GoRouterState state) =>
+      const PasswordSignInRoute();
+
+  String get location => GoRouteData.$location(
+        '/welcome/password_sign_in',
       );
 
   void go(BuildContext context) => context.go(location);

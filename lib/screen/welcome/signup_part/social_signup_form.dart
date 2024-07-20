@@ -3,8 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/service/auth/auth_provider.dart';
 import 'package:mobile/service/router/router_provider.dart';
 
-class OauthForm extends HookConsumerWidget {
-  const OauthForm({super.key});
+class SocialSignUpForm extends HookConsumerWidget {
+  const SocialSignUpForm({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

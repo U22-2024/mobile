@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/common/reducer.dart';
-import 'package:mobile/screen/welcome/part/password_input_field.dart';
-import 'package:mobile/screen/welcome/part/store.dart';
 import 'package:mobile/service/auth/auth_provider.dart';
 import 'package:mobile/service/router/router_provider.dart';
 
 import 'email_input_field.dart';
+import 'password_input_field.dart';
+import 'store.dart';
 
-class EmailPasswdForm extends HookConsumerWidget {
-  const EmailPasswdForm({super.key});
+class PasswordSignUpForm extends HookConsumerWidget {
+  const PasswordSignUpForm({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

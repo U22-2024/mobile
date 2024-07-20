@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/common/reducer.dart';
-import 'package:mobile/screen/welcome/part/store.dart';
+import 'package:mobile/components/custom_input_field/custom_input_field.dart';
 import 'package:mobile/service/validator/text_validator/password_validate_result.dart';
+
+import 'store.dart';
 
 class PasswordInputField extends StatelessWidget {
   const PasswordInputField({super.key});
@@ -42,49 +44,38 @@ class _PasswordForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final visiblePassword = StateModel.selectOf<EmailPasswordFormState, bool>(
-        context, select: (state) {
-      return isRePassword ? state.visibleRePassword : state.visiblePassword;
-    });
-    final validateResult =
-        StateModel.selectOf<EmailPasswordFormState, PasswordValidateResult>(
+    final (visiblePassword, validateResult) = StateModel.selectOf<
+        EmailPasswordFormState, (bool, PasswordValidateResult)>(
       context,
-      select: (state) => state.passwordValidateResult,
+      select: (state) {
+        final visible =
+            isRePassword ? state.visibleRePassword : state.visiblePassword;
+        final result = state.passwordValidateResult;
+        return (visible, result);
+      },
     );
 
-    return TextFormField(
+    return CustomInputField(
       controller: controller,
-      decoration: InputDecoration(
-        labelText: isRePassword ? "パスワードの確認" : "パスワード",
-        border: const OutlineInputBorder(borderSide: BorderSide.none),
-        fillColor: Theme.of(context).hoverColor,
-        filled: true,
-        errorStyle: const TextStyle(height: 0),
-        suffixIcon: IconButton(
-          icon: Icon(visiblePassword ? Icons.visibility_off : Icons.visibility),
-          onPressed: () {
-            final dispatcher = Dispatcher.of<EmailPasswordFormAction>(context);
-            dispatcher?.dispatch(
-              isRePassword
-                  ? PasswordVisibleAction(visibleRePassword: !visiblePassword)
-                  : PasswordVisibleAction(visiblePassword: !visiblePassword),
-            );
-          },
-        ),
+      label: isRePassword ? "パスワードの確認" : "パスワード",
+      validateMessage:
+          PasswordValidateResult.isValid(validateResult) ? null : "",
+      suffixIcon: IconButton(
+        icon: Icon(visiblePassword ? Icons.visibility_off : Icons.visibility),
+        onPressed: () {
+          final dispatcher = Dispatcher.of<EmailPasswordFormAction>(context);
+          dispatcher?.dispatch(
+            isRePassword
+                ? PasswordVisibleAction(visibleRePassword: !visiblePassword)
+                : PasswordVisibleAction(visiblePassword: !visiblePassword),
+          );
+        },
       ),
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.visiblePassword,
       obscureText: !visiblePassword,
       onChanged: (value) {
         Dispatcher.of<EmailPasswordFormAction>(context)
             ?.dispatch(PasswordChangedAction());
-      },
-      validator: (value) {
-        if (PasswordValidateResult.isValid(validateResult)) {
-          return null;
-        }
-
-        return "";
       },
     );
   }
