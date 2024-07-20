@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile/service/auth/auth_provider.dart';
 import 'package:mobile/service/router/router_provider.dart';
 
 class SignInModal extends HookConsumerWidget {
@@ -60,8 +61,29 @@ class SignInModal extends HookConsumerWidget {
               height: 20,
             ),
             "Googleでログイン",
-            () {
-              // TODO: Implement google sign in
+            () async {
+              // モーダルを閉じる
+              Navigator.of(context).pop();
+              try {
+                await ref.read(signInWithGoogleProvider.future);
+              } catch (err) {
+                if (!context.mounted) return;
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("ログインエラー"),
+                    content: const Text("Googleアカウントでのログインに失敗しました"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("OK"),
+                      )
+                    ],
+                  ),
+                );
+              }
             },
           ),
         ],
