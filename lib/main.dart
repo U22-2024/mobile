@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'presentation/app/main_app.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile/presentation/app/main_app.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const ProviderScope(
+    child: MainApp(),
+  ));
 }

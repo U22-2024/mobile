@@ -1,0 +1,105 @@
+{
+  "project_info": {
+    "project_number": "486354809018",
+    "project_id": "u22-2024",
+    "storage_bucket": "u22-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486354809018:android:77d8ecff06f7fa492b9283",
+        "android_client_info": {
+          "package_name": "jp.ac.kagawa_nct.sr.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486354809018-erkrpbav8pabdo0p5e7mkd13mrc438vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2pyd51G15siy7seu2zYQQ81AjeTFzM_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486354809018-erkrpbav8pabdo0p5e7mkd13mrc438vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486354809018:android:303dec296107fa212b9283",
+        "android_client_info": {
+          "package_name": "jp.kosen_ac.kagawa.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486354809018-v1r2v6tihaipsgum3u1asbp7ookhrcc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.kosen_ac.kagawa.mobile",
+            "certificate_hash": "b36e6bed794b03228c7bf374c2d5e17c1e978c15"
+          }
+        },
+        {
+          "client_id": "486354809018-erkrpbav8pabdo0p5e7mkd13mrc438vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2pyd51G15siy7seu2zYQQ81AjeTFzM_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486354809018-erkrpbav8pabdo0p5e7mkd13mrc438vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486354809018:android:dcb9bd23b284c9862b9283",
+        "android_client_info": {
+          "package_name": "jp.kosenac.kagawa.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486354809018-erkrpbav8pabdo0p5e7mkd13mrc438vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2pyd51G15siy7seu2zYQQ81AjeTFzM_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486354809018-erkrpbav8pabdo0p5e7mkd13mrc438vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
