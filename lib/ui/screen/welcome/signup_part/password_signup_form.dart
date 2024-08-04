@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/common/reducer.dart';
-import 'package:mobile/service/auth/auth_provider.dart';
+import 'package:mobile/repository/user/user_repository.dart';
 import 'package:mobile/service/router/router_provider.dart';
 
 import 'email_input_field.dart';
@@ -46,16 +46,13 @@ class _Form extends ConsumerWidget {
 
       dispatcher.dispatch(SignUpStartAction());
       try {
-        await ref.read(
-          createUserWithEmailAndPasswordProvider
-              .call(state.emailController.text, state.passwordController.text)
-              .future,
-        );
+        final userRepository = ref.read(userRepositoryProvider);
+        await userRepository.createAndSignIn(
+            state.emailController.text, state.passwordController.text);
         dispatcher.dispatch(SignUpSuccessAction());
 
-        await ref.read(signInWithEmailAndPasswordProvider
-            .call(state.emailController.text, state.passwordController.text)
-            .future);
+        await userRepository.signInWithEmailAndPassword(
+            state.emailController.text, state.passwordController.text);
         if (!context.mounted) return;
         const HomeRoute().go(context);
       } on FirebaseAuthException catch (e) {

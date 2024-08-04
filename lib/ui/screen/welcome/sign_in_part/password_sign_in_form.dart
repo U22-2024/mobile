@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/extensions/firebase_auth/firebase_auth_extension.dart';
-import 'package:mobile/service/auth/auth_provider.dart';
+import 'package:mobile/repository/user/user_repository.dart';
 import 'package:mobile/service/router/router_provider.dart';
 import 'package:mobile/service/validator/text_validator/email_validate_result.dart';
 import 'package:mobile/service/validator/text_validator/password_validate_result.dart';
@@ -51,11 +51,10 @@ class PasswordSignInForm extends HookConsumerWidget {
       }
 
       try {
-        final future = ref.read(
-          signInWithEmailAndPasswordProvider
-              .call(emailController.text, passwordController.text)
-              .future,
-        );
+        final future = ref
+            .read(userRepositoryProvider)
+            .signInWithEmailAndPassword(
+                emailController.text, passwordController.text);
         signInPending.value = future;
 
         await future;

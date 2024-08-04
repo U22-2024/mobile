@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile/service/auth/auth_provider.dart';
+import 'package:mobile/repository/user/user_repository.dart';
 import 'package:mobile/service/router/router_provider.dart';
 
 class SignInModal extends HookConsumerWidget {
@@ -65,7 +65,7 @@ class SignInModal extends HookConsumerWidget {
               // モーダルを閉じる
               Navigator.of(context).pop();
               try {
-                await ref.read(signInWithGoogleProvider.future);
+                await ref.read(userRepositoryProvider).signInWithGoogle();
               } catch (err) {
                 if (!context.mounted) return;
                 showDialog(
