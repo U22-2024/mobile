@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3fe011ad-4c7a-4756-963b-6a5cbb56b46d" name="Changes" comment="AndroidStudioの設定を共有">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/mobile_android.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/flutter/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/main.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/my_application.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/my_application.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobile.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.config/dotnet-tools.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.firebaserc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.husky/task-runner.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mobile.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/startup.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.run/BuildRunner Watch.run.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.run/GenerateGrpc.run.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.run/InitTask.run.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/bufbuild/buf/v1.35.1/buf-Windows-x86_64.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/appInsightsSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/deploymentTargetSelector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/migrations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/google-services.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/kotlin/jp/kosen_ac/kagawa/mobile/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/jp/ac/kagawa_nct/sr/mobile/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/xml/network_security_config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/google.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buf.gen.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buf.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/reducer.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/extensions/firebase_auth/firebase_auth_extension.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/firebase_options.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/auth/app_user.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/auth/app_user.freezed.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/settings/settings_model.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/settings/settings_model.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/google/protobuf/field_mask.pb.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/google/protobuf/field_mask.pbenum.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/google/protobuf/field_mask.pbjson.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/user/v1/user.pb.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/user/v1/user.pbenum.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/user/v1/user.pbgrpc.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/user/v1/user.pbjson.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/grpc/grpc_provider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/grpc/grpc_provider.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/isar/isar_provider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/isar/isar_provider.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/router/router_provider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/router/router_provider.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/settings/settings_provider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/settings/settings_provider.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/settings/settings_service.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/validator/text_validator/email_validate_result.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/validator/text_validator/email_validate_result.freezed.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/validator/text_validator/password_validate_result.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/validator/text_validator/password_validate_result.freezed.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service/validator/text_validator/text_validator.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/app.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/components/custom_input_field/custom_input_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/components/text_divider/text_divider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/home/home_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/password_signin_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/sign_in_part/password_sign_in_form.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/sign_in_part/sign_in_modal.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/signup_part/email_input_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/signup_part/password_input_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/signup_part/password_signup_form.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/signup_part/signup_form.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/signup_part/social_signup_form.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/signup_part/store.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/signup_part/store.freezed.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/signup_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screen/welcome/welcome_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/github.fsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/init.fsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lint-staged.fsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/settings.fsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/runner/Runner.rc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/runner/Runner.rc" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "gongitsune"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/U22-2024/mobile.git",
+    "accountId": "6e15b573-908f-489d-9bc9-2e23f571600b"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2kAlyndaODWQ87U9f9017121TZw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3fe011ad-4c7a-4756-963b-6a5cbb56b46d" name="Changes" comment="" />
+      <created>1722734521018</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1722734521018</updated>
+    </task>
+    <task id="LOCAL-00001" summary="AndroidStudioの設定を共有">
+      <option name="closed" value="true" />
+      <created>1722734580647</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722734580647</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="AndroidStudioの設定を共有" />
+    <option name="LAST_COMMIT_MESSAGE" value="AndroidStudioの設定を共有" />
+  </component>
+</project>
