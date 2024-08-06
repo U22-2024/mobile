@@ -37,6 +37,12 @@ extension $SplashRouteExtension on SplashRoute {
 RouteBase get $homeRoute => GoRouteData.$route(
       path: '/home',
       factory: $HomeRouteExtension._fromState,
+      routes: [
+        GoRouteData.$route(
+          path: 'remind',
+          factory: $RemindRouteExtension._fromState,
+        ),
+      ],
     );
 
 extension $HomeRouteExtension on HomeRoute {
@@ -44,6 +50,23 @@ extension $HomeRouteExtension on HomeRoute {
 
   String get location => GoRouteData.$location(
         '/home',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $RemindRouteExtension on RemindRoute {
+  static RemindRoute _fromState(GoRouterState state) => const RemindRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/remind',
       );
 
   void go(BuildContext context) => context.go(location);

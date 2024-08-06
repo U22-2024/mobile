@@ -7,6 +7,8 @@ import 'package:mobile/presentation/home/home_screen.dart';
 import 'package:mobile/presentation/login/login_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../home/remind/remind_screen.dart';
+
 part 'router.g.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -49,13 +51,27 @@ class SplashRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<HomeRoute>(path: HomeScreen.routeLocation)
+@TypedGoRoute<HomeRoute>(
+  path: HomeScreen.routeLocation,
+  routes: [
+    TypedGoRoute<RemindRoute>(path: RemindScreen.routeLocation),
+  ],
+)
 class HomeRoute extends GoRouteData {
   const HomeRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const HomeScreen();
+  }
+}
+
+class RemindRoute extends GoRouteData {
+  const RemindRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const RemindScreen();
   }
 }
 

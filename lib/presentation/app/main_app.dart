@@ -24,6 +24,9 @@ class MainApp extends ConsumerWidget {
         Locale('en'),
         Locale('ja'),
       ],
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
     );
   }
 }

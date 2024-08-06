@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: user/v1/user.proto
+//  source: remined/v1/remined.proto
 //
 // @dart = 2.12
 
