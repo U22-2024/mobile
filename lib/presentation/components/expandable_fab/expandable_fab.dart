@@ -17,7 +17,7 @@ class ExpandableFab extends HookWidget {
       final index = entry.key;
       final child = entry.value;
 
-      final offset = 60.0 * (index + 1) + 20;
+      final offset = 80.0 * (index + 1) - 10;
       return _ExpandingActionButton(controller, offset, child);
     }).toList();
   }
@@ -55,23 +55,35 @@ class ExpandableFab extends HookWidget {
 }
 
 class ActionButton extends StatelessWidget {
-  const ActionButton({super.key, required this.icon, required this.onPressed});
+  const ActionButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    this.label,
+  });
 
   final Widget icon;
   final VoidCallback onPressed;
+  final Widget? label;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      shape: const CircleBorder(),
-      clipBehavior: Clip.antiAlias,
-      color: Theme.of(context).colorScheme.secondary,
-      elevation: 4,
-      child: IconButton(
-        icon: icon,
-        color: Theme.of(context).colorScheme.onSecondary,
-        onPressed: onPressed,
-      ),
+    return Column(
+      children: [
+        Material(
+          shape: const CircleBorder(),
+          clipBehavior: Clip.antiAlias,
+          color: Theme.of(context).colorScheme.secondary,
+          elevation: 4,
+          child: IconButton(
+            padding: const EdgeInsets.all(10),
+            icon: icon,
+            color: Theme.of(context).colorScheme.onSecondary,
+            onPressed: onPressed,
+          ),
+        ),
+        if (label != null) label!,
+      ],
     );
   }
 }
