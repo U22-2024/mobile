@@ -7,18 +7,24 @@ class ExpandableFab extends HookWidget {
     required this.children,
   });
 
-  final List<Widget> children;
+  final List<ActionButton> children;
 
   Iterable<Widget> _buildChildren(
     BuildContext context,
     AnimationController controller,
+    ValueNotifier<bool> isOpen,
   ) {
     return children.asMap().entries.map((entry) {
       final index = entry.key;
       final child = entry.value;
 
       final offset = 80.0 * (index + 1) - 10;
-      return _ExpandingActionButton(controller, offset, child);
+
+      final configuredChild = child.copyWith(onPressed: () {
+        child.onPressed();
+        isOpen.value = false;
+      });
+      return _ExpandingActionButton(controller, offset, configuredChild);
     }).toList();
   }
 
@@ -36,7 +42,7 @@ class ExpandableFab extends HookWidget {
         alignment: Alignment.bottomCenter,
         clipBehavior: Clip.none,
         children: [
-          ..._buildChildren(context, controller),
+          ..._buildChildren(context, controller, isOpen),
           FloatingActionButton(
             onPressed: () {
               if (isOpen.value) {
@@ -54,6 +60,10 @@ class ExpandableFab extends HookWidget {
   }
 }
 
+abstract class IOnPressedInjectable<T> {
+  T injectOnPressed(VoidCallback onPressed);
+}
+
 class ActionButton extends StatelessWidget {
   const ActionButton({
     super.key,
@@ -65,6 +75,18 @@ class ActionButton extends StatelessWidget {
   final Widget icon;
   final VoidCallback onPressed;
   final Widget? label;
+
+  ActionButton copyWith({
+    Widget? icon,
+    VoidCallback? onPressed,
+    Widget? label,
+  }) {
+    return ActionButton(
+      icon: icon ?? this.icon,
+      onPressed: onPressed ?? this.onPressed,
+      label: label ?? this.label,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +113,7 @@ class ActionButton extends StatelessWidget {
 class _ExpandingActionButton extends StatelessWidget {
   final Animation<double> progress;
   final double offset;
-  final Widget child;
+  final ActionButton child;
 
   const _ExpandingActionButton(this.progress, this.offset, this.child);
 

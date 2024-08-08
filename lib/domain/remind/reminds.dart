@@ -11,6 +11,8 @@ part 'reminds.g.dart';
 class Reminds extends _$Reminds {
   @override
   List<Remind> build() {
+    // フェッチが終了したときに状態が更新されてUIが再描画されるため、awaitしない
+    fetch();
     return [];
   }
 
