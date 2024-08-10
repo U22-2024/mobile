@@ -6,7 +6,7 @@ part of 'remind_groups.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$remindGroupClientHash() => r'ffbd24a1314b1227d0bc58fe6946d79d5454f72e';
+String _$remindGroupClientHash() => r'fec6234865d586003082613151550ed579c61294';
 
 /// See also [remindGroupClient].
 @ProviderFor(remindGroupClient)
@@ -23,7 +23,7 @@ final remindGroupClientProvider =
 
 typedef RemindGroupClientRef
     = AutoDisposeFutureProviderRef<RemindGroupServiceClient>;
-String _$remindGroupsHash() => r'f1c41eaa95c861bbc84c5461939be81b07d2b574';
+String _$remindGroupsHash() => r'71d2764ecd6eafc5c6301889de49842d04eeaa16';
 
 /// See also [RemindGroups].
 @ProviderFor(RemindGroups)
