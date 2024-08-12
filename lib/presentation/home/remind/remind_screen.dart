@@ -111,6 +111,8 @@ class _NewGroupActionButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.watch(createGroupModalProvider.notifier);
+
     return Row(
       children: [
         const Text("リマインド"),
@@ -119,13 +121,7 @@ class _NewGroupActionButton extends ConsumerWidget {
           heroTag: null,
           onPressed: () {
             expandableKey.currentState?.toggle();
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (context) {
-                return const CreateGroupScreen();
-              },
-            );
+            notifier.show(context);
           },
           child: const Icon(Icons.create_new_folder_rounded),
         ),
