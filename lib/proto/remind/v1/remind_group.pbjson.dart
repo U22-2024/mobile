@@ -21,13 +21,29 @@ const RemindGroup$json = {
     {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
     {'1': 'uid', '3': 4, '4': 1, '5': 9, '10': 'uid'},
+    {'1': 'icon', '3': 5, '4': 1, '5': 11, '6': '.remind.v1.IconData', '10': 'icon'},
   ],
 };
 
 /// Descriptor for `RemindGroup`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List remindGroupDescriptor = $convert.base64Decode(
     'CgtSZW1pbmRHcm91cBIOCgJpZBgBIAEoCVICaWQSFAoFdGl0bGUYAiABKAlSBXRpdGxlEiAKC2'
-    'Rlc2NyaXB0aW9uGAMgASgJUgtkZXNjcmlwdGlvbhIQCgN1aWQYBCABKAlSA3VpZA==');
+    'Rlc2NyaXB0aW9uGAMgASgJUgtkZXNjcmlwdGlvbhIQCgN1aWQYBCABKAlSA3VpZBInCgRpY29u'
+    'GAUgASgLMhMucmVtaW5kLnYxLkljb25EYXRhUgRpY29u');
+
+@$core.Deprecated('Use iconDataDescriptor instead')
+const IconData$json = {
+  '1': 'IconData',
+  '2': [
+    {'1': 'code_point', '3': 1, '4': 1, '5': 5, '10': 'codePoint'},
+    {'1': 'font_family', '3': 2, '4': 1, '5': 9, '10': 'fontFamily'},
+  ],
+};
+
+/// Descriptor for `IconData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List iconDataDescriptor = $convert.base64Decode(
+    'CghJY29uRGF0YRIdCgpjb2RlX3BvaW50GAEgASgFUgljb2RlUG9pbnQSHwoLZm9udF9mYW1pbH'
+    'kYAiABKAlSCmZvbnRGYW1pbHk=');
 
 @$core.Deprecated('Use getRemindGroupRequestDescriptor instead')
 const GetRemindGroupRequest$json = {
@@ -86,13 +102,15 @@ const CreateRemindGroupRequest$json = {
     {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
     {'1': 'uid', '3': 3, '4': 1, '5': 9, '10': 'uid'},
+    {'1': 'icon', '3': 4, '4': 1, '5': 11, '6': '.remind.v1.IconData', '10': 'icon'},
   ],
 };
 
 /// Descriptor for `CreateRemindGroupRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createRemindGroupRequestDescriptor = $convert.base64Decode(
     'ChhDcmVhdGVSZW1pbmRHcm91cFJlcXVlc3QSFAoFdGl0bGUYASABKAlSBXRpdGxlEiAKC2Rlc2'
-    'NyaXB0aW9uGAIgASgJUgtkZXNjcmlwdGlvbhIQCgN1aWQYAyABKAlSA3VpZA==');
+    'NyaXB0aW9uGAIgASgJUgtkZXNjcmlwdGlvbhIQCgN1aWQYAyABKAlSA3VpZBInCgRpY29uGAQg'
+    'ASgLMhMucmVtaW5kLnYxLkljb25EYXRhUgRpY29u');
 
 @$core.Deprecated('Use createRemindGroupResponseDescriptor instead')
 const CreateRemindGroupResponse$json = {
@@ -114,13 +132,15 @@ const UpdateRemindGroupRequest$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
+    {'1': 'icon', '3': 4, '4': 1, '5': 11, '6': '.remind.v1.IconData', '10': 'icon'},
   ],
 };
 
 /// Descriptor for `UpdateRemindGroupRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateRemindGroupRequestDescriptor = $convert.base64Decode(
     'ChhVcGRhdGVSZW1pbmRHcm91cFJlcXVlc3QSDgoCaWQYASABKAlSAmlkEhQKBXRpdGxlGAIgAS'
-    'gJUgV0aXRsZRIgCgtkZXNjcmlwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24=');
+    'gJUgV0aXRsZRIgCgtkZXNjcmlwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24SJwoEaWNvbhgEIAEo'
+    'CzITLnJlbWluZC52MS5JY29uRGF0YVIEaWNvbg==');
 
 @$core.Deprecated('Use updateRemindGroupResponseDescriptor instead')
 const UpdateRemindGroupResponse$json = {

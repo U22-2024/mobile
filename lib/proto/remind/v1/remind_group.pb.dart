@@ -19,6 +19,7 @@ class RemindGroup extends $pb.GeneratedMessage {
     $core.String? title,
     $core.String? description,
     $core.String? uid,
+    IconData? icon,
   }) {
     final $result = create();
     if (id != null) {
@@ -33,6 +34,9 @@ class RemindGroup extends $pb.GeneratedMessage {
     if (uid != null) {
       $result.uid = uid;
     }
+    if (icon != null) {
+      $result.icon = icon;
+    }
     return $result;
   }
   RemindGroup._() : super();
@@ -44,6 +48,7 @@ class RemindGroup extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..aOS(4, _omitFieldNames ? '' : 'uid')
+    ..aOM<IconData>(5, _omitFieldNames ? '' : 'icon', subBuilder: IconData.create)
     ..hasRequiredFields = false
   ;
 
@@ -103,6 +108,81 @@ class RemindGroup extends $pb.GeneratedMessage {
   $core.bool hasUid() => $_has(3);
   @$pb.TagNumber(4)
   void clearUid() => clearField(4);
+
+  @$pb.TagNumber(5)
+  IconData get icon => $_getN(4);
+  @$pb.TagNumber(5)
+  set icon(IconData v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasIcon() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearIcon() => clearField(5);
+  @$pb.TagNumber(5)
+  IconData ensureIcon() => $_ensure(4);
+}
+
+class IconData extends $pb.GeneratedMessage {
+  factory IconData({
+    $core.int? codePoint,
+    $core.String? fontFamily,
+  }) {
+    final $result = create();
+    if (codePoint != null) {
+      $result.codePoint = codePoint;
+    }
+    if (fontFamily != null) {
+      $result.fontFamily = fontFamily;
+    }
+    return $result;
+  }
+  IconData._() : super();
+  factory IconData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory IconData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'IconData', package: const $pb.PackageName(_omitMessageNames ? '' : 'remind.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'codePoint', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'fontFamily')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  IconData clone() => IconData()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  IconData copyWith(void Function(IconData) updates) => super.copyWith((message) => updates(message as IconData)) as IconData;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static IconData create() => IconData._();
+  IconData createEmptyInstance() => create();
+  static $pb.PbList<IconData> createRepeated() => $pb.PbList<IconData>();
+  @$core.pragma('dart2js:noInline')
+  static IconData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<IconData>(create);
+  static IconData? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get codePoint => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set codePoint($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCodePoint() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCodePoint() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fontFamily => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fontFamily($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFontFamily() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFontFamily() => clearField(2);
 }
 
 class GetRemindGroupRequest extends $pb.GeneratedMessage {
@@ -306,6 +386,7 @@ class CreateRemindGroupRequest extends $pb.GeneratedMessage {
     $core.String? title,
     $core.String? description,
     $core.String? uid,
+    IconData? icon,
   }) {
     final $result = create();
     if (title != null) {
@@ -317,6 +398,9 @@ class CreateRemindGroupRequest extends $pb.GeneratedMessage {
     if (uid != null) {
       $result.uid = uid;
     }
+    if (icon != null) {
+      $result.icon = icon;
+    }
     return $result;
   }
   CreateRemindGroupRequest._() : super();
@@ -327,6 +411,7 @@ class CreateRemindGroupRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'description')
     ..aOS(3, _omitFieldNames ? '' : 'uid')
+    ..aOM<IconData>(4, _omitFieldNames ? '' : 'icon', subBuilder: IconData.create)
     ..hasRequiredFields = false
   ;
 
@@ -377,6 +462,17 @@ class CreateRemindGroupRequest extends $pb.GeneratedMessage {
   $core.bool hasUid() => $_has(2);
   @$pb.TagNumber(3)
   void clearUid() => clearField(3);
+
+  @$pb.TagNumber(4)
+  IconData get icon => $_getN(3);
+  @$pb.TagNumber(4)
+  set icon(IconData v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasIcon() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearIcon() => clearField(4);
+  @$pb.TagNumber(4)
+  IconData ensureIcon() => $_ensure(3);
 }
 
 class CreateRemindGroupResponse extends $pb.GeneratedMessage {
@@ -436,6 +532,7 @@ class UpdateRemindGroupRequest extends $pb.GeneratedMessage {
     $core.String? id,
     $core.String? title,
     $core.String? description,
+    IconData? icon,
   }) {
     final $result = create();
     if (id != null) {
@@ -447,6 +544,9 @@ class UpdateRemindGroupRequest extends $pb.GeneratedMessage {
     if (description != null) {
       $result.description = description;
     }
+    if (icon != null) {
+      $result.icon = icon;
+    }
     return $result;
   }
   UpdateRemindGroupRequest._() : super();
@@ -457,6 +557,7 @@ class UpdateRemindGroupRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'description')
+    ..aOM<IconData>(4, _omitFieldNames ? '' : 'icon', subBuilder: IconData.create)
     ..hasRequiredFields = false
   ;
 
@@ -507,6 +608,17 @@ class UpdateRemindGroupRequest extends $pb.GeneratedMessage {
   $core.bool hasDescription() => $_has(2);
   @$pb.TagNumber(3)
   void clearDescription() => clearField(3);
+
+  @$pb.TagNumber(4)
+  IconData get icon => $_getN(3);
+  @$pb.TagNumber(4)
+  set icon(IconData v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasIcon() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearIcon() => clearField(4);
+  @$pb.TagNumber(4)
+  IconData ensureIcon() => $_ensure(3);
 }
 
 class UpdateRemindGroupResponse extends $pb.GeneratedMessage {

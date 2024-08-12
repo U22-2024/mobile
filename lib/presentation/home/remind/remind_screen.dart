@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
+import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart';
 
 class RemindScreen extends HookConsumerWidget {
@@ -89,6 +90,7 @@ class _RemindGroupCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         width: 100,
+        height: 100,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -116,8 +118,14 @@ class _NewGroupActionButton extends ConsumerWidget {
         FloatingActionButton.small(
           heroTag: null,
           onPressed: () {
-            // TODO: リマインドグループを作成する
             expandableKey.currentState?.toggle();
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) {
+                return const CreateGroupScreen();
+              },
+            );
           },
           child: const Icon(Icons.create_new_folder_rounded),
         ),
