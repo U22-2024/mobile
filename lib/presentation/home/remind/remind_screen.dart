@@ -3,7 +3,7 @@ import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
 import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
-import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart';
+import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart' hide IconData;
 
 class RemindScreen extends HookConsumerWidget {
   RemindScreen({super.key});
@@ -60,10 +60,17 @@ class RemindScreen extends HookConsumerWidget {
 
 class _BoardView extends HookConsumerWidget {
   Iterable<Widget> _buildBoards(
-      BuildContext context, List<RemindGroup> groups) {
-    return groups.map((group) {
+    BuildContext context,
+    List<RemindGroup> groups,
+  ) {
+    final groupWidgets = groups.map((group) {
       return _RemindGroupCard(group: group);
     });
+
+    return [
+      _RemindGroupAllCard(),
+      ...groupWidgets,
+    ];
   }
 
   @override
@@ -95,8 +102,36 @@ class _RemindGroupCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Icon(Icons.tips_and_updates),
+            Icon(
+              CreateGroupModal.icons.firstWhere(
+                (icon) => icon.codePoint == group.icon.codePoint,
+                orElse: () => CreateGroupModal.icons.first,
+              ),
+            ),
+            const SizedBox(height: 8),
             Text(group.title),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _RemindGroupAllCard extends HookConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Card(
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        width: 100,
+        height: 100,
+        child: const Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(Icons.manage_search_rounded),
+            SizedBox(height: 8),
+            Text("グループを管理"),
           ],
         ),
       ),
@@ -115,7 +150,7 @@ class _NewGroupActionButton extends ConsumerWidget {
 
     return Row(
       children: [
-        const Text("リマインド"),
+        const Text("グループ"),
         const SizedBox(width: 20),
         FloatingActionButton.small(
           heroTag: null,

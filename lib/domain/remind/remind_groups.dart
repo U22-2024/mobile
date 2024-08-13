@@ -30,7 +30,7 @@ class RemindGroups extends _$RemindGroups {
     return [];
   }
 
-  Future add(String title, String? description) async {
+  Future add(String title, IconData icon) async {
     final client = await ref.read(remindGroupClientProvider.future);
     final user = await ref.read(authStateChangeProvider.future);
 
@@ -42,7 +42,7 @@ class RemindGroups extends _$RemindGroups {
       CreateRemindGroupRequest(
         uid: user.uid,
         title: title,
-        description: description,
+        icon: icon,
       ),
     );
 
@@ -73,6 +73,7 @@ class RemindGroups extends _$RemindGroups {
       id: group.id,
       title: group.title,
       description: group.description,
+      icon: group.icon,
     ));
 
     state = state
