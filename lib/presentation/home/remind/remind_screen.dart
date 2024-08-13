@@ -60,28 +60,37 @@ class RemindScreen extends HookConsumerWidget {
 }
 
 class _BoardView extends HookConsumerWidget {
-  Iterable<Widget> _buildBoards(
+  Widget _buildBoard(
     BuildContext context,
     List<RemindGroup> groups,
+    int index,
   ) {
-    final groupWidgets = groups.map((group) {
-      return _RemindGroupCard(group: group);
-    });
+    if (index == 0) {
+      return _RemindGroupAllCard();
+    }
 
-    return [
-      _RemindGroupAllCard(),
-      ...groupWidgets,
-    ];
+    return _RemindGroupCard(group: groups[index - 1]);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final groups = ref.watch(remindGroupsProvider);
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: _buildBoards(context, groups).toList(),
+    // return SingleChildScrollView(
+    //   scrollDirection: Axis.horizontal,
+    //   child: Row(
+    //     children: _buildBoards(context, groups).toList(),
+    //   ),
+    // );
+    return SizedBox(
+      height: 100,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: groups.length + 1,
+        itemBuilder: (context, index) {
+          return _buildBoard(context, groups, index);
+        },
       ),
     );
   }
@@ -121,11 +130,12 @@ class _RemindGroupCard extends StatelessWidget {
 class _RemindGroupAllCard extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return InkWell(
-      onTap: () {
-        const ManageRemindGroupRoute().go(context);
-      },
-      child: Card(
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () {
+          const ManageRemindGroupRoute().go(context);
+        },
         child: Container(
           padding: const EdgeInsets.all(8),
           width: 100,
