@@ -18,6 +18,8 @@ class ManageGroupScreen extends HookConsumerWidget {
         child: Column(
           children: [
             _RemindGroupsCard(),
+            const SizedBox(height: 16),
+            _CreateRemindGroupButton(),
           ],
         ),
       ),
@@ -25,7 +27,7 @@ class ManageGroupScreen extends HookConsumerWidget {
   }
 }
 
-class _RemindGroupsCard extends HookConsumerWidget {
+class _RemindGroupsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final groups = ref.watch(remindGroupsProvider);
@@ -47,9 +49,13 @@ class _RemindGroupsCard extends HookConsumerWidget {
       margin: const EdgeInsets.all(8),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 400),
-        child: ListView.builder(
+        child: ListView.separated(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
+          separatorBuilder: (context, idx) => const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 64),
+            child: Divider(),
+          ),
           itemCount: groups.length,
           itemBuilder: (context, idx) {
             final group = groups[idx];
@@ -69,7 +75,6 @@ class _RemindGroupsCard extends HookConsumerWidget {
                   Text(group.title),
                 ],
               ),
-              subtitle: const Text("1件のリマインド"),
               trailing: IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
@@ -102,6 +107,18 @@ class _RemindGroupsCard extends HookConsumerWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class _CreateRemindGroupButton extends HookConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ElevatedButton(
+      onPressed: () {
+        ref.read(remindGroupModalProvider.notifier).showCreateModal(context);
+      },
+      child: const Text("新しいリマインドグループを作成"),
     );
   }
 }

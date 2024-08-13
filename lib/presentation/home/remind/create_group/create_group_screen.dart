@@ -98,7 +98,7 @@ class RemindGroupModal extends _$RemindGroupModal {
     );
   }
 
-  Future showEditModal(BuildContext context, RemindGroup group) {
+  Future showEditModal(BuildContext context, RemindGroup group) async {
     state = state.copyWith(
       title: TextEditingController(text: group.title),
       iconIdx: icons.indexWhere(
@@ -106,7 +106,7 @@ class RemindGroupModal extends _$RemindGroupModal {
       ),
     );
 
-    return showModalBottomSheet(
+    await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) {
@@ -130,6 +130,7 @@ class RemindGroupModal extends _$RemindGroupModal {
         );
       },
     );
+    reset();
   }
 }
 
