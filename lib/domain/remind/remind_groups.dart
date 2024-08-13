@@ -65,7 +65,6 @@ class RemindGroups extends _$RemindGroups {
       throw Exception("User is not signed in");
     }
 
-    await Future.delayed(const Duration(seconds: 6));
     await client.deleteRemindGroup(DeleteRemindGroupRequest(id: id));
     state = state.where((g) => g.id != id).toList();
   }

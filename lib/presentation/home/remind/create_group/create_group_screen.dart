@@ -12,6 +12,8 @@ part 'create_group_screen.g.dart';
 
 @riverpod
 class RemindGroupModal extends _$RemindGroupModal {
+  final formKey = GlobalKey<FormState>();
+
   static const icons = [
     Icons.home,
     Icons.star,
@@ -85,23 +87,30 @@ class RemindGroupModal extends _$RemindGroupModal {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return _Screen(
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                ref.read(remindGroupModalProvider.notifier).reset();
-                Navigator.of(context).pop();
-              },
-              child: const Text("キャンセル"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                ref.read(remindGroupModalProvider.notifier)._create();
-                Navigator.of(context).pop();
-              },
-              child: const Text("作成"),
-            ),
-          ],
+        return Form(
+          key: formKey,
+          child: _Screen(
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  ref.read(remindGroupModalProvider.notifier).reset();
+                  Navigator.of(context).pop();
+                },
+                child: const Text("キャンセル"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState?.validate() ?? false) {
+                    ref.read(remindGroupModalProvider.notifier)._create();
+                    Navigator.of(context).pop();
+                  } else {
+                    return;
+                  }
+                },
+                child: const Text("作成"),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -119,23 +128,30 @@ class RemindGroupModal extends _$RemindGroupModal {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return _Screen(
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                ref.read(remindGroupModalProvider.notifier).reset();
-                Navigator.of(context).pop();
-              },
-              child: const Text("キャンセル"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                ref.read(remindGroupModalProvider.notifier)._update(group);
-                Navigator.of(context).pop();
-              },
-              child: const Text("保存"),
-            ),
-          ],
+        return Form(
+          key: formKey,
+          child: _Screen(
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  ref.read(remindGroupModalProvider.notifier).reset();
+                  Navigator.of(context).pop();
+                },
+                child: const Text("キャンセル"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState?.validate() ?? false) {
+                    ref.read(remindGroupModalProvider.notifier)._update(group);
+                    Navigator.of(context).pop();
+                  } else {
+                    return;
+                  }
+                },
+                child: const Text("保存"),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -210,11 +226,17 @@ class _GroupTitleField extends HookConsumerWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: TextField(
+              child: TextFormField(
                 controller: ref.read(remindGroupModalProvider).title,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "グループ名を入力してください";
+                  }
+                  return null;
+                },
                 decoration: const InputDecoration(
                   labelText: "グループ名",
-                  hintText: "グループ名を入力してください",
                 ),
               ),
             )

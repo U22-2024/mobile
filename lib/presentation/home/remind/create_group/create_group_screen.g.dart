@@ -6,7 +6,7 @@ part of 'create_group_screen.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$remindGroupModalHash() => r'21cc19a1059f307348646a5a3463a21f8f28a2d5';
+String _$remindGroupModalHash() => r'fb022f075a982e93c0fa3fbacd5dee89a56ba17f';
 
 /// See also [RemindGroupModal].
 @ProviderFor(RemindGroupModal)
