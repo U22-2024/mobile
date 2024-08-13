@@ -45,6 +45,9 @@ class RemindGroupModal extends _$RemindGroupModal {
   Future<void> _create() async {
     final groups = ref.read(remindGroupsProvider.notifier);
 
+    if (state.title.text.isEmpty) {
+      return;
+    }
     await groups.add(
       state.title.text,
       IconData(
@@ -58,6 +61,12 @@ class RemindGroupModal extends _$RemindGroupModal {
   Future<void> _update(RemindGroup group) async {
     final groups = ref.read(remindGroupsProvider.notifier);
 
+    if (state.title.text.isEmpty) {
+      return;
+    }
+    if (group.id.isEmpty) {
+      return;
+    }
     await groups.update(
       RemindGroup(
         id: group.id,

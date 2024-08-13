@@ -91,6 +91,9 @@ class _RemindGroupsCard extends ConsumerWidget {
                         ),
                         TextButton(
                           onPressed: () {
+                            if (group.id.isEmpty) {
+                              return;
+                            }
                             ref
                                 .read(remindGroupsProvider.notifier)
                                 .remove(group.id);

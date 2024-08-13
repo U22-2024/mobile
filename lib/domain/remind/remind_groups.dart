@@ -30,7 +30,11 @@ class RemindGroups extends _$RemindGroups {
     return [];
   }
 
-  Future add(String title, IconData icon) async {
+  Future<void> add(String title, IconData icon) async {
+    if (title.isEmpty) {
+      throw Exception("Title is empty");
+    }
+
     final client = await ref.read(remindGroupClientProvider.future);
     final user = await ref.read(authStateChangeProvider.future);
 
@@ -49,7 +53,11 @@ class RemindGroups extends _$RemindGroups {
     state = [...state, res.remindGroup];
   }
 
-  Future remove(String id) async {
+  Future<void> remove(String id) async {
+    if (id.isEmpty) {
+      throw Exception("ID is empty");
+    }
+
     final client = await ref.read(remindGroupClientProvider.future);
     final user = await ref.read(authStateChangeProvider.future);
 
@@ -57,11 +65,19 @@ class RemindGroups extends _$RemindGroups {
       throw Exception("User is not signed in");
     }
 
+    await Future.delayed(const Duration(seconds: 6));
     await client.deleteRemindGroup(DeleteRemindGroupRequest(id: id));
     state = state.where((g) => g.id != id).toList();
   }
 
-  Future update(RemindGroup group) async {
+  Future<void> update(RemindGroup group) async {
+    if (group.title.isEmpty) {
+      throw Exception("Title is empty");
+    }
+    if (group.id.isEmpty) {
+      throw Exception("ID is empty");
+    }
+
     final client = await ref.read(remindGroupClientProvider.future);
     final user = await ref.read(authStateChangeProvider.future);
 
@@ -81,7 +97,7 @@ class RemindGroups extends _$RemindGroups {
         .toList();
   }
 
-  Future fetch() async {
+  Future<void> fetch() async {
     final client = await ref.read(remindGroupClientProvider.future);
     final user = await ref.read(authStateChangeProvider.future);
 

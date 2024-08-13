@@ -23,7 +23,7 @@ final remindGroupClientProvider =
 
 typedef RemindGroupClientRef
     = AutoDisposeFutureProviderRef<RemindGroupServiceClient>;
-String _$remindGroupsHash() => r'5382d66213354beda69d704dd39bf923b01d7528';
+String _$remindGroupsHash() => r'ab4285d224673a9caae6d524f78f243daf54179b';
 
 /// See also [RemindGroups].
 @ProviderFor(RemindGroups)
