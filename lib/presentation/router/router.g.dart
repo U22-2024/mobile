@@ -41,6 +41,12 @@ RouteBase get $homeRoute => GoRouteData.$route(
         GoRouteData.$route(
           path: 'remind',
           factory: $RemindRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'manage_group',
+              factory: $ManageRemindGroupRouteExtension._fromState,
+            ),
+          ],
         ),
       ],
     );
@@ -67,6 +73,24 @@ extension $RemindRouteExtension on RemindRoute {
 
   String get location => GoRouteData.$location(
         '/home/remind',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ManageRemindGroupRouteExtension on ManageRemindGroupRoute {
+  static ManageRemindGroupRoute _fromState(GoRouterState state) =>
+      const ManageRemindGroupRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/remind/manage_group',
       );
 
   void go(BuildContext context) => context.go(location);

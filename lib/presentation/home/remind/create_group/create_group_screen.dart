@@ -11,7 +11,7 @@ part 'create_group_screen.freezed.dart';
 part 'create_group_screen.g.dart';
 
 @riverpod
-class CreateGroupModal extends _$CreateGroupModal {
+class RemindGroupModal extends _$RemindGroupModal {
   static const icons = [
     Icons.home,
     Icons.star,
@@ -42,7 +42,7 @@ class CreateGroupModal extends _$CreateGroupModal {
     state = state.copyWith(iconIdx: idx);
   }
 
-  Future<void> create() async {
+  Future<void> _create() async {
     final groups = ref.read(remindGroupsProvider.notifier);
 
     await groups.add(
@@ -55,12 +55,79 @@ class CreateGroupModal extends _$CreateGroupModal {
     reset();
   }
 
-  Future show(BuildContext context) {
+  Future<void> _update(RemindGroup group) async {
+    final groups = ref.read(remindGroupsProvider.notifier);
+
+    await groups.update(
+      RemindGroup(
+        id: group.id,
+        title: state.title.text,
+        icon: IconData(
+          codePoint: icons[state.iconIdx].codePoint,
+          fontFamily: icons[state.iconIdx].fontFamily,
+        ),
+      ),
+    );
+    reset();
+  }
+
+  Future showCreateModal(BuildContext context) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return _Screen();
+        return _Screen(
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                ref.read(remindGroupModalProvider.notifier).reset();
+                Navigator.of(context).pop();
+              },
+              child: const Text("キャンセル"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                ref.read(remindGroupModalProvider.notifier)._create();
+                Navigator.of(context).pop();
+              },
+              child: const Text("作成"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future showEditModal(BuildContext context, RemindGroup group) {
+    state = state.copyWith(
+      title: TextEditingController(text: group.title),
+      iconIdx: icons.indexWhere(
+        (icon) => icon.codePoint == group.icon.codePoint,
+      ),
+    );
+
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return _Screen(
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                ref.read(remindGroupModalProvider.notifier).reset();
+                Navigator.of(context).pop();
+              },
+              child: const Text("キャンセル"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                ref.read(remindGroupModalProvider.notifier)._update(group);
+                Navigator.of(context).pop();
+              },
+              child: const Text("保存"),
+            ),
+          ],
+        );
       },
     );
   }
@@ -68,10 +135,14 @@ class CreateGroupModal extends _$CreateGroupModal {
 
 /// リマインドグループ作成スクリーン
 class _Screen extends HookConsumerWidget {
+  final List<Widget> actions;
+
+  const _Screen({required this.actions});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mediaQuery = MediaQuery.of(context);
-    final height = max(300, mediaQuery.size.height * 0.3);
+    final height = max(400, mediaQuery.size.height * 0.5);
 
     return Container(
       height: height + mediaQuery.viewInsets.bottom,
@@ -84,7 +155,7 @@ class _Screen extends HookConsumerWidget {
             const SizedBox(height: 16),
             _IconSelector(),
             const SizedBox(height: 16),
-            _ButtonGroup(),
+            _ButtonGroup(actions: actions),
           ],
         ),
       ),
@@ -103,7 +174,7 @@ class State with _$State {
 class _GroupTitleField extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final iconIdx = ref.watch(createGroupModalProvider).iconIdx;
+    final iconIdx = ref.watch(remindGroupModalProvider).iconIdx;
     final theme = Theme.of(context);
 
     return Card(
@@ -120,7 +191,7 @@ class _GroupTitleField extends HookConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Icon(
-                    CreateGroupModal.icons[iconIdx],
+                    RemindGroupModal.icons[iconIdx],
                     size: 30,
                     color: theme.colorScheme.onSecondary,
                   ),
@@ -130,7 +201,7 @@ class _GroupTitleField extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: TextField(
-                controller: ref.read(createGroupModalProvider).title,
+                controller: ref.read(remindGroupModalProvider).title,
                 decoration: const InputDecoration(
                   labelText: "グループ名",
                   hintText: "グループ名を入力してください",
@@ -147,7 +218,7 @@ class _GroupTitleField extends HookConsumerWidget {
 class _IconSelector extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentIconIdx = ref.watch(createGroupModalProvider).iconIdx;
+    final currentIconIdx = ref.watch(remindGroupModalProvider).iconIdx;
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -155,14 +226,14 @@ class _IconSelector extends HookConsumerWidget {
         padding: const EdgeInsets.all(16),
         width: double.infinity,
         child: Wrap(
-          children: CreateGroupModal.icons.indexed.map(
+          children: RemindGroupModal.icons.indexed.map(
             (elem) {
               final icon = elem.$2;
               final idx = elem.$1;
               return IconButton(
                 icon: Icon(icon, size: 30),
                 onPressed: () {
-                  ref.read(createGroupModalProvider.notifier).iconIdx = idx;
+                  ref.read(remindGroupModalProvider.notifier).iconIdx = idx;
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(
@@ -181,27 +252,16 @@ class _IconSelector extends HookConsumerWidget {
 }
 
 class _ButtonGroup extends HookConsumerWidget {
+  final List<Widget> actions;
+
+  const _ButtonGroup({required this.actions});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Wrap(
       alignment: WrapAlignment.center,
       spacing: 20,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            ref.read(createGroupModalProvider.notifier).reset();
-            Navigator.of(context).pop();
-          },
-          child: const Text("キャンセル"),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            ref.read(createGroupModalProvider.notifier).create();
-            Navigator.of(context).pop();
-          },
-          child: const Text("作成"),
-        ),
-      ],
+      children: actions,
     );
   }
 }

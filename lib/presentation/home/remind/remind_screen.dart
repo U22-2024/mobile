@@ -3,6 +3,7 @@ import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
 import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
+import 'package:mobile/presentation/router/router.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart' hide IconData;
 
 class RemindScreen extends HookConsumerWidget {
@@ -15,7 +16,7 @@ class RemindScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reminds'),
+        title: const Text('リマインド'),
       ),
       body: Column(
         children: [
@@ -103,9 +104,9 @@ class _RemindGroupCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
-              CreateGroupModal.icons.firstWhere(
+              RemindGroupModal.icons.firstWhere(
                 (icon) => icon.codePoint == group.icon.codePoint,
-                orElse: () => CreateGroupModal.icons.first,
+                orElse: () => RemindGroupModal.icons.first,
               ),
             ),
             const SizedBox(height: 8),
@@ -120,19 +121,24 @@ class _RemindGroupCard extends StatelessWidget {
 class _RemindGroupAllCard extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Card(
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        width: 100,
-        height: 100,
-        child: const Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Icon(Icons.manage_search_rounded),
-            SizedBox(height: 8),
-            Text("グループを管理"),
-          ],
+    return InkWell(
+      onTap: () {
+        const ManageRemindGroupRoute().go(context);
+      },
+      child: Card(
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          width: 100,
+          height: 100,
+          child: const Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(Icons.manage_search_rounded),
+              SizedBox(height: 8),
+              Text("グループを管理"),
+            ],
+          ),
         ),
       ),
     );
@@ -146,7 +152,7 @@ class _NewGroupActionButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(createGroupModalProvider.notifier);
+    final notifier = ref.watch(remindGroupModalProvider.notifier);
 
     return Row(
       children: [
@@ -156,7 +162,7 @@ class _NewGroupActionButton extends ConsumerWidget {
           heroTag: null,
           onPressed: () {
             expandableKey.currentState?.toggle();
-            notifier.show(context);
+            notifier.showCreateModal(context);
           },
           child: const Icon(Icons.create_new_folder_rounded),
         ),
