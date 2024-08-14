@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
+import 'package:mobile/domain/remind/reminds.dart';
 import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
 import 'package:mobile/presentation/router/router.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart' hide IconData;
@@ -177,6 +178,23 @@ class _NewGroupActionButton extends ConsumerWidget {
           child: const Icon(Icons.create_new_folder_rounded),
         ),
       ],
+    );
+  }
+}
+
+class _RemindListView extends HookConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final reminds = ref.watch(remindsProvider);
+
+    return ListView.builder(
+      itemCount: reminds.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(reminds[index].title),
+          subtitle: Text(reminds[index].description),
+        );
+      },
     );
   }
 }
