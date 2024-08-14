@@ -22,6 +22,8 @@ class RemindScreen extends HookConsumerWidget {
       body: Column(
         children: [
           _BoardView(),
+          const SizedBox(height: 24),
+          _RemindListView(),
         ],
       ),
       floatingActionButtonLocation: ExpandableFab.location,
@@ -182,12 +184,24 @@ class _NewGroupActionButton extends ConsumerWidget {
   }
 }
 
+class _NewRemindActionButton extends ConsumerWidget {
+  final GlobalKey<ExpandableFabState> expandableKey;
+
+  const _NewRemindActionButton({required this.expandableKey});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const SizedBox();
+  }
+}
+
 class _RemindListView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final reminds = ref.watch(remindsProvider);
 
     return ListView.builder(
+      shrinkWrap: true,
       itemCount: reminds.length,
       itemBuilder: (context, index) {
         return ListTile(
