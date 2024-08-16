@@ -44,17 +44,7 @@ class RemindScreen extends HookConsumerWidget {
           blur: 5,
         ),
         children: [
-          const Row(
-            children: [
-              Text("リマインド"),
-              SizedBox(width: 20),
-              FloatingActionButton.small(
-                onPressed: null,
-                heroTag: null,
-                child: Icon(Icons.alarm_add),
-              ),
-            ],
-          ),
+          _NewRemindActionButton(expandableKey: _key),
           _NewGroupActionButton(expandableKey: _key),
         ],
       ),
@@ -79,14 +69,9 @@ class _BoardView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final groups = ref.watch(remindGroupsProvider);
 
-    // return SingleChildScrollView(
-    //   scrollDirection: Axis.horizontal,
-    //   child: Row(
-    //     children: _buildBoards(context, groups).toList(),
-    //   ),
-    // );
     return SizedBox(
       height: 100,
+      width: double.infinity,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -191,7 +176,20 @@ class _NewRemindActionButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const SizedBox();
+    return Row(
+      children: [
+        const Text("リマインド"),
+        const SizedBox(width: 20),
+        FloatingActionButton.small(
+          heroTag: null,
+          onPressed: () {
+            expandableKey.currentState?.toggle();
+            const CreateRemindRoute().go(context);
+          },
+          child: const Icon(Icons.alarm_add),
+        ),
+      ],
+    );
   }
 }
 
