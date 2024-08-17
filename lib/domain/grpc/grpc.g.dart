@@ -6,11 +6,11 @@ part of 'grpc.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$grpcChannelHash() => r'4b779c8dd897cb593d350b39715745f26e05edaa';
+String _$grpcChannelHash() => r'd8ad0a33d3859d74bfa2d43ad840206460a5ba0c';
 
 /// See also [grpcChannel].
 @ProviderFor(grpcChannel)
-final grpcChannelProvider = Provider<ClientChannel>.internal(
+final grpcChannelProvider = AutoDisposeProvider<ClientChannel>.internal(
   grpcChannel,
   name: r'grpcChannelProvider',
   debugGetCreateSourceHash:
@@ -19,7 +19,7 @@ final grpcChannelProvider = Provider<ClientChannel>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef GrpcChannelRef = ProviderRef<ClientChannel>;
+typedef GrpcChannelRef = AutoDisposeProviderRef<ClientChannel>;
 String _$grpcRemindGroupHash() => r'f806774bbafb8e227cb4e2f4f25b1fce491036ce';
 
 /// See also [grpcRemindGroup].

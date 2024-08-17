@@ -19,7 +19,7 @@ part 'grpc.g.dart';
   }
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 ClientChannel grpcChannel(GrpcChannelRef ref) {
   final (host, port) = getHostAndPort();
 

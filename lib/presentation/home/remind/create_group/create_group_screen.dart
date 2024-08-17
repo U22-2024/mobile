@@ -10,10 +10,87 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'create_group_screen.freezed.dart';
 part 'create_group_screen.g.dart';
 
+final _createModalFormKey = GlobalKey<FormState>();
+final _editModalFormKey = GlobalKey<FormState>();
+
+Future showCreateModal(BuildContext context, WidgetRef ref) {
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (context) {
+      return Form(
+        key: _createModalFormKey,
+        child: _Screen(
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                ref.read(remindGroupModalProvider.notifier).reset();
+                Navigator.of(context).pop();
+              },
+              child: const Text("キャンセル"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_createModalFormKey.currentState?.validate() ?? false) {
+                  ref.read(remindGroupModalProvider.notifier)._create();
+                  Navigator.of(context).pop();
+                } else {
+                  return;
+                }
+              },
+              child: const Text("作成"),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+Future showEditModal(
+  BuildContext context,
+  RemindGroup group,
+  WidgetRef ref,
+) async {
+  final notifier = ref.read(remindGroupModalProvider.notifier);
+  notifier._updateEditState(group);
+
+  await showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (context) {
+      return Form(
+        key: _editModalFormKey,
+        child: _Screen(
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                ref.read(remindGroupModalProvider.notifier).reset();
+                Navigator.of(context).pop();
+              },
+              child: const Text("キャンセル"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_createModalFormKey.currentState?.validate() ?? false) {
+                  ref.read(remindGroupModalProvider.notifier)._update(group);
+                  Navigator.of(context).pop();
+                } else {
+                  return;
+                }
+              },
+              child: const Text("保存"),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+  notifier.reset();
+}
+
 @riverpod
 class RemindGroupModal extends _$RemindGroupModal {
-  final formKey = GlobalKey<FormState>();
-
   static const icons = [
     Icons.home,
     Icons.star,
@@ -82,80 +159,13 @@ class RemindGroupModal extends _$RemindGroupModal {
     reset();
   }
 
-  Future showCreateModal(BuildContext context) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Form(
-          key: formKey,
-          child: _Screen(
-            actions: [
-              ElevatedButton(
-                onPressed: () {
-                  ref.read(remindGroupModalProvider.notifier).reset();
-                  Navigator.of(context).pop();
-                },
-                child: const Text("キャンセル"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (formKey.currentState?.validate() ?? false) {
-                    ref.read(remindGroupModalProvider.notifier)._create();
-                    Navigator.of(context).pop();
-                  } else {
-                    return;
-                  }
-                },
-                child: const Text("作成"),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Future showEditModal(BuildContext context, RemindGroup group) async {
+  void _updateEditState(RemindGroup group) {
     state = state.copyWith(
       title: TextEditingController(text: group.title),
       iconIdx: icons.indexWhere(
         (icon) => icon.codePoint == group.icon.codePoint,
       ),
     );
-
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Form(
-          key: formKey,
-          child: _Screen(
-            actions: [
-              ElevatedButton(
-                onPressed: () {
-                  ref.read(remindGroupModalProvider.notifier).reset();
-                  Navigator.of(context).pop();
-                },
-                child: const Text("キャンセル"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (formKey.currentState?.validate() ?? false) {
-                    ref.read(remindGroupModalProvider.notifier)._update(group);
-                    Navigator.of(context).pop();
-                  } else {
-                    return;
-                  }
-                },
-                child: const Text("保存"),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-    reset();
   }
 }
 

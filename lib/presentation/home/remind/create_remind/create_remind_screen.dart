@@ -126,15 +126,15 @@ class _TitleInputCard extends ConsumerWidget {
 class _GroupInputCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(16),
+    return const Card(
+      margin: EdgeInsets.all(16),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            const Text('グループ'),
-            const SizedBox(height: 8),
-            const Text('未実装'),
+            Text('グループ'),
+            SizedBox(height: 8),
+            Text('未実装'),
           ],
         ),
       ),

@@ -61,9 +61,7 @@ class _RemindGroupsCard extends ConsumerWidget {
             final group = groups[idx];
             return ListTile(
               onTap: () {
-                ref
-                    .read(remindGroupModalProvider.notifier)
-                    .showEditModal(context, group);
+                showEditModal(context, group, ref);
               },
               title: Row(
                 children: [
@@ -119,7 +117,7 @@ class _CreateRemindGroupButton extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       onPressed: () {
-        ref.read(remindGroupModalProvider.notifier).showCreateModal(context);
+        showCreateModal(context, ref);
       },
       child: const Text("新しいリマインドグループを作成"),
     );
