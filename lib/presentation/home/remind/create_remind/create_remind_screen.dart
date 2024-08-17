@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
+import 'package:mobile/domain/remind/reminds.dart';
 import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
 import 'package:mobile/presentation/home/remind/create_remind/select_group_modal.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart';
+
+final _formKey = GlobalKey<FormState>();
 
 class CreateRemindScreen extends HookConsumerWidget {
   const CreateRemindScreen({super.key});
@@ -19,18 +23,34 @@ class CreateRemindScreen extends HookConsumerWidget {
         ref.watch(remindGroupsProvider.select((groups) => groups.first));
     final selectedGroup = useState(firstGroup);
 
+    onCreate() {
+      if (_formKey.currentState?.validate() ?? false) {
+        ref.read(remindsProvider.notifier).add(
+              titleController.text,
+              memoController.text,
+              selectedGroup.value.id,
+            );
+        context.pop();
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('新しいリマインド'),
       ),
       body: Column(
         children: [
-          _TitleInputCard(
-            titleController: titleController,
-            memoController: memoController,
+          Form(
+            key: _formKey,
+            child: _TitleInputCard(
+              titleController: titleController,
+              memoController: memoController,
+            ),
           ),
           const SizedBox(height: 16),
           _GroupInputCard(selectedGroup: selectedGroup),
+          const SizedBox(height: 16),
+          _ButtonGroup(onCreate: onCreate),
         ],
       ),
     );
@@ -120,6 +140,32 @@ class _GroupInputCard extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ButtonGroup extends HookConsumerWidget {
+  final Function() onCreate;
+
+  const _ButtonGroup({required this.onCreate});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 20,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            context.pop();
+          },
+          child: const Text('キャンセル'),
+        ),
+        ElevatedButton(
+          onPressed: onCreate,
+          child: const Text('リマインドを作成'),
+        ),
+      ],
     );
   }
 }

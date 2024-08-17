@@ -196,15 +196,22 @@ class _RemindListView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final reminds = ref.watch(remindsProvider);
 
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: reminds.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(reminds[index].title),
-          subtitle: Text(reminds[index].description),
-        );
-      },
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Divider(),
+        ),
+        itemCount: reminds.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: const Icon(Icons.radio_button_unchecked),
+            title: Text(reminds[index].title),
+          );
+        },
+      ),
     );
   }
 }
