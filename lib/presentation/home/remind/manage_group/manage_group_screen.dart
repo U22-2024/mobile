@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
-import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
+import 'package:mobile/presentation/home/remind/group_modal/remind_group_modal.dart';
 
 class ManageGroupScreen extends HookConsumerWidget {
   const ManageGroupScreen({super.key});
@@ -61,13 +61,13 @@ class _RemindGroupsCard extends ConsumerWidget {
             final group = groups[idx];
             return ListTile(
               onTap: () {
-                showEditModal(context, group, ref);
+                showEditModal(context, group);
               },
               title: Row(
                 children: [
-                  Icon(RemindGroupModal.icons.firstWhere(
+                  Icon(icons.firstWhere(
                     (icon) => icon.codePoint == group.icon.codePoint,
-                    orElse: () => RemindGroupModal.icons.first,
+                    orElse: () => icons.first,
                   )),
                   const SizedBox(width: 16),
                   Text(group.title),
@@ -117,7 +117,7 @@ class _CreateRemindGroupButton extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       onPressed: () {
-        showCreateModal(context, ref);
+        showCreateModal(context);
       },
       child: const Text("新しいリマインドグループを作成"),
     );

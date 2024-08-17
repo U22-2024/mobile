@@ -3,7 +3,7 @@ import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
 import 'package:mobile/domain/remind/reminds.dart';
-import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
+import 'package:mobile/presentation/home/remind/group_modal/remind_group_modal.dart';
 import 'package:mobile/presentation/router/router.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart' hide IconData;
 
@@ -15,6 +15,8 @@ class RemindScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final groups = ref.watch(remindGroupsProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('リマインド'),
@@ -44,7 +46,7 @@ class RemindScreen extends HookConsumerWidget {
           blur: 5,
         ),
         children: [
-          _NewRemindActionButton(expandableKey: _key),
+          if (groups.isNotEmpty) _NewRemindActionButton(expandableKey: _key),
           _NewGroupActionButton(expandableKey: _key),
         ],
       ),
@@ -101,9 +103,9 @@ class _RemindGroupCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
-              RemindGroupModal.icons.firstWhere(
+              icons.firstWhere(
                 (icon) => icon.codePoint == group.icon.codePoint,
-                orElse: () => RemindGroupModal.icons.first,
+                orElse: () => icons.first,
               ),
             ),
             const SizedBox(height: 8),
@@ -158,7 +160,7 @@ class _NewGroupActionButton extends ConsumerWidget {
           heroTag: null,
           onPressed: () {
             expandableKey.currentState?.toggle();
-            showCreateModal(context, ref);
+            showCreateModal(context);
           },
           child: const Icon(Icons.create_new_folder_rounded),
         ),

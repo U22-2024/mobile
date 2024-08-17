@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
-import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
+import 'package:mobile/presentation/home/remind/group_modal/remind_group_modal.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart';
 
 class SelectGroupModal extends HookConsumerWidget {
@@ -36,7 +36,7 @@ class SelectGroupModal extends HookConsumerWidget {
                   title: const Text('新しいグループを作成'),
                   leading: const Icon(Icons.add),
                   onTap: () {
-                    showCreateModal(context, ref);
+                    showCreateModal(context);
                   },
                 );
               }
@@ -45,9 +45,9 @@ class SelectGroupModal extends HookConsumerWidget {
               return ListTile(
                 title: Row(
                   children: [
-                    Icon(RemindGroupModal.icons.firstWhere(
+                    Icon(icons.firstWhere(
                       (icon) => icon.codePoint == group.icon.codePoint,
-                      orElse: () => RemindGroupModal.icons.first,
+                      orElse: () => icons.first,
                     )),
                     const SizedBox(width: 16),
                     Text(group.title),

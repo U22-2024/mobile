@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
 import 'package:mobile/domain/remind/reminds.dart';
-import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
 import 'package:mobile/presentation/home/remind/create_remind/select_group_modal.dart';
+import 'package:mobile/presentation/home/remind/group_modal/remind_group_modal.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -131,9 +131,9 @@ class _GroupInputCard extends ConsumerWidget {
         ),
         child: Row(
           children: [
-            Icon(RemindGroupModal.icons.firstWhere(
+            Icon(icons.firstWhere(
               (icon) => icon.codePoint == selectedGroup.value.icon.codePoint,
-              orElse: () => RemindGroupModal.icons.first,
+              orElse: () => icons.first,
             )),
             const SizedBox(width: 8),
             Text(selectedGroup.value.title),
