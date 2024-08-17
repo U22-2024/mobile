@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/remind/remind_groups.dart';
-import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
+import 'package:mobile/domain/remind/reminds.dart';
+import 'package:mobile/presentation/home/remind/group_modal/remind_group_modal.dart';
 import 'package:mobile/presentation/router/router.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart' hide IconData;
 
@@ -14,6 +15,8 @@ class RemindScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final groups = ref.watch(remindGroupsProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('リマインド'),
@@ -21,6 +24,8 @@ class RemindScreen extends HookConsumerWidget {
       body: Column(
         children: [
           _BoardView(),
+          const SizedBox(height: 24),
+          _RemindListView(),
         ],
       ),
       floatingActionButtonLocation: ExpandableFab.location,
@@ -41,17 +46,7 @@ class RemindScreen extends HookConsumerWidget {
           blur: 5,
         ),
         children: [
-          const Row(
-            children: [
-              Text("リマインド"),
-              SizedBox(width: 20),
-              FloatingActionButton.small(
-                onPressed: null,
-                heroTag: null,
-                child: Icon(Icons.alarm_add),
-              ),
-            ],
-          ),
+          if (groups.isNotEmpty) _NewRemindActionButton(expandableKey: _key),
           _NewGroupActionButton(expandableKey: _key),
         ],
       ),
@@ -76,14 +71,9 @@ class _BoardView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final groups = ref.watch(remindGroupsProvider);
 
-    // return SingleChildScrollView(
-    //   scrollDirection: Axis.horizontal,
-    //   child: Row(
-    //     children: _buildBoards(context, groups).toList(),
-    //   ),
-    // );
     return SizedBox(
       height: 100,
+      width: double.infinity,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -113,9 +103,9 @@ class _RemindGroupCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
-              RemindGroupModal.icons.firstWhere(
+              icons.firstWhere(
                 (icon) => icon.codePoint == group.icon.codePoint,
-                orElse: () => RemindGroupModal.icons.first,
+                orElse: () => icons.first,
               ),
             ),
             const SizedBox(height: 8),
@@ -162,8 +152,6 @@ class _NewGroupActionButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(remindGroupModalProvider.notifier);
-
     return Row(
       children: [
         const Text("グループ"),
@@ -172,11 +160,60 @@ class _NewGroupActionButton extends ConsumerWidget {
           heroTag: null,
           onPressed: () {
             expandableKey.currentState?.toggle();
-            notifier.showCreateModal(context);
+            showCreateModal(context);
           },
           child: const Icon(Icons.create_new_folder_rounded),
         ),
       ],
+    );
+  }
+}
+
+class _NewRemindActionButton extends ConsumerWidget {
+  final GlobalKey<ExpandableFabState> expandableKey;
+
+  const _NewRemindActionButton({required this.expandableKey});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      children: [
+        const Text("リマインド"),
+        const SizedBox(width: 20),
+        FloatingActionButton.small(
+          heroTag: null,
+          onPressed: () {
+            expandableKey.currentState?.toggle();
+            const CreateRemindRoute().go(context);
+          },
+          child: const Icon(Icons.alarm_add),
+        ),
+      ],
+    );
+  }
+}
+
+class _RemindListView extends HookConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final reminds = ref.watch(remindsProvider);
+
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Divider(),
+        ),
+        itemCount: reminds.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: const Icon(Icons.radio_button_unchecked),
+            title: Text(reminds[index].title),
+          );
+        },
+      ),
     );
   }
 }

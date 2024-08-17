@@ -2,12 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grpc/grpc.dart';
 
 class AuthInterceptor extends ClientInterceptor {
-  final FirebaseAuth auth;
-
-  AuthInterceptor({required this.auth});
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future _injectToken(Map<String, String> metadata, String uri) async {
-    final user = auth.currentUser;
+    final user = _auth.currentUser;
     if (user != null) {
       final token = await user.getIdToken();
       metadata["authorization"] = "Bearer $token";

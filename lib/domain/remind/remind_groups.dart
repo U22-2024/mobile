@@ -1,25 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
-import 'package:mobile/domain/grpc/auth_interceptor.dart';
 import 'package:mobile/domain/grpc/grpc.dart';
 import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'remind_groups.g.dart';
-
-@riverpod
-Future<RemindGroupServiceClient> remindGroupClient(
-  RemindGroupClientRef ref,
-) async {
-  final channel = ref.watch(grpcChannelProvider);
-
-  return RemindGroupServiceClient(
-    channel,
-    interceptors: [
-      AuthInterceptor(auth: FirebaseAuth.instance),
-    ],
-  );
-}
 
 @riverpod
 class RemindGroups extends _$RemindGroups {
@@ -35,7 +19,7 @@ class RemindGroups extends _$RemindGroups {
       throw Exception("Title is empty");
     }
 
-    final client = await ref.read(remindGroupClientProvider.future);
+    final client = ref.read(grpcRemindGroupProvider);
     final user = await ref.read(authStateChangeProvider.future);
 
     if (user == null) {
@@ -58,7 +42,7 @@ class RemindGroups extends _$RemindGroups {
       throw Exception("ID is empty");
     }
 
-    final client = await ref.read(remindGroupClientProvider.future);
+    final client = ref.read(grpcRemindGroupProvider);
     final user = await ref.read(authStateChangeProvider.future);
 
     if (user == null) {
@@ -77,7 +61,7 @@ class RemindGroups extends _$RemindGroups {
       throw Exception("ID is empty");
     }
 
-    final client = await ref.read(remindGroupClientProvider.future);
+    final client = ref.read(grpcRemindGroupProvider);
     final user = await ref.read(authStateChangeProvider.future);
 
     if (user == null) {
@@ -97,7 +81,7 @@ class RemindGroups extends _$RemindGroups {
   }
 
   Future<void> fetch() async {
-    final client = await ref.read(remindGroupClientProvider.future);
+    final client = ref.read(grpcRemindGroupProvider);
     final user = await ref.read(authStateChangeProvider.future);
 
     if (user == null) {
