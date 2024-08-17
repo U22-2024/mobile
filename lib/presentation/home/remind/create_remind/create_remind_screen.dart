@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'create_remind_screen.freezed.dart';
-part 'create_remind_screen.g.dart';
+import 'package:mobile/domain/remind/remind_groups.dart';
+import 'package:mobile/presentation/home/remind/create_group/create_group_screen.dart';
+import 'package:mobile/presentation/home/remind/create_remind/select_group_modal.dart';
+import 'package:mobile/proto/remind/v1/remind_group.pbgrpc.dart';
 
 class CreateRemindScreen extends HookConsumerWidget {
   const CreateRemindScreen({super.key});
@@ -16,6 +15,9 @@ class CreateRemindScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final titleController = useTextEditingController();
     final memoController = useTextEditingController();
+    final firstGroup =
+        ref.watch(remindGroupsProvider.select((groups) => groups.first));
+    final selectedGroup = useState(firstGroup);
 
     return Scaffold(
       appBar: AppBar(
@@ -28,44 +30,11 @@ class CreateRemindScreen extends HookConsumerWidget {
             memoController: memoController,
           ),
           const SizedBox(height: 16),
-          _GroupInputCard(),
+          _GroupInputCard(selectedGroup: selectedGroup),
         ],
       ),
     );
   }
-}
-
-@riverpod
-class _Controller extends _$Controller {
-  @override
-  _State build() {
-    return _State(
-      title: "",
-      memo: "",
-      groupId: '',
-    );
-  }
-
-  set title(String title) {
-    state = state.copyWith(title: title);
-  }
-
-  set memo(String memo) {
-    state = state.copyWith(memo: memo);
-  }
-
-  set groupId(String groupId) {
-    state = state.copyWith(groupId: groupId);
-  }
-}
-
-@freezed
-class _State with _$State {
-  factory _State({
-    required String title,
-    required String memo,
-    required String groupId,
-  }) = __State;
 }
 
 class _TitleInputCard extends ConsumerWidget {
@@ -79,9 +48,9 @@ class _TitleInputCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(24),
         child: Column(
           children: [
             TextFormField(
@@ -89,9 +58,6 @@ class _TitleInputCard extends ConsumerWidget {
               decoration: const InputDecoration(
                 labelText: 'タイトル',
               ),
-              onSaved: (value) {
-                ref.read(_controllerProvider.notifier).title = value ?? '';
-              },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value?.isEmpty ?? true) {
@@ -108,9 +74,6 @@ class _TitleInputCard extends ConsumerWidget {
                   decoration: const InputDecoration(
                     hintText: 'メモ',
                   ),
-                  onSaved: (value) {
-                    ref.read(_controllerProvider.notifier).memo = value ?? '';
-                  },
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                 ),
@@ -123,18 +86,37 @@ class _TitleInputCard extends ConsumerWidget {
   }
 }
 
-class _GroupInputCard extends StatelessWidget {
+class _GroupInputCard extends ConsumerWidget {
+  final ValueNotifier<RemindGroup> selectedGroup;
+
+  const _GroupInputCard({required this.selectedGroup});
+
   @override
-  Widget build(BuildContext context) {
-    return const Card(
-      margin: EdgeInsets.all(16),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      child: ElevatedButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) =>
+                SelectGroupModal(selectedGroup: selectedGroup),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: Row(
           children: [
-            Text('グループ'),
-            SizedBox(height: 8),
-            Text('未実装'),
+            Icon(RemindGroupModal.icons.firstWhere(
+              (icon) => icon.codePoint == selectedGroup.value.icon.codePoint,
+              orElse: () => RemindGroupModal.icons.first,
+            )),
+            const SizedBox(width: 8),
+            Text(selectedGroup.value.title),
           ],
         ),
       ),
