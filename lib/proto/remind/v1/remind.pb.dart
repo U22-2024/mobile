@@ -13,6 +13,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+export 'remind.pbenum.dart';
+
 class Remind extends $pb.GeneratedMessage {
   factory Remind({
     $core.String? id,
