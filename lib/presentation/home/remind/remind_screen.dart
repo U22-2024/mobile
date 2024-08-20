@@ -93,6 +93,16 @@ class _RemindGroupCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Stack(
+    //   children: [
+    //     Assets.icons.folderIcon.svg(width: 100, height: 100),
+    //     Align(
+    //       alignment: Alignment.center,
+    //       child: Text(group.title),
+    //     ),
+    //   ],
+    // );
+
     return Card(
       child: Container(
         padding: const EdgeInsets.all(8),
