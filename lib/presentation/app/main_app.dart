@@ -2,7 +2,7 @@ import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile/presentation/router/router.dart';
+import 'package:mobile/presentation/router/router_provider.dart';
 
 class MainApp extends ConsumerWidget {
   const MainApp({super.key});
