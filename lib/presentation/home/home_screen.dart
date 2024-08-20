@@ -1,6 +1,5 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/presentation/router/router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             const Text('Hello World!'),
             ElevatedButton(
-              onPressed: () => const RemindRoute().go(context),
+              onPressed: () {},
               child: const Text('Reminds'),
             ),
             const SignOutButton(),

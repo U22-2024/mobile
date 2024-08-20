@@ -4,9 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
 import 'package:mobile/presentation/app/splash_screen.dart';
 import 'package:mobile/presentation/home/home_screen.dart';
-import 'package:mobile/presentation/home/remind/create_remind/create_remind_screen.dart';
-import 'package:mobile/presentation/home/remind/manage_group/manage_group_screen.dart';
-import 'package:mobile/presentation/home/remind/remind_screen.dart';
 import 'package:mobile/presentation/login/login_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -54,19 +51,7 @@ class SplashRoute extends GoRouteData {
 
 @TypedGoRoute<HomeRoute>(
   path: HomeScreen.routeLocation,
-  routes: [
-    TypedGoRoute<RemindRoute>(
-      path: RemindScreen.routeLocation,
-      routes: [
-        TypedGoRoute<ManageRemindGroupRoute>(
-          path: ManageGroupScreen.routeLocation,
-        ),
-        TypedGoRoute<CreateRemindRoute>(
-          path: CreateRemindScreen.routeLocation,
-        ),
-      ],
-    ),
-  ],
+  routes: [],
 )
 class HomeRoute extends GoRouteData {
   const HomeRoute();
@@ -74,33 +59,6 @@ class HomeRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const HomeScreen();
-  }
-}
-
-class RemindRoute extends GoRouteData {
-  const RemindRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return RemindScreen();
-  }
-}
-
-class ManageRemindGroupRoute extends GoRouteData {
-  const ManageRemindGroupRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const ManageGroupScreen();
-  }
-}
-
-class CreateRemindRoute extends GoRouteData {
-  const CreateRemindRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const CreateRemindScreen();
   }
 }
 
