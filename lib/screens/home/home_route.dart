@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/presentation/home/home.dart';
 import 'package:mobile/presentation/router/navigator_key.dart';
+
+import 'home.dart';
 
 class HomeBranch extends StatefulShellBranchData {
   static final $navigatorKey = homeNavigatorKey;

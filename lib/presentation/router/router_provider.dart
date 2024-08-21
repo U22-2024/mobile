@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
-import 'package:mobile/presentation/home/home_route.dart';
 import 'package:mobile/presentation/router/router.dart';
+import 'package:mobile/screens/home/home_route.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router_provider.g.dart';

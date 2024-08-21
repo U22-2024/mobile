@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/firebase_options.dart';
-import 'package:mobile/presentation/app/main_app.dart';
+import 'package:mobile/presentation/main_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

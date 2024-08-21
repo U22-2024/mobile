@@ -26,6 +26,7 @@ class MainApp extends ConsumerWidget {
       ],
       theme: ThemeData(
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pinkAccent),
       ),
     );
   }

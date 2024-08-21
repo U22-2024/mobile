@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/presentation/home/home_route.dart';
-import 'package:mobile/presentation/login/login.dart';
 import 'package:mobile/presentation/root.dart';
-import 'package:mobile/presentation/shopping/shopping_route.dart';
+import 'package:mobile/screens/home/home_route.dart';
+import 'package:mobile/screens/login/login.dart';
+import 'package:mobile/screens/shopping/shopping_route.dart';
 
 part 'router.g.dart';
 

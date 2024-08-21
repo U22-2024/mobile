@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/presentation/router/navigator_key.dart';
-import 'package:mobile/presentation/shopping/shopping.dart';
+
+import 'shopping.dart';
 
 class ShoppingBranch extends StatefulShellBranchData {
   static final $navigatorKey = shoppingNavigatorKey;

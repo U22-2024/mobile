@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/presentation/branch_container.dart';
-import 'package:mobile/presentation/root_navigation_bar.dart';
+import 'package:mobile/presentation/widgets/root_navigation_bar.dart';
 
 class RootScreen extends ConsumerWidget {
   const RootScreen({
