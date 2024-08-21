@@ -1,24 +1,9 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
-
-final _menuActions = [
-  _MenuAction(
-    title: "プロフィール",
-    icon: Icons.person,
-    onTap: () {},
-  ),
-  _MenuAction(
-    title: "ログアウト",
-    icon: Icons.logout,
-    onTap: () {
-      FirebaseAuth.instance.signOut();
-    },
-  ),
-];
+import 'package:mobile/presentation/router/router.dart';
+import 'package:mobile/screens/profile/profile_route.dart';
 
 class UserAvatar extends HookConsumerWidget {
   const UserAvatar({super.key});
@@ -27,6 +12,23 @@ class UserAvatar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authStateChangeProvider);
 
+    final menuActions = [
+      _MenuAction(
+        title: "プロフィール",
+        icon: Icons.person,
+        onTap: () {
+          const ProfileRoute().go(context);
+        },
+      ),
+      _MenuAction(
+        title: "ログアウト",
+        icon: Icons.logout,
+        onTap: () {
+          FirebaseAuth.instance.signOut();
+        },
+      ),
+    ];
+
     return SizedBox(
       width: 58,
       child: PopupMenuButton(
@@ -34,7 +36,7 @@ class UserAvatar extends HookConsumerWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         icon: _buildAvatar(context, user),
-        itemBuilder: (context) => _menuActions
+        itemBuilder: (context) => menuActions
             .map(
               (action) => PopupMenuItem(
                 onTap: action.onTap,
@@ -51,7 +53,6 @@ class UserAvatar extends HookConsumerWidget {
 
   Widget _buildAvatar(BuildContext context, AsyncValue<User?> user) {
     return user.when(data: (value) {
-      log("URL: ${value?.photoURL ?? "null"}");
       if (value == null || value.photoURL == null) {
         return const CircleAvatar(
           child: Icon(Icons.person),

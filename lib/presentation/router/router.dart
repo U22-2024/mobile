@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile/presentation/root.dart';
 import 'package:mobile/screens/home/home_route.dart';
 import 'package:mobile/screens/login/login.dart';
+import 'package:mobile/screens/profile/profile_route.dart';
 import 'package:mobile/screens/shopping/shopping_route.dart';
 
 part 'router.g.dart';
@@ -12,7 +13,12 @@ part 'router.g.dart';
     // ボトムナビゲーションバーに表示されるブランチ
     TypedStatefulShellBranch<HomeBranch>(
       routes: [
-        TypedGoRoute<HomeRoute>(path: HomeRoute.location),
+        TypedGoRoute<HomeRoute>(
+          path: HomeRoute.location,
+          routes: [
+            TypedGoRoute<ProfileRoute>(path: ProfileRoute.location),
+          ],
+        ),
       ],
     ),
     TypedStatefulShellBranch<ShoppingBranch>(

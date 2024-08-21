@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 GoRouter router(RouterRef ref) {
   // ユーザーの認証状態を監視
   final authState = ref.watch(authStateChangeProvider);
