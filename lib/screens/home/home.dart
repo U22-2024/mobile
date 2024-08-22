@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/presentation/widgets/avatar.dart';
 import 'package:mobile/screens/home/widgets/advice_card.dart';
+import 'package:mobile/screens/home/widgets/least_event_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,6 +22,8 @@ class HomeScreen extends StatelessWidget {
           children: [
             SizedBox(height: 16),
             AdviceCard(),
+            SizedBox(height: 16),
+            LeastEventCard()
           ],
         ),
       ),
