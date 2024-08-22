@@ -12,26 +12,66 @@ class RootNavigationBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final (selectedIndex, indicatorColor) = navigationShell.currentIndex <= 2
-        ? (navigationShell.currentIndex, null)
-        : (0, Colors.transparent);
+    return BottomAppBar(
+      notchMargin: 12,
+      shape: const CircularNotchedRectangle(),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _NavBarItem(
+            navigationShell: navigationShell,
+            index: 0,
+            title: 'ホーム',
+            icon: const Icon(Icons.home, size: 28),
+          ),
+          _NavBarItem(
+            navigationShell: navigationShell,
+            index: 1,
+            title: '今日のイベント',
+            icon: const Icon(Icons.event, size: 28),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-    return NavigationBar(
-      indicatorColor: indicatorColor,
-      selectedIndex: selectedIndex,
-      destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.home),
-          label: "ホーム",
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.shopping_cart),
-          label: "買い物",
-        ),
-      ],
-      onDestinationSelected: (index) => navigationShell.goBranch(
-        index,
-        initialLocation: index == navigationShell.currentIndex,
+class _NavBarItem extends StatelessWidget {
+  const _NavBarItem({
+    required this.navigationShell,
+    required this.index,
+    required this.title,
+    required this.icon,
+  });
+
+  final StatefulNavigationShell navigationShell;
+  final int index;
+  final String title;
+  final Widget icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final isSelected = navigationShell.currentIndex == index;
+    final theme = Theme.of(context);
+
+    return Material(
+      shape: const StadiumBorder(),
+      color: isSelected
+          ? theme.colorScheme.secondaryContainer
+          : Colors.transparent,
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: () => navigationShell.goBranch(index),
+            icon: icon,
+          ),
+          if (isSelected) ...[
+            const SizedBox(width: 8),
+            Text(title),
+            const SizedBox(width: 16),
+          ]
+        ],
       ),
     );
   }
