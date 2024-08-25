@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile/domain/event/event_item_repository.dart';
-import 'package:mobile/domain/event/event_repository.dart';
+import 'package:mobile/domain/event/event_model.dart';
 import 'package:mobile/presentation/router/router.dart';
 import 'package:mobile/screens/event_detail/event_detail_route.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class EventCard extends HookConsumerWidget {
   const EventCard({
@@ -15,40 +13,21 @@ class EventCard extends HookConsumerWidget {
   final EventModel event;
 
   Widget _buildContent(EventModel event, WidgetRef ref) {
-    final eventItems = ref.watch(eventItemsByEventProvider.call(event.id));
-    final items = eventItems.when(
-      data: (data) => data,
-      error: (err, stackTrace) => [],
-      loading: () => List.filled(
-        2,
-        EventItemModel(
-          id: const EventItemModelId('loading'),
-          eventId: event.id,
-          startAt: DateTime.now(),
-          title: 'Loading...',
-          description: 'Loading...',
-        ),
-      ),
-    );
-
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 400),
-      child: Skeletonizer(
-        enabled: eventItems.isLoading,
-        child: ListView.separated(
-          shrinkWrap: true,
-          separatorBuilder: (context, idx) => const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Divider(),
-          ),
-          itemCount: items.length,
-          itemBuilder: (context, idx) {
-            final item = items[idx];
-            return ListTile(
-              title: Text(item.title),
-            );
-          },
+      child: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, idx) => const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Divider(),
         ),
+        itemCount: event.items.length,
+        itemBuilder: (context, idx) {
+          final item = event.items[idx];
+          return ListTile(
+            title: Text(item.value),
+          );
+        },
       ),
     );
   }

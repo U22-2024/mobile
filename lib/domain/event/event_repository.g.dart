@@ -6,7 +6,7 @@ part of 'event_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$leastEventHash() => r'7c136733e9d72dc494da9e1c83a564b229b8fd9d';
+String _$leastEventHash() => r'0fd10d1b97e33644f4c487031e3363172767617d';
 
 /// See also [leastEvent].
 @ProviderFor(leastEvent)
@@ -20,7 +20,7 @@ final leastEventProvider = AutoDisposeFutureProvider<EventModel?>.internal(
 );
 
 typedef LeastEventRef = AutoDisposeFutureProviderRef<EventModel?>;
-String _$eventRepositoryHash() => r'3559ba7b8994db76820f81af9c9917ce84617a4a';
+String _$eventRepositoryHash() => r'7ab34d5db06c961e7840bc1b3142cdd7776247cc';
 
 /// See also [EventRepository].
 @ProviderFor(EventRepository)

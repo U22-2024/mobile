@@ -18,18 +18,22 @@ const Event$json = {
   '1': 'Event',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Guid', '10': 'id'},
-    {'1': 'event_item', '3': 2, '4': 3, '5': 9, '10': 'eventItem'},
-    {'1': 'time_table', '3': 3, '4': 1, '5': 11, '6': '.event.v1.TimeTable', '10': 'timeTable'},
-    {'1': 'user_items', '3': 4, '4': 1, '5': 11, '6': '.event.v1.UserItems', '10': 'userItems'},
+    {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
+    {'1': 'event_item', '3': 4, '4': 3, '5': 9, '10': 'eventItem'},
+    {'1': 'time_table', '3': 5, '4': 1, '5': 11, '6': '.event.v1.TimeTable', '10': 'timeTable'},
+    {'1': 'user_items', '3': 6, '4': 1, '5': 11, '6': '.event.v1.UserItems', '10': 'userItems'},
+    {'1': 'uid', '3': 7, '4': 1, '5': 11, '6': '.common.v1.Uid', '10': 'uid'},
   ],
 };
 
 /// Descriptor for `Event`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List eventDescriptor = $convert.base64Decode(
-    'CgVFdmVudBIfCgJpZBgBIAEoCzIPLmNvbW1vbi52MS5HdWlkUgJpZBIdCgpldmVudF9pdGVtGA'
-    'IgAygJUglldmVudEl0ZW0SMgoKdGltZV90YWJsZRgDIAEoCzITLmV2ZW50LnYxLlRpbWVUYWJs'
-    'ZVIJdGltZVRhYmxlEjIKCnVzZXJfaXRlbXMYBCABKAsyEy5ldmVudC52MS5Vc2VySXRlbXNSCX'
-    'VzZXJJdGVtcw==');
+    'CgVFdmVudBIfCgJpZBgBIAEoCzIPLmNvbW1vbi52MS5HdWlkUgJpZBIUCgV0aXRsZRgCIAEoCV'
+    'IFdGl0bGUSIAoLZGVzY3JpcHRpb24YAyABKAlSC2Rlc2NyaXB0aW9uEh0KCmV2ZW50X2l0ZW0Y'
+    'BCADKAlSCWV2ZW50SXRlbRIyCgp0aW1lX3RhYmxlGAUgASgLMhMuZXZlbnQudjEuVGltZVRhYm'
+    'xlUgl0aW1lVGFibGUSMgoKdXNlcl9pdGVtcxgGIAEoCzITLmV2ZW50LnYxLlVzZXJJdGVtc1IJ'
+    'dXNlckl0ZW1zEiAKA3VpZBgHIAEoCzIOLmNvbW1vbi52MS5VaWRSA3VpZA==');
 
 @$core.Deprecated('Use timeTableDescriptor instead')
 const TimeTable$json = {
@@ -159,16 +163,21 @@ const CreateEventRequest$json = {
   '1': 'CreateEventRequest',
   '2': [
     {'1': 'uid', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Uid', '10': 'uid'},
-    {'1': 'time_table', '3': 2, '4': 1, '5': 11, '6': '.event.v1.TimeTable', '10': 'timeTable'},
-    {'1': 'user_items', '3': 3, '4': 1, '5': 11, '6': '.event.v1.UserItems', '10': 'userItems'},
+    {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
+    {'1': 'event_item', '3': 4, '4': 3, '5': 9, '10': 'eventItem'},
+    {'1': 'time_table', '3': 5, '4': 1, '5': 11, '6': '.event.v1.TimeTable', '10': 'timeTable'},
+    {'1': 'user_items', '3': 6, '4': 1, '5': 11, '6': '.event.v1.UserItems', '10': 'userItems'},
   ],
 };
 
 /// Descriptor for `CreateEventRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createEventRequestDescriptor = $convert.base64Decode(
-    'ChJDcmVhdGVFdmVudFJlcXVlc3QSIAoDdWlkGAEgASgLMg4uY29tbW9uLnYxLlVpZFIDdWlkEj'
-    'IKCnRpbWVfdGFibGUYAiABKAsyEy5ldmVudC52MS5UaW1lVGFibGVSCXRpbWVUYWJsZRIyCgp1'
-    'c2VyX2l0ZW1zGAMgASgLMhMuZXZlbnQudjEuVXNlckl0ZW1zUgl1c2VySXRlbXM=');
+    'ChJDcmVhdGVFdmVudFJlcXVlc3QSIAoDdWlkGAEgASgLMg4uY29tbW9uLnYxLlVpZFIDdWlkEh'
+    'QKBXRpdGxlGAIgASgJUgV0aXRsZRIgCgtkZXNjcmlwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24S'
+    'HQoKZXZlbnRfaXRlbRgEIAMoCVIJZXZlbnRJdGVtEjIKCnRpbWVfdGFibGUYBSABKAsyEy5ldm'
+    'VudC52MS5UaW1lVGFibGVSCXRpbWVUYWJsZRIyCgp1c2VyX2l0ZW1zGAYgASgLMhMuZXZlbnQu'
+    'djEuVXNlckl0ZW1zUgl1c2VySXRlbXM=');
 
 @$core.Deprecated('Use createEventResponseDescriptor instead')
 const CreateEventResponse$json = {

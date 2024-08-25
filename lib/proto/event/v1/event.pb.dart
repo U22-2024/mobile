@@ -20,13 +20,22 @@ import 'core.pbenum.dart' as $10;
 class Event extends $pb.GeneratedMessage {
   factory Event({
     $9.Guid? id,
+    $core.String? title,
+    $core.String? description,
     $core.Iterable<$core.String>? eventItem,
     TimeTable? timeTable,
     UserItems? userItems,
+    $9.Uid? uid,
   }) {
     final $result = create();
     if (id != null) {
       $result.id = id;
+    }
+    if (title != null) {
+      $result.title = title;
+    }
+    if (description != null) {
+      $result.description = description;
     }
     if (eventItem != null) {
       $result.eventItem.addAll(eventItem);
@@ -37,6 +46,9 @@ class Event extends $pb.GeneratedMessage {
     if (userItems != null) {
       $result.userItems = userItems;
     }
+    if (uid != null) {
+      $result.uid = uid;
+    }
     return $result;
   }
   Event._() : super();
@@ -45,9 +57,12 @@ class Event extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Event', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
     ..aOM<$9.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $9.Guid.create)
-    ..pPS(2, _omitFieldNames ? '' : 'eventItem')
-    ..aOM<TimeTable>(3, _omitFieldNames ? '' : 'timeTable', subBuilder: TimeTable.create)
-    ..aOM<UserItems>(4, _omitFieldNames ? '' : 'userItems', subBuilder: UserItems.create)
+    ..aOS(2, _omitFieldNames ? '' : 'title')
+    ..aOS(3, _omitFieldNames ? '' : 'description')
+    ..pPS(4, _omitFieldNames ? '' : 'eventItem')
+    ..aOM<TimeTable>(5, _omitFieldNames ? '' : 'timeTable', subBuilder: TimeTable.create)
+    ..aOM<UserItems>(6, _omitFieldNames ? '' : 'userItems', subBuilder: UserItems.create)
+    ..aOM<$9.Uid>(7, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
     ..hasRequiredFields = false
   ;
 
@@ -84,29 +99,58 @@ class Event extends $pb.GeneratedMessage {
   $9.Guid ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.List<$core.String> get eventItem => $_getList(1);
+  $core.String get title => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set title($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTitle() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTitle() => clearField(2);
 
   @$pb.TagNumber(3)
-  TimeTable get timeTable => $_getN(2);
+  $core.String get description => $_getSZ(2);
   @$pb.TagNumber(3)
-  set timeTable(TimeTable v) { setField(3, v); }
+  set description($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasTimeTable() => $_has(2);
+  $core.bool hasDescription() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTimeTable() => clearField(3);
-  @$pb.TagNumber(3)
-  TimeTable ensureTimeTable() => $_ensure(2);
+  void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  UserItems get userItems => $_getN(3);
-  @$pb.TagNumber(4)
-  set userItems(UserItems v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasUserItems() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearUserItems() => clearField(4);
-  @$pb.TagNumber(4)
-  UserItems ensureUserItems() => $_ensure(3);
+  $core.List<$core.String> get eventItem => $_getList(3);
+
+  @$pb.TagNumber(5)
+  TimeTable get timeTable => $_getN(4);
+  @$pb.TagNumber(5)
+  set timeTable(TimeTable v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTimeTable() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTimeTable() => clearField(5);
+  @$pb.TagNumber(5)
+  TimeTable ensureTimeTable() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  UserItems get userItems => $_getN(5);
+  @$pb.TagNumber(6)
+  set userItems(UserItems v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasUserItems() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearUserItems() => clearField(6);
+  @$pb.TagNumber(6)
+  UserItems ensureUserItems() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $9.Uid get uid => $_getN(6);
+  @$pb.TagNumber(7)
+  set uid($9.Uid v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasUid() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearUid() => clearField(7);
+  @$pb.TagNumber(7)
+  $9.Uid ensureUid() => $_ensure(6);
 }
 
 class TimeTable extends $pb.GeneratedMessage {
@@ -721,12 +765,24 @@ class GetEventsResponse extends $pb.GeneratedMessage {
 class CreateEventRequest extends $pb.GeneratedMessage {
   factory CreateEventRequest({
     $9.Uid? uid,
+    $core.String? title,
+    $core.String? description,
+    $core.Iterable<$core.String>? eventItem,
     TimeTable? timeTable,
     UserItems? userItems,
   }) {
     final $result = create();
     if (uid != null) {
       $result.uid = uid;
+    }
+    if (title != null) {
+      $result.title = title;
+    }
+    if (description != null) {
+      $result.description = description;
+    }
+    if (eventItem != null) {
+      $result.eventItem.addAll(eventItem);
     }
     if (timeTable != null) {
       $result.timeTable = timeTable;
@@ -742,8 +798,11 @@ class CreateEventRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateEventRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
     ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
-    ..aOM<TimeTable>(2, _omitFieldNames ? '' : 'timeTable', subBuilder: TimeTable.create)
-    ..aOM<UserItems>(3, _omitFieldNames ? '' : 'userItems', subBuilder: UserItems.create)
+    ..aOS(2, _omitFieldNames ? '' : 'title')
+    ..aOS(3, _omitFieldNames ? '' : 'description')
+    ..pPS(4, _omitFieldNames ? '' : 'eventItem')
+    ..aOM<TimeTable>(5, _omitFieldNames ? '' : 'timeTable', subBuilder: TimeTable.create)
+    ..aOM<UserItems>(6, _omitFieldNames ? '' : 'userItems', subBuilder: UserItems.create)
     ..hasRequiredFields = false
   ;
 
@@ -780,26 +839,47 @@ class CreateEventRequest extends $pb.GeneratedMessage {
   $9.Uid ensureUid() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  TimeTable get timeTable => $_getN(1);
+  $core.String get title => $_getSZ(1);
   @$pb.TagNumber(2)
-  set timeTable(TimeTable v) { setField(2, v); }
+  set title($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasTimeTable() => $_has(1);
+  $core.bool hasTitle() => $_has(1);
   @$pb.TagNumber(2)
-  void clearTimeTable() => clearField(2);
-  @$pb.TagNumber(2)
-  TimeTable ensureTimeTable() => $_ensure(1);
+  void clearTitle() => clearField(2);
 
   @$pb.TagNumber(3)
-  UserItems get userItems => $_getN(2);
+  $core.String get description => $_getSZ(2);
   @$pb.TagNumber(3)
-  set userItems(UserItems v) { setField(3, v); }
+  set description($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasUserItems() => $_has(2);
+  $core.bool hasDescription() => $_has(2);
   @$pb.TagNumber(3)
-  void clearUserItems() => clearField(3);
-  @$pb.TagNumber(3)
-  UserItems ensureUserItems() => $_ensure(2);
+  void clearDescription() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.String> get eventItem => $_getList(3);
+
+  @$pb.TagNumber(5)
+  TimeTable get timeTable => $_getN(4);
+  @$pb.TagNumber(5)
+  set timeTable(TimeTable v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTimeTable() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTimeTable() => clearField(5);
+  @$pb.TagNumber(5)
+  TimeTable ensureTimeTable() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  UserItems get userItems => $_getN(5);
+  @$pb.TagNumber(6)
+  set userItems(UserItems v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasUserItems() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearUserItems() => clearField(6);
+  @$pb.TagNumber(6)
+  UserItems ensureUserItems() => $_ensure(5);
 }
 
 class CreateEventResponse extends $pb.GeneratedMessage {
