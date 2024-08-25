@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $6;
+import '../../common/v1/common.pb.dart' as $9;
 import 'shopping_item.pbenum.dart';
 
 export 'shopping_item.pbenum.dart';
@@ -21,7 +21,7 @@ export 'shopping_item.pbenum.dart';
 /// 買い物リストのアイテム
 class ShoppingItem extends $pb.GeneratedMessage {
   factory ShoppingItem({
-    $6.Guid? id,
+    $9.Guid? id,
     $core.String? name,
     $core.String? quantity,
     $core.String? type,
@@ -54,7 +54,7 @@ class ShoppingItem extends $pb.GeneratedMessage {
   factory ShoppingItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ShoppingItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'shopping.v1'), createEmptyInstance: create)
-    ..aOM<$6.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $6.Guid.create)
+    ..aOM<$9.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $9.Guid.create)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'quantity')
     ..aOS(4, _omitFieldNames ? '' : 'type')
@@ -86,15 +86,15 @@ class ShoppingItem extends $pb.GeneratedMessage {
 
   /// アイテムのGUID
   @$pb.TagNumber(1)
-  $6.Guid get id => $_getN(0);
+  $9.Guid get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($6.Guid v) { setField(1, v); }
+  set id($9.Guid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Guid ensureId() => $_ensure(0);
+  $9.Guid ensureId() => $_ensure(0);
 
   /// アイテム名
   @$pb.TagNumber(2)
@@ -285,7 +285,7 @@ class CreateShoppingItemResponse extends $pb.GeneratedMessage {
 /// アイテムの情報を更新する
 class UpdateShoppingItemRequest extends $pb.GeneratedMessage {
   factory UpdateShoppingItemRequest({
-    $6.Guid? id,
+    $9.Guid? id,
     $core.String? name,
     $core.String? quantity,
     $core.String? memo,
@@ -314,7 +314,7 @@ class UpdateShoppingItemRequest extends $pb.GeneratedMessage {
   factory UpdateShoppingItemRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateShoppingItemRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'shopping.v1'), createEmptyInstance: create)
-    ..aOM<$6.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $6.Guid.create)
+    ..aOM<$9.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $9.Guid.create)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'quantity')
     ..aOS(5, _omitFieldNames ? '' : 'memo')
@@ -345,15 +345,15 @@ class UpdateShoppingItemRequest extends $pb.GeneratedMessage {
 
   /// アイテムのGUID
   @$pb.TagNumber(1)
-  $6.Guid get id => $_getN(0);
+  $9.Guid get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($6.Guid v) { setField(1, v); }
+  set id($9.Guid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Guid ensureId() => $_ensure(0);
+  $9.Guid ensureId() => $_ensure(0);
 
   /// アイテム名
   @$pb.TagNumber(2)
@@ -451,7 +451,7 @@ class UpdateShoppingItemResponse extends $pb.GeneratedMessage {
 
 class DeleteShoppingItemRequest extends $pb.GeneratedMessage {
   factory DeleteShoppingItemRequest({
-    $6.Guid? id,
+    $9.Guid? id,
   }) {
     final $result = create();
     if (id != null) {
@@ -464,7 +464,7 @@ class DeleteShoppingItemRequest extends $pb.GeneratedMessage {
   factory DeleteShoppingItemRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteShoppingItemRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'shopping.v1'), createEmptyInstance: create)
-    ..aOM<$6.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $6.Guid.create)
+    ..aOM<$9.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $9.Guid.create)
     ..hasRequiredFields = false
   ;
 
@@ -491,15 +491,15 @@ class DeleteShoppingItemRequest extends $pb.GeneratedMessage {
 
   /// アイテムのGUID
   @$pb.TagNumber(1)
-  $6.Guid get id => $_getN(0);
+  $9.Guid get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($6.Guid v) { setField(1, v); }
+  set id($9.Guid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Guid ensureId() => $_ensure(0);
+  $9.Guid ensureId() => $_ensure(0);
 }
 
 class DeleteShoppingItemResponse extends $pb.GeneratedMessage {

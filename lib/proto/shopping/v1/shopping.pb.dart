@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'shopping_item.pb.dart' as $5;
+import 'shopping_item.pb.dart' as $8;
 
 /// リクエストしたユーザーのUIDに紐づく買い物リストのアイテムを取得する
 class GetShoppingListRequest extends $pb.GeneratedMessage {
@@ -50,7 +50,7 @@ class GetShoppingListRequest extends $pb.GeneratedMessage {
 
 class GetShoppingListResponse extends $pb.GeneratedMessage {
   factory GetShoppingListResponse({
-    $core.Iterable<$5.ShoppingItem>? items,
+    $core.Iterable<$8.ShoppingItem>? items,
   }) {
     final $result = create();
     if (items != null) {
@@ -63,7 +63,7 @@ class GetShoppingListResponse extends $pb.GeneratedMessage {
   factory GetShoppingListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetShoppingListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'shopping.v1'), createEmptyInstance: create)
-    ..pc<$5.ShoppingItem>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: $5.ShoppingItem.create)
+    ..pc<$8.ShoppingItem>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: $8.ShoppingItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -89,7 +89,7 @@ class GetShoppingListResponse extends $pb.GeneratedMessage {
   static GetShoppingListResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$5.ShoppingItem> get items => $_getList(0);
+  $core.List<$8.ShoppingItem> get items => $_getList(0);
 }
 
 
