@@ -31,11 +31,20 @@ RouteBase get $rootRoute => StatefulShellRouteData.$route(
           ],
         ),
         StatefulShellBranchData.$branch(
-          navigatorKey: ShoppingBranch.$navigatorKey,
+          navigatorKey: EventListBranch.$navigatorKey,
           routes: [
             GoRouteData.$route(
-              path: '/shopping',
-              factory: $ShoppingRouteExtension._fromState,
+              path: '/event_list',
+              factory: $EventListRouteExtension._fromState,
+            ),
+          ],
+        ),
+        StatefulShellBranchData.$branch(
+          navigatorKey: EventDetailBranch.$navigatorKey,
+          routes: [
+            GoRouteData.$route(
+              path: '/event_detail',
+              factory: $EventDetailRouteExtension._fromState,
             ),
           ],
         ),
@@ -80,11 +89,34 @@ extension $ProfileRouteExtension on ProfileRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ShoppingRouteExtension on ShoppingRoute {
-  static ShoppingRoute _fromState(GoRouterState state) => const ShoppingRoute();
+extension $EventListRouteExtension on EventListRoute {
+  static EventListRoute _fromState(GoRouterState state) =>
+      const EventListRoute();
 
   String get location => GoRouteData.$location(
-        '/shopping',
+        '/event_list',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $EventDetailRouteExtension on EventDetailRoute {
+  static EventDetailRoute _fromState(GoRouterState state) => EventDetailRoute(
+        eventId: state.uri.queryParameters['event-id']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/event_detail',
+        queryParams: {
+          'event-id': eventId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

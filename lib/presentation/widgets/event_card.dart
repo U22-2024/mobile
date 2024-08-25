@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/event/event_item_repository.dart';
 import 'package:mobile/domain/event/event_repository.dart';
+import 'package:mobile/presentation/router/router.dart';
+import 'package:mobile/screens/event_detail/event_detail_route.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class EventCard extends HookConsumerWidget {
@@ -56,27 +58,40 @@ class EventCard extends HookConsumerWidget {
     final theme = Theme.of(context);
 
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.calendar_today_rounded,
-                  color: theme.colorScheme.onPrimaryContainer,
-                ),
-                const SizedBox(width: 16),
-                Text(
-                  event.title,
-                  style: theme.textTheme.labelLarge,
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            _buildContent(event, ref),
-          ],
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () {
+          const EventDetailRoute(eventId: "").push(context);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.calendar_today_rounded,
+                    color: theme.colorScheme.onPrimaryContainer,
+                  ),
+                  const SizedBox(width: 16),
+                  Text(
+                    event.title,
+                    style: theme.textTheme.labelLarge,
+                  ),
+                  const Spacer(),
+                  const Text("タップして詳細を見る"),
+                  const SizedBox(width: 8),
+                  Icon(
+                    Icons.touch_app_rounded,
+                    color: theme.colorScheme.onPrimaryContainer,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              _buildContent(event, ref),
+            ],
+          ),
         ),
       ),
     );

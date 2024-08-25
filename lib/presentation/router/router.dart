@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/presentation/root.dart';
+import 'package:mobile/screens/event_detail/event_detail_route.dart';
+import 'package:mobile/screens/event_list/event_list_route.dart';
 import 'package:mobile/screens/home/home_route.dart';
 import 'package:mobile/screens/login/login.dart';
 import 'package:mobile/screens/profile/profile_route.dart';
-import 'package:mobile/screens/shopping/shopping_route.dart';
 
 part 'router.g.dart';
 
@@ -21,11 +22,20 @@ part 'router.g.dart';
         ),
       ],
     ),
-    TypedStatefulShellBranch<ShoppingBranch>(
+    TypedStatefulShellBranch<EventListBranch>(
       routes: [
-        TypedGoRoute<ShoppingRoute>(path: ShoppingRoute.location),
+        TypedGoRoute<EventListRoute>(
+          path: EventListRoute.location,
+        ),
       ],
     ),
+
+    // ボトムナビゲーションバーに表示されないブランチ
+    TypedStatefulShellBranch<EventDetailBranch>(
+      routes: [
+        TypedGoRoute<EventDetailRoute>(path: EventDetailRoute.location),
+      ],
+    )
   ],
 )
 class RootRoute extends StatefulShellRouteData {
