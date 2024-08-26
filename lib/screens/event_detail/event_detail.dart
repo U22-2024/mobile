@@ -30,18 +30,16 @@ class EventDetailScreen extends ConsumerWidget {
       ),
       body: Container(
         alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              if (event != null) ...[
-                const SizedBox(height: 20),
-                TimeTable(event: event),
-                const SizedBox(height: 20),
-                EventItemList(event: event),
-                const SizedBox(height: 20),
-              ],
+        child: Column(
+          children: [
+            if (event != null) ...[
+              const SizedBox(height: 20),
+              TimeTable(event: event),
+              const SizedBox(height: 20),
+              EventItemList(event: event),
+              const SizedBox(height: 40),
             ],
-          ),
+          ],
         ),
       ),
     );

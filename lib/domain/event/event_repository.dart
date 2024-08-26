@@ -89,6 +89,8 @@ class EventRepository extends _$EventRepository {
         userItems: const [
           UserItemModel(value: 'PCはバッテリーが十分に充電されているか確認する'),
           UserItemModel(value: '資料はメールで送っておく'),
+          UserItemModel(value: "アドバイス：会社には10分前につくようにした方が良いよ"),
+          UserItemModel(value: "アドバイス：会社には10分前につくようにした方が良いよ"),
         ],
         timeTable: TimeTableModel(
           items: [
