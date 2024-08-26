@@ -1,3 +1,4 @@
+import "package:collection/collection.dart";
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/event/event_model.dart';
@@ -16,9 +17,9 @@ class EventDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final events = ref.watch(leastEventProvider);
+    final events = ref.watch(eventRepositoryProvider);
     final event = events.when(
-      data: (data) => data,
+      data: (data) => data.firstWhereOrNull((e) => e.id == eventId),
       error: (err, stackTrace) => null,
       loading: () => EventModel.empty(),
     );

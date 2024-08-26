@@ -28,7 +28,7 @@ class RootNavigationBar extends ConsumerWidget {
           _NavBarItem(
             navigationShell: navigationShell,
             index: 1,
-            title: '今日のイベント',
+            title: 'イベント',
             icon: const Icon(Icons.event, size: 28),
           ),
         ],

@@ -40,7 +40,7 @@ class EventCard extends HookConsumerWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
-          const EventDetailRoute(eventId: "").push(context);
+          EventDetailRoute(eventId: event.id.value).push(context);
         },
         child: Padding(
           padding: const EdgeInsets.all(16),

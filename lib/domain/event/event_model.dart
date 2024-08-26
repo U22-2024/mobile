@@ -3,10 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'event_model.freezed.dart';
 
 //#region EventModel
-@immutable
-class EventModelId {
-  const EventModelId(this.value);
-  final String value;
+@freezed
+class EventModelId with _$EventModelId {
+  const factory EventModelId(String value) = _EventModelId;
 }
 
 @freezed

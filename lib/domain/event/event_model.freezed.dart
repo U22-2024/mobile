@@ -15,6 +15,134 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
+mixin _$EventModelId {
+  String get value => throw _privateConstructorUsedError;
+
+  /// Create a copy of EventModelId
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $EventModelIdCopyWith<EventModelId> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $EventModelIdCopyWith<$Res> {
+  factory $EventModelIdCopyWith(
+          EventModelId value, $Res Function(EventModelId) then) =
+      _$EventModelIdCopyWithImpl<$Res, EventModelId>;
+  @useResult
+  $Res call({String value});
+}
+
+/// @nodoc
+class _$EventModelIdCopyWithImpl<$Res, $Val extends EventModelId>
+    implements $EventModelIdCopyWith<$Res> {
+  _$EventModelIdCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of EventModelId
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_value.copyWith(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$EventModelIdImplCopyWith<$Res>
+    implements $EventModelIdCopyWith<$Res> {
+  factory _$$EventModelIdImplCopyWith(
+          _$EventModelIdImpl value, $Res Function(_$EventModelIdImpl) then) =
+      __$$EventModelIdImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String value});
+}
+
+/// @nodoc
+class __$$EventModelIdImplCopyWithImpl<$Res>
+    extends _$EventModelIdCopyWithImpl<$Res, _$EventModelIdImpl>
+    implements _$$EventModelIdImplCopyWith<$Res> {
+  __$$EventModelIdImplCopyWithImpl(
+      _$EventModelIdImpl _value, $Res Function(_$EventModelIdImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of EventModelId
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$EventModelIdImpl(
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EventModelIdImpl implements _EventModelId {
+  const _$EventModelIdImpl(this.value);
+
+  @override
+  final String value;
+
+  @override
+  String toString() {
+    return 'EventModelId(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EventModelIdImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  /// Create a copy of EventModelId
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EventModelIdImplCopyWith<_$EventModelIdImpl> get copyWith =>
+      __$$EventModelIdImplCopyWithImpl<_$EventModelIdImpl>(this, _$identity);
+}
+
+abstract class _EventModelId implements EventModelId {
+  const factory _EventModelId(final String value) = _$EventModelIdImpl;
+
+  @override
+  String get value;
+
+  /// Create a copy of EventModelId
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$EventModelIdImplCopyWith<_$EventModelIdImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$EventModel {
   EventModelId get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -44,6 +172,7 @@ abstract class $EventModelCopyWith<$Res> {
       TimeTableModel timeTable,
       List<UserItemModel> userItems});
 
+  $EventModelIdCopyWith<$Res> get id;
   $TimeTableModelCopyWith<$Res> get timeTable;
 }
 
@@ -101,6 +230,16 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
+  $EventModelIdCopyWith<$Res> get id {
+    return $EventModelIdCopyWith<$Res>(_value.id, (value) {
+      return _then(_value.copyWith(id: value) as $Val);
+    });
+  }
+
+  /// Create a copy of EventModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
   $TimeTableModelCopyWith<$Res> get timeTable {
     return $TimeTableModelCopyWith<$Res>(_value.timeTable, (value) {
       return _then(_value.copyWith(timeTable: value) as $Val);
@@ -124,6 +263,8 @@ abstract class _$$EventModelImplCopyWith<$Res>
       TimeTableModel timeTable,
       List<UserItemModel> userItems});
 
+  @override
+  $EventModelIdCopyWith<$Res> get id;
   @override
   $TimeTableModelCopyWith<$Res> get timeTable;
 }
