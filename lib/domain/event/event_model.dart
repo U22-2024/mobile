@@ -19,6 +19,19 @@ class EventModel with _$EventModel {
     required TimeTableModel timeTable,
     required List<UserItemModel> userItems,
   }) = _EventModel;
+
+  static EventModel empty() => const EventModel(
+        id: EventModelId(""),
+        title: "",
+        items: [],
+        timeTable: TimeTableModel(
+          items: [],
+          transitCount: 0,
+          walkDistance: 0,
+          fare: 0,
+        ),
+        userItems: [],
+      );
 }
 
 @freezed
