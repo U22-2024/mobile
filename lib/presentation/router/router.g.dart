@@ -7,18 +7,56 @@ part of 'router.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $splashRoute,
-      $homeRoute,
+      $rootRoute,
       $loginRoute,
     ];
 
-RouteBase get $splashRoute => GoRouteData.$route(
-      path: '/',
-      factory: $SplashRouteExtension._fromState,
+RouteBase get $rootRoute => StatefulShellRouteData.$route(
+      navigatorContainerBuilder: RootRoute.$navigatorContainerBuilder,
+      factory: $RootRouteExtension._fromState,
+      branches: [
+        StatefulShellBranchData.$branch(
+          navigatorKey: HomeBranch.$navigatorKey,
+          routes: [
+            GoRouteData.$route(
+              path: '/',
+              factory: $HomeRouteExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'profile',
+                  factory: $ProfileRouteExtension._fromState,
+                ),
+              ],
+            ),
+          ],
+        ),
+        StatefulShellBranchData.$branch(
+          navigatorKey: EventListBranch.$navigatorKey,
+          routes: [
+            GoRouteData.$route(
+              path: '/event_list',
+              factory: $EventListRouteExtension._fromState,
+            ),
+          ],
+        ),
+        StatefulShellBranchData.$branch(
+          navigatorKey: EventDetailBranch.$navigatorKey,
+          routes: [
+            GoRouteData.$route(
+              path: '/event_detail',
+              factory: $EventDetailRouteExtension._fromState,
+            ),
+          ],
+        ),
+      ],
     );
 
-extension $SplashRouteExtension on SplashRoute {
-  static SplashRoute _fromState(GoRouterState state) => const SplashRoute();
+extension $RootRouteExtension on RootRoute {
+  static RootRoute _fromState(GoRouterState state) => const RootRoute();
+}
+
+extension $HomeRouteExtension on HomeRoute {
+  static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
 
   String get location => GoRouteData.$location(
         '/',
@@ -34,32 +72,11 @@ extension $SplashRouteExtension on SplashRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $homeRoute => GoRouteData.$route(
-      path: '/home',
-      factory: $HomeRouteExtension._fromState,
-      routes: [
-        GoRouteData.$route(
-          path: 'remind',
-          factory: $RemindRouteExtension._fromState,
-          routes: [
-            GoRouteData.$route(
-              path: 'manage_group',
-              factory: $ManageRemindGroupRouteExtension._fromState,
-            ),
-            GoRouteData.$route(
-              path: 'create-remind',
-              factory: $CreateRemindRouteExtension._fromState,
-            ),
-          ],
-        ),
-      ],
-    );
-
-extension $HomeRouteExtension on HomeRoute {
-  static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
+extension $ProfileRouteExtension on ProfileRoute {
+  static ProfileRoute _fromState(GoRouterState state) => const ProfileRoute();
 
   String get location => GoRouteData.$location(
-        '/home',
+        '/profile',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -72,11 +89,12 @@ extension $HomeRouteExtension on HomeRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $RemindRouteExtension on RemindRoute {
-  static RemindRoute _fromState(GoRouterState state) => const RemindRoute();
+extension $EventListRouteExtension on EventListRoute {
+  static EventListRoute _fromState(GoRouterState state) =>
+      const EventListRoute();
 
   String get location => GoRouteData.$location(
-        '/home/remind',
+        '/event_list',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -89,30 +107,16 @@ extension $RemindRouteExtension on RemindRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ManageRemindGroupRouteExtension on ManageRemindGroupRoute {
-  static ManageRemindGroupRoute _fromState(GoRouterState state) =>
-      const ManageRemindGroupRoute();
-
-  String get location => GoRouteData.$location(
-        '/home/remind/manage_group',
+extension $EventDetailRouteExtension on EventDetailRoute {
+  static EventDetailRoute _fromState(GoRouterState state) => EventDetailRoute(
+        eventId: state.uri.queryParameters['event-id']!,
       );
 
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $CreateRemindRouteExtension on CreateRemindRoute {
-  static CreateRemindRoute _fromState(GoRouterState state) =>
-      const CreateRemindRoute();
-
   String get location => GoRouteData.$location(
-        '/home/remind/create-remind',
+        '/event_detail',
+        queryParams: {
+          'event-id': eventId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);
@@ -146,24 +150,3 @@ extension $LoginRouteExtension on LoginRoute {
 
   void replace(BuildContext context) => context.replace(location);
 }
-
-// **************************************************************************
-// RiverpodGenerator
-// **************************************************************************
-
-String _$routerHash() => r'0d2250d18fbf31b993595d7bdcbb22cc32273f1b';
-
-/// See also [router].
-@ProviderFor(router)
-final routerProvider = Provider<GoRouter>.internal(
-  router,
-  name: r'routerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$routerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef RouterRef = ProviderRef<GoRouter>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -13,6 +13,23 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use remindTypeDescriptor instead')
+const RemindType$json = {
+  '1': 'RemindType',
+  '2': [
+    {'1': 'REMIND_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'REMIND_TYPE_SHOPPING', '2': 1},
+    {'1': 'REMIND_TYPE_HOMEWORK', '2': 2},
+    {'1': 'REMIND_TYPE_OUTING', '2': 3},
+  ],
+};
+
+/// Descriptor for `RemindType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List remindTypeDescriptor = $convert.base64Decode(
+    'CgpSZW1pbmRUeXBlEhsKF1JFTUlORF9UWVBFX1VOU1BFQ0lGSUVEEAASGAoUUkVNSU5EX1RZUE'
+    'VfU0hPUFBJTkcQARIYChRSRU1JTkRfVFlQRV9IT01FV09SSxACEhYKElJFTUlORF9UWVBFX09V'
+    'VElORxAD');
+
 @$core.Deprecated('Use remindDescriptor instead')
 const Remind$json = {
   '1': 'Remind',

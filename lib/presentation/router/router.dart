@@ -1,116 +1,75 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/domain/auth/user_repository.dart';
-import 'package:mobile/presentation/app/splash_screen.dart';
-import 'package:mobile/presentation/home/home_screen.dart';
-import 'package:mobile/presentation/home/remind/create_remind/create_remind_screen.dart';
-import 'package:mobile/presentation/home/remind/manage_group/manage_group_screen.dart';
-import 'package:mobile/presentation/home/remind/remind_screen.dart';
-import 'package:mobile/presentation/login/login_screen.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:mobile/presentation/root.dart';
+import 'package:mobile/screens/event_detail/event_detail_route.dart';
+import 'package:mobile/screens/event_list/event_list_route.dart';
+import 'package:mobile/screens/home/home_route.dart';
+import 'package:mobile/screens/login/login.dart';
+import 'package:mobile/screens/profile/profile_route.dart';
 
 part 'router.g.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
-
-@Riverpod(keepAlive: true)
-GoRouter router(RouterRef ref) {
-  // ユーザーの認証状態を監視
-  final authState = ref.watch(authStateChangeProvider);
-
-  return GoRouter(
-      navigatorKey: _rootNavigatorKey,
-      routes: $appRoutes,
-      debugLogDiagnostics: kDebugMode,
-      redirect: (context, state) {
-        if (authState.isLoading || authState.hasError) return null;
-
-        final isAuth = authState.valueOrNull != null;
-        final isSplash = state.matchedLocation == SplashScreen.routeLocation;
-        if (isSplash) {
-          return isAuth ? HomeScreen.routeLocation : LoginScreen.routeLocation;
-        }
-
-        final isLoggingIn = state.matchedLocation == LoginScreen.routeLocation;
-        if (isLoggingIn) {
-          return isAuth ? HomeScreen.routeLocation : null;
-        }
-
-        return isAuth ? null : LoginScreen.routeLocation;
-      });
-}
-
-//#region Routes
-@TypedGoRoute<SplashRoute>(path: SplashScreen.routeLocation)
-class SplashRoute extends GoRouteData {
-  const SplashRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SplashScreen();
-  }
-}
-
-@TypedGoRoute<HomeRoute>(
-  path: HomeScreen.routeLocation,
-  routes: [
-    TypedGoRoute<RemindRoute>(
-      path: RemindScreen.routeLocation,
+@TypedStatefulShellRoute<RootRoute>(
+  branches: [
+    // ボトムナビゲーションバーに表示されるブランチ
+    TypedStatefulShellBranch<HomeBranch>(
       routes: [
-        TypedGoRoute<ManageRemindGroupRoute>(
-          path: ManageGroupScreen.routeLocation,
-        ),
-        TypedGoRoute<CreateRemindRoute>(
-          path: CreateRemindScreen.routeLocation,
+        TypedGoRoute<HomeRoute>(
+          path: HomeRoute.location,
+          routes: [
+            TypedGoRoute<ProfileRoute>(path: ProfileRoute.location),
+          ],
         ),
       ],
     ),
+    TypedStatefulShellBranch<EventListBranch>(
+      routes: [
+        TypedGoRoute<EventListRoute>(
+          path: EventListRoute.location,
+        ),
+      ],
+    ),
+
+    // ボトムナビゲーションバーに表示されないブランチ
+    TypedStatefulShellBranch<EventDetailBranch>(
+      routes: [
+        TypedGoRoute<EventDetailRoute>(path: EventDetailRoute.location),
+      ],
+    )
   ],
 )
-class HomeRoute extends GoRouteData {
-  const HomeRoute();
+class RootRoute extends StatefulShellRouteData {
+  const RootRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const HomeScreen();
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
+    return navigationShell;
+  }
+
+  static Widget $navigatorContainerBuilder(
+    BuildContext context,
+    StatefulNavigationShell navigationShell,
+    List<Widget> children,
+  ) {
+    return RootScreen(
+      navigationShell: navigationShell,
+      children: children,
+    );
   }
 }
 
-class RemindRoute extends GoRouteData {
-  const RemindRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return RemindScreen();
-  }
-}
-
-class ManageRemindGroupRoute extends GoRouteData {
-  const ManageRemindGroupRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const ManageGroupScreen();
-  }
-}
-
-class CreateRemindRoute extends GoRouteData {
-  const CreateRemindRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const CreateRemindScreen();
-  }
-}
-
-@TypedGoRoute<LoginRoute>(path: LoginScreen.routeLocation)
+@TypedGoRoute<LoginRoute>(path: LoginRoute.location)
 class LoginRoute extends GoRouteData {
   const LoginRoute();
+
+  static const location = "/login";
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const LoginScreen();
   }
 }
-//#endregion Routes
