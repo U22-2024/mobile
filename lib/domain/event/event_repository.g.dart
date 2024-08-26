@@ -20,7 +20,7 @@ final leastEventProvider = AutoDisposeFutureProvider<EventModel?>.internal(
 );
 
 typedef LeastEventRef = AutoDisposeFutureProviderRef<EventModel?>;
-String _$eventRepositoryHash() => r'7ab34d5db06c961e7840bc1b3142cdd7776247cc';
+String _$eventRepositoryHash() => r'debac0fdef187d65a1b2a222648b28bd914c3733';
 
 /// See also [EventRepository].
 @ProviderFor(EventRepository)

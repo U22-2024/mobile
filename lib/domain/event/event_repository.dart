@@ -27,6 +27,8 @@ class EventRepository extends _$EventRepository {
         userItems: const [
           UserItemModel(value: '水筒には水を入れておく'),
           UserItemModel(value: '筆記用具は黒ボールペンを持参する'),
+          UserItemModel(value: '水筒には水を入れておく'),
+          UserItemModel(value: '筆記用具は黒ボールペンを持参する'),
         ],
         timeTable: TimeTableModel(
           items: [
