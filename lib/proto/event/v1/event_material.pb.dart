@@ -178,6 +178,8 @@ class EventMaterial extends $pb.GeneratedMessage {
   static EventMaterial getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventMaterial>(create);
   static EventMaterial? _defaultInstance;
 
+  /// 外出するかしないか
+  /// ただのタスクか外出イベントか
   @$pb.TagNumber(1)
   $core.bool get isOut => $_getBF(0);
   @$pb.TagNumber(1)
@@ -187,6 +189,7 @@ class EventMaterial extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearIsOut() => clearField(1);
 
+  /// イベントのタイトル
   @$pb.TagNumber(2)
   $core.String get remind => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -196,6 +199,7 @@ class EventMaterial extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearRemind() => clearField(2);
 
+  /// 現在地の緯度経度
   @$pb.TagNumber(3)
   $10.Pos get fromPos => $_getN(2);
   @$pb.TagNumber(3)
@@ -207,6 +211,7 @@ class EventMaterial extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $10.Pos ensureFromPos() => $_ensure(2);
 
+  /// 目的地の名前
   @$pb.TagNumber(4)
   $core.String get destination => $_getSZ(3);
   @$pb.TagNumber(4)
@@ -216,6 +221,8 @@ class EventMaterial extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearDestination() => clearField(4);
 
+  /// 目的地の緯度経度
+  /// PredictPositionsFromTextで取得したものを使う
   @$pb.TagNumber(5)
   $10.Pos get destinationPos => $_getN(4);
   @$pb.TagNumber(5)
@@ -227,6 +234,8 @@ class EventMaterial extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $10.Pos ensureDestinationPos() => $_ensure(4);
 
+  /// 移動手段
+  /// リクエスト時には設定しなくてよい
   @$pb.TagNumber(6)
   $10.MoveType get moveType => $_getN(5);
   @$pb.TagNumber(6)
@@ -236,6 +245,7 @@ class EventMaterial extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearMoveType() => clearField(6);
 
+  /// 移動手段のオプション
   @$pb.TagNumber(7)
   $core.String get option => $_getSZ(6);
   @$pb.TagNumber(7)
@@ -245,6 +255,7 @@ class EventMaterial extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearOption() => clearField(7);
 
+  /// イベントの開始時間
   @$pb.TagNumber(8)
   $10.DateTime get startTime => $_getN(7);
   @$pb.TagNumber(8)
@@ -256,6 +267,7 @@ class EventMaterial extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $10.DateTime ensureStartTime() => $_ensure(7);
 
+  /// イベントの終了時間
   @$pb.TagNumber(9)
   $10.DateTime get endTime => $_getN(8);
   @$pb.TagNumber(9)
@@ -329,6 +341,7 @@ class PredictEventMaterialItemRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $9.Uid ensureUid() => $_ensure(0);
 
+  /// 初回は空でリクエスト
   @$pb.TagNumber(2)
   EventMaterial get eventMaterial => $_getN(1);
   @$pb.TagNumber(2)
@@ -340,6 +353,7 @@ class PredictEventMaterialItemRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   EventMaterial ensureEventMaterial() => $_ensure(1);
 
+  /// レスポンスをもとにして、テキストをクライアント側で作成する
   @$pb.TagNumber(3)
   $core.String get text => $_getSZ(2);
   @$pb.TagNumber(3)
@@ -463,6 +477,7 @@ class PredictPositionsFromTextRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $9.Uid ensureUid() => $_ensure(0);
 
+  /// ex.) イオン、スターバックス、東京駅
   @$pb.TagNumber(2)
   $core.String get text => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -472,6 +487,7 @@ class PredictPositionsFromTextRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearText() => clearField(2);
 
+  /// 現在地の緯度経度
   @$pb.TagNumber(3)
   $10.Pos get fromPos => $_getN(2);
   @$pb.TagNumber(3)
@@ -524,6 +540,7 @@ class PredictPositionsFromTextResponse extends $pb.GeneratedMessage {
   static PredictPositionsFromTextResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PredictPositionsFromTextResponse>(create);
   static PredictPositionsFromTextResponse? _defaultInstance;
 
+  /// 候補をいくつか返す
   @$pb.TagNumber(1)
   $core.List<Place> get place => $_getList(0);
 }
@@ -589,6 +606,7 @@ class PredictTimeTableRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $9.Uid ensureUid() => $_ensure(0);
 
+  /// 全て埋まった状態でリクエスト
   @$pb.TagNumber(2)
   EventMaterial get eventMaterial => $_getN(1);
   @$pb.TagNumber(2)
@@ -600,6 +618,7 @@ class PredictTimeTableRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   EventMaterial ensureEventMaterial() => $_ensure(1);
 
+  /// 行きか帰りか
   @$pb.TagNumber(3)
   $core.bool get isGoing => $_getBF(2);
   @$pb.TagNumber(3)

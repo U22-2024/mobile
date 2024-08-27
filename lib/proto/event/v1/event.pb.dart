@@ -1073,14 +1073,14 @@ class UpdateEventResponse extends $pb.GeneratedMessage {
 class DeleteEventRequest extends $pb.GeneratedMessage {
   factory DeleteEventRequest({
     $9.Uid? uid,
-    $9.Guid? guid,
+    $9.Guid? id,
   }) {
     final $result = create();
     if (uid != null) {
       $result.uid = uid;
     }
-    if (guid != null) {
-      $result.guid = guid;
+    if (id != null) {
+      $result.id = id;
     }
     return $result;
   }
@@ -1090,7 +1090,7 @@ class DeleteEventRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteEventRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
     ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
-    ..aOM<$9.Guid>(2, _omitFieldNames ? '' : 'guid', subBuilder: $9.Guid.create)
+    ..aOM<$9.Guid>(2, _omitFieldNames ? '' : 'id', subBuilder: $9.Guid.create)
     ..hasRequiredFields = false
   ;
 
@@ -1127,15 +1127,15 @@ class DeleteEventRequest extends $pb.GeneratedMessage {
   $9.Uid ensureUid() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $9.Guid get guid => $_getN(1);
+  $9.Guid get id => $_getN(1);
   @$pb.TagNumber(2)
-  set guid($9.Guid v) { setField(2, v); }
+  set id($9.Guid v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasGuid() => $_has(1);
+  $core.bool hasId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearGuid() => clearField(2);
+  void clearId() => clearField(2);
   @$pb.TagNumber(2)
-  $9.Guid ensureGuid() => $_ensure(1);
+  $9.Guid ensureId() => $_ensure(1);
 }
 
 class DeleteEventResponse extends $pb.GeneratedMessage {
