@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/presentation/widgets/branch_container.dart';
 import 'package:mobile/presentation/widgets/root_navigation_bar.dart';
+import 'package:mobile/screens/event_add/event_add.dart';
 
 class RootScreen extends ConsumerWidget {
   const RootScreen({
@@ -23,7 +24,9 @@ class RootScreen extends ConsumerWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => navigationShell.goBranch(0),
+        onPressed: () {
+          showEventAddModal(context);
+        },
         shape: const CircleBorder(),
         child: const Icon(Icons.add),
       ),
