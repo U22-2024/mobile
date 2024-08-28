@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -38,11 +40,6 @@ class EventAddModal extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // BAD: 時間がないから全部読んでる
-    ref.watch(clientEventMaterialProvider);
-    ref.watch(aiOnlyPredictProvider);
-    ref.watch(predictSourceProvider);
-
     final eventMaterial = ref.watch(eventMaterialRepositoryProvider);
     final textController = useTextEditingController();
     final isFirstPredicted = useState(false);
@@ -82,7 +79,8 @@ class EventAddModal extends HookConsumerWidget {
             child: ElevatedButton(
               onPressed: () async {
                 if (!(_formKey.currentState?.validate() ?? false)) return;
-                _formKey.currentState?.save();
+                _formKey.currentState!.save();
+                log(eventMaterial.toString(), name: 'EventAddModal');
                 final future = ref
                     .read(eventMaterialRepositoryProvider.notifier)
                     .predict(textController.text);

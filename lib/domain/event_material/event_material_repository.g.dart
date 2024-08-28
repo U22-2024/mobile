@@ -22,7 +22,7 @@ final _clientProvider =
 
 typedef _ClientRef = AutoDisposeProviderRef<EventMaterialServiceClient>;
 String _$predictPlacesByTextHash() =>
-    r'f469fb41d79ca648f7213c2d9e7be5d15de2b58a';
+    r'6b0883b1f48fd77b8b795221c1061ac5ed6cc04a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -215,62 +215,13 @@ class _PredictPlacesByTextProviderElement
   String get placeText => (origin as PredictPlacesByTextProvider).placeText;
 }
 
-String _$predictSourceHash() => r'68ab7391102c8e868f4546ecba24a4fc1104e136';
-
-/// See also [PredictSource].
-@ProviderFor(PredictSource)
-final predictSourceProvider =
-    AutoDisposeNotifierProvider<PredictSource, PredictSourceState>.internal(
-  PredictSource.new,
-  name: r'predictSourceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$predictSourceHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$PredictSource = AutoDisposeNotifier<PredictSourceState>;
-String _$clientEventMaterialHash() =>
-    r'cdbab39d86b3f0355dd210d1b9b72728c59762ab';
-
-/// See also [ClientEventMaterial].
-@ProviderFor(ClientEventMaterial)
-final clientEventMaterialProvider = AutoDisposeNotifierProvider<
-    ClientEventMaterial, ClientEventMaterialState>.internal(
-  ClientEventMaterial.new,
-  name: r'clientEventMaterialProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$clientEventMaterialHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$ClientEventMaterial = AutoDisposeNotifier<ClientEventMaterialState>;
-String _$aiOnlyPredictHash() => r'886fa09ae2556d9cd3bb411648295abd5e0cc04e';
-
-/// See also [AiOnlyPredict].
-@ProviderFor(AiOnlyPredict)
-final aiOnlyPredictProvider =
-    AutoDisposeNotifierProvider<AiOnlyPredict, AiOnlyPredictState>.internal(
-  AiOnlyPredict.new,
-  name: r'aiOnlyPredictProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$aiOnlyPredictHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$AiOnlyPredict = AutoDisposeNotifier<AiOnlyPredictState>;
 String _$eventMaterialRepositoryHash() =>
-    r'bb43d3f9c24b60da16c7ffd64e1f3b62e488ad97';
+    r'7ed876d98b57f3a2c3680897de5e97f2557ba7e6';
 
 /// See also [EventMaterialRepository].
 @ProviderFor(EventMaterialRepository)
-final eventMaterialRepositoryProvider = AutoDisposeNotifierProvider<
-    EventMaterialRepository, EventMaterialModel>.internal(
+final eventMaterialRepositoryProvider =
+    AutoDisposeNotifierProvider<EventMaterialRepository, State>.internal(
   EventMaterialRepository.new,
   name: r'eventMaterialRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -280,6 +231,6 @@ final eventMaterialRepositoryProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$EventMaterialRepository = AutoDisposeNotifier<EventMaterialModel>;
+typedef _$EventMaterialRepository = AutoDisposeNotifier<State>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

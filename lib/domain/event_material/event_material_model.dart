@@ -22,7 +22,7 @@ class EventMaterialModel with _$EventMaterialModel {
 
   factory EventMaterialModel.fromSource({
     required PredictSourceState source,
-    required ClientEventMaterialState clientOnly,
+    required ClientOnlyState clientOnly,
     required AiOnlyPredictState aiOnly,
   }) =>
       EventMaterialModel(
@@ -48,7 +48,7 @@ class EventMaterialModel with _$EventMaterialModel {
         endAt: eventMaterial.endTime,
       );
 
-  get isFilled =>
+  bool get isFilled =>
       isOut != null &&
       (remind?.isNotEmpty ?? false) &&
       fromPos != null &&
@@ -57,7 +57,7 @@ class EventMaterialModel with _$EventMaterialModel {
       moveType != null &&
       startAt != null &&
       endAt != null;
-  get grpcEventMaterial => EventMaterial(
+  EventMaterial get grpcEventMaterial => EventMaterial(
         isOut: isOut,
         remind: remind,
         fromPos: fromPos,

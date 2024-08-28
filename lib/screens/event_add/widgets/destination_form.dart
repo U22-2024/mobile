@@ -10,13 +10,16 @@ class DestinationForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final predictSource = ref.watch(predictSourceProvider);
-    final clientData = ref.watch(clientEventMaterialProvider);
-    if ((predictSource.destination?.isNotEmpty ?? false) &&
-        clientData.destPos != null) return const SizedBox();
+    final eventMaterial = ref.watch(eventMaterialRepositoryProvider);
+    final isDisable =
+        ((eventMaterial.predictSource.destination?.isNotEmpty ?? false) &&
+            eventMaterial.clientOnlyState.destPos != null);
+    if (isDisable) {
+      return const SizedBox();
+    }
 
     final textController =
-        useTextEditingController(text: predictSource.destination);
+        useTextEditingController(text: eventMaterial.predictSource.destination);
     final places = useState<List<Place>>([]);
     final pendingPlacesReq = useState<Future<void>?>(null);
     final snapshot = useFuture(pendingPlacesReq.value);
@@ -26,7 +29,8 @@ class DestinationForm extends HookConsumerWidget {
     return Column(
       children: [
         TextFormField(
-          enabled: snapshot.connectionState != ConnectionState.waiting,
+          enabled:
+              !isDisable && snapshot.connectionState != ConnectionState.waiting,
           controller: textController,
           decoration: const InputDecoration(
             labelText: 'どこに行く？',
@@ -47,8 +51,9 @@ class DestinationForm extends HookConsumerWidget {
           },
         ),
         const SizedBox(height: 16),
-        if (places.value.isEmpty ||
-            lastSearched.value != textController.text) ...[
+        if (!isDisable &&
+            (places.value.isEmpty ||
+                lastSearched.value != textController.text)) ...[
           ElevatedButton(
             onPressed: snapshot.connectionState == ConnectionState.waiting
                 ? null
@@ -71,6 +76,7 @@ class DestinationForm extends HookConsumerWidget {
             snapshot.connectionState != ConnectionState.waiting)
           DropdownButtonFormField2(
             decoration: InputDecoration(
+              enabled: !isDisable,
               contentPadding: const EdgeInsets.symmetric(vertical: 16),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
@@ -92,11 +98,12 @@ class DestinationForm extends HookConsumerWidget {
                 )
                 .toList(),
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            onChanged: (value) {
+            onChanged: isDisable ? null : (value) {},
+            onSaved: (value) {
               if (value == null) return;
-              ref.read(predictSourceProvider.notifier).destination = value.name;
-              ref.read(clientEventMaterialProvider.notifier).destPos =
-                  value.pos;
+              ref
+                  .read(eventMaterialRepositoryProvider.notifier)
+                  .setDestination(value);
             },
             validator: (value) {
               if (value == null) {

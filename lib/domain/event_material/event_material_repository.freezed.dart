@@ -205,38 +205,37 @@ abstract class _PredictSourceState extends PredictSourceState {
 }
 
 /// @nodoc
-mixin _$ClientEventMaterialState {
+mixin _$ClientOnlyState {
   $core.Pos? get fromPos => throw _privateConstructorUsedError;
   $core.Pos? get destPos => throw _privateConstructorUsedError;
 
-  /// Create a copy of ClientEventMaterialState
+  /// Create a copy of ClientOnlyState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ClientEventMaterialStateCopyWith<ClientEventMaterialState> get copyWith =>
+  $ClientOnlyStateCopyWith<ClientOnlyState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ClientEventMaterialStateCopyWith<$Res> {
-  factory $ClientEventMaterialStateCopyWith(ClientEventMaterialState value,
-          $Res Function(ClientEventMaterialState) then) =
-      _$ClientEventMaterialStateCopyWithImpl<$Res, ClientEventMaterialState>;
+abstract class $ClientOnlyStateCopyWith<$Res> {
+  factory $ClientOnlyStateCopyWith(
+          ClientOnlyState value, $Res Function(ClientOnlyState) then) =
+      _$ClientOnlyStateCopyWithImpl<$Res, ClientOnlyState>;
   @useResult
   $Res call({$core.Pos? fromPos, $core.Pos? destPos});
 }
 
 /// @nodoc
-class _$ClientEventMaterialStateCopyWithImpl<$Res,
-        $Val extends ClientEventMaterialState>
-    implements $ClientEventMaterialStateCopyWith<$Res> {
-  _$ClientEventMaterialStateCopyWithImpl(this._value, this._then);
+class _$ClientOnlyStateCopyWithImpl<$Res, $Val extends ClientOnlyState>
+    implements $ClientOnlyStateCopyWith<$Res> {
+  _$ClientOnlyStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ClientEventMaterialState
+  /// Create a copy of ClientOnlyState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -258,28 +257,25 @@ class _$ClientEventMaterialStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$ClientEventMaterialStateImplCopyWith<$Res>
-    implements $ClientEventMaterialStateCopyWith<$Res> {
-  factory _$$ClientEventMaterialStateImplCopyWith(
-          _$ClientEventMaterialStateImpl value,
-          $Res Function(_$ClientEventMaterialStateImpl) then) =
-      __$$ClientEventMaterialStateImplCopyWithImpl<$Res>;
+abstract class _$$ClientOnlyStateImplCopyWith<$Res>
+    implements $ClientOnlyStateCopyWith<$Res> {
+  factory _$$ClientOnlyStateImplCopyWith(_$ClientOnlyStateImpl value,
+          $Res Function(_$ClientOnlyStateImpl) then) =
+      __$$ClientOnlyStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({$core.Pos? fromPos, $core.Pos? destPos});
 }
 
 /// @nodoc
-class __$$ClientEventMaterialStateImplCopyWithImpl<$Res>
-    extends _$ClientEventMaterialStateCopyWithImpl<$Res,
-        _$ClientEventMaterialStateImpl>
-    implements _$$ClientEventMaterialStateImplCopyWith<$Res> {
-  __$$ClientEventMaterialStateImplCopyWithImpl(
-      _$ClientEventMaterialStateImpl _value,
-      $Res Function(_$ClientEventMaterialStateImpl) _then)
+class __$$ClientOnlyStateImplCopyWithImpl<$Res>
+    extends _$ClientOnlyStateCopyWithImpl<$Res, _$ClientOnlyStateImpl>
+    implements _$$ClientOnlyStateImplCopyWith<$Res> {
+  __$$ClientOnlyStateImplCopyWithImpl(
+      _$ClientOnlyStateImpl _value, $Res Function(_$ClientOnlyStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ClientEventMaterialState
+  /// Create a copy of ClientOnlyState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -287,7 +283,7 @@ class __$$ClientEventMaterialStateImplCopyWithImpl<$Res>
     Object? fromPos = freezed,
     Object? destPos = freezed,
   }) {
-    return _then(_$ClientEventMaterialStateImpl(
+    return _then(_$ClientOnlyStateImpl(
       fromPos: freezed == fromPos
           ? _value.fromPos
           : fromPos // ignore: cast_nullable_to_non_nullable
@@ -302,9 +298,8 @@ class __$$ClientEventMaterialStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ClientEventMaterialStateImpl extends _ClientEventMaterialState {
-  const _$ClientEventMaterialStateImpl({this.fromPos, this.destPos})
-      : super._();
+class _$ClientOnlyStateImpl extends _ClientOnlyState {
+  const _$ClientOnlyStateImpl({this.fromPos, this.destPos}) : super._();
 
   @override
   final $core.Pos? fromPos;
@@ -313,14 +308,14 @@ class _$ClientEventMaterialStateImpl extends _ClientEventMaterialState {
 
   @override
   String toString() {
-    return 'ClientEventMaterialState(fromPos: $fromPos, destPos: $destPos)';
+    return 'ClientOnlyState(fromPos: $fromPos, destPos: $destPos)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ClientEventMaterialStateImpl &&
+            other is _$ClientOnlyStateImpl &&
             (identical(other.fromPos, fromPos) || other.fromPos == fromPos) &&
             (identical(other.destPos, destPos) || other.destPos == destPos));
   }
@@ -328,33 +323,33 @@ class _$ClientEventMaterialStateImpl extends _ClientEventMaterialState {
   @override
   int get hashCode => Object.hash(runtimeType, fromPos, destPos);
 
-  /// Create a copy of ClientEventMaterialState
+  /// Create a copy of ClientOnlyState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ClientEventMaterialStateImplCopyWith<_$ClientEventMaterialStateImpl>
-      get copyWith => __$$ClientEventMaterialStateImplCopyWithImpl<
-          _$ClientEventMaterialStateImpl>(this, _$identity);
+  _$$ClientOnlyStateImplCopyWith<_$ClientOnlyStateImpl> get copyWith =>
+      __$$ClientOnlyStateImplCopyWithImpl<_$ClientOnlyStateImpl>(
+          this, _$identity);
 }
 
-abstract class _ClientEventMaterialState extends ClientEventMaterialState {
-  const factory _ClientEventMaterialState(
+abstract class _ClientOnlyState extends ClientOnlyState {
+  const factory _ClientOnlyState(
       {final $core.Pos? fromPos,
-      final $core.Pos? destPos}) = _$ClientEventMaterialStateImpl;
-  const _ClientEventMaterialState._() : super._();
+      final $core.Pos? destPos}) = _$ClientOnlyStateImpl;
+  const _ClientOnlyState._() : super._();
 
   @override
   $core.Pos? get fromPos;
   @override
   $core.Pos? get destPos;
 
-  /// Create a copy of ClientEventMaterialState
+  /// Create a copy of ClientOnlyState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ClientEventMaterialStateImplCopyWith<_$ClientEventMaterialStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$ClientOnlyStateImplCopyWith<_$ClientOnlyStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -501,5 +496,224 @@ abstract class _AiOnlyPredictState extends AiOnlyPredictState {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AiOnlyPredictStateImplCopyWith<_$AiOnlyPredictStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$State {
+  PredictSourceState get predictSource => throw _privateConstructorUsedError;
+  ClientOnlyState get clientOnlyState => throw _privateConstructorUsedError;
+  AiOnlyPredictState get aiOnlyPredict => throw _privateConstructorUsedError;
+
+  /// Create a copy of State
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $StateCopyWith<State> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $StateCopyWith<$Res> {
+  factory $StateCopyWith(State value, $Res Function(State) then) =
+      _$StateCopyWithImpl<$Res, State>;
+  @useResult
+  $Res call(
+      {PredictSourceState predictSource,
+      ClientOnlyState clientOnlyState,
+      AiOnlyPredictState aiOnlyPredict});
+
+  $PredictSourceStateCopyWith<$Res> get predictSource;
+  $ClientOnlyStateCopyWith<$Res> get clientOnlyState;
+  $AiOnlyPredictStateCopyWith<$Res> get aiOnlyPredict;
+}
+
+/// @nodoc
+class _$StateCopyWithImpl<$Res, $Val extends State>
+    implements $StateCopyWith<$Res> {
+  _$StateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of State
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? predictSource = null,
+    Object? clientOnlyState = null,
+    Object? aiOnlyPredict = null,
+  }) {
+    return _then(_value.copyWith(
+      predictSource: null == predictSource
+          ? _value.predictSource
+          : predictSource // ignore: cast_nullable_to_non_nullable
+              as PredictSourceState,
+      clientOnlyState: null == clientOnlyState
+          ? _value.clientOnlyState
+          : clientOnlyState // ignore: cast_nullable_to_non_nullable
+              as ClientOnlyState,
+      aiOnlyPredict: null == aiOnlyPredict
+          ? _value.aiOnlyPredict
+          : aiOnlyPredict // ignore: cast_nullable_to_non_nullable
+              as AiOnlyPredictState,
+    ) as $Val);
+  }
+
+  /// Create a copy of State
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PredictSourceStateCopyWith<$Res> get predictSource {
+    return $PredictSourceStateCopyWith<$Res>(_value.predictSource, (value) {
+      return _then(_value.copyWith(predictSource: value) as $Val);
+    });
+  }
+
+  /// Create a copy of State
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ClientOnlyStateCopyWith<$Res> get clientOnlyState {
+    return $ClientOnlyStateCopyWith<$Res>(_value.clientOnlyState, (value) {
+      return _then(_value.copyWith(clientOnlyState: value) as $Val);
+    });
+  }
+
+  /// Create a copy of State
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AiOnlyPredictStateCopyWith<$Res> get aiOnlyPredict {
+    return $AiOnlyPredictStateCopyWith<$Res>(_value.aiOnlyPredict, (value) {
+      return _then(_value.copyWith(aiOnlyPredict: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$StateImplCopyWith<$Res> implements $StateCopyWith<$Res> {
+  factory _$$StateImplCopyWith(
+          _$StateImpl value, $Res Function(_$StateImpl) then) =
+      __$$StateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {PredictSourceState predictSource,
+      ClientOnlyState clientOnlyState,
+      AiOnlyPredictState aiOnlyPredict});
+
+  @override
+  $PredictSourceStateCopyWith<$Res> get predictSource;
+  @override
+  $ClientOnlyStateCopyWith<$Res> get clientOnlyState;
+  @override
+  $AiOnlyPredictStateCopyWith<$Res> get aiOnlyPredict;
+}
+
+/// @nodoc
+class __$$StateImplCopyWithImpl<$Res>
+    extends _$StateCopyWithImpl<$Res, _$StateImpl>
+    implements _$$StateImplCopyWith<$Res> {
+  __$$StateImplCopyWithImpl(
+      _$StateImpl _value, $Res Function(_$StateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of State
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? predictSource = null,
+    Object? clientOnlyState = null,
+    Object? aiOnlyPredict = null,
+  }) {
+    return _then(_$StateImpl(
+      predictSource: null == predictSource
+          ? _value.predictSource
+          : predictSource // ignore: cast_nullable_to_non_nullable
+              as PredictSourceState,
+      clientOnlyState: null == clientOnlyState
+          ? _value.clientOnlyState
+          : clientOnlyState // ignore: cast_nullable_to_non_nullable
+              as ClientOnlyState,
+      aiOnlyPredict: null == aiOnlyPredict
+          ? _value.aiOnlyPredict
+          : aiOnlyPredict // ignore: cast_nullable_to_non_nullable
+              as AiOnlyPredictState,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$StateImpl extends _State {
+  const _$StateImpl(
+      {this.predictSource = const PredictSourceState(),
+      this.clientOnlyState = const ClientOnlyState(),
+      this.aiOnlyPredict = const AiOnlyPredictState()})
+      : super._();
+
+  @override
+  @JsonKey()
+  final PredictSourceState predictSource;
+  @override
+  @JsonKey()
+  final ClientOnlyState clientOnlyState;
+  @override
+  @JsonKey()
+  final AiOnlyPredictState aiOnlyPredict;
+
+  @override
+  String toString() {
+    return 'State(predictSource: $predictSource, clientOnlyState: $clientOnlyState, aiOnlyPredict: $aiOnlyPredict)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StateImpl &&
+            (identical(other.predictSource, predictSource) ||
+                other.predictSource == predictSource) &&
+            (identical(other.clientOnlyState, clientOnlyState) ||
+                other.clientOnlyState == clientOnlyState) &&
+            (identical(other.aiOnlyPredict, aiOnlyPredict) ||
+                other.aiOnlyPredict == aiOnlyPredict));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, predictSource, clientOnlyState, aiOnlyPredict);
+
+  /// Create a copy of State
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StateImplCopyWith<_$StateImpl> get copyWith =>
+      __$$StateImplCopyWithImpl<_$StateImpl>(this, _$identity);
+}
+
+abstract class _State extends State {
+  const factory _State(
+      {final PredictSourceState predictSource,
+      final ClientOnlyState clientOnlyState,
+      final AiOnlyPredictState aiOnlyPredict}) = _$StateImpl;
+  const _State._() : super._();
+
+  @override
+  PredictSourceState get predictSource;
+  @override
+  ClientOnlyState get clientOnlyState;
+  @override
+  AiOnlyPredictState get aiOnlyPredict;
+
+  /// Create a copy of State
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$StateImplCopyWith<_$StateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
