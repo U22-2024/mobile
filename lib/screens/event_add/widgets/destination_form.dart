@@ -32,9 +32,12 @@ class DestinationForm extends HookConsumerWidget {
           enabled:
               !isDisable && snapshot.connectionState != ConnectionState.waiting,
           controller: textController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             labelText: 'どこに行く？',
             hintText: '例: 近くのレストラン、○○駅',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {

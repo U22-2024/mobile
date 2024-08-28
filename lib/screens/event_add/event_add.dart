@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/event_material/event_material_repository.dart';
 import 'package:mobile/screens/event_add/widgets/destination_form.dart';
+import 'package:mobile/screens/event_add/widgets/move_type_form.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 Future<T?> showEventAddModal<T>(BuildContext context) {
@@ -72,6 +73,8 @@ class EventAddModal extends HookConsumerWidget {
           if (isFirstPredicted.value) ...[
             const SizedBox(height: 16),
             const DestinationForm(),
+            const SizedBox(height: 16),
+            const MoveTypeForm(),
           ],
           const SizedBox(height: 16),
           Align(

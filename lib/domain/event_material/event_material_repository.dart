@@ -174,6 +174,14 @@ class EventMaterialRepository extends _$EventMaterialRepository {
       ),
     );
   }
+
+  void setMoveType($core.MoveType moveType) {
+    state = state.copyWith(
+      predictSource: state.predictSource.copyWith(
+        moveType: moveType,
+      ),
+    );
+  }
 }
 
 @riverpod
