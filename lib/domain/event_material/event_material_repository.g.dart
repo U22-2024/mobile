@@ -22,7 +22,7 @@ final _clientProvider =
 
 typedef _ClientRef = AutoDisposeProviderRef<EventMaterialServiceClient>;
 String _$predictPlacesByTextHash() =>
-    r'c0bf32e0f536073387a7d62086a088d19f92ee8c';
+    r'f469fb41d79ca648f7213c2d9e7be5d15de2b58a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -232,7 +232,7 @@ final predictSourceProvider =
 
 typedef _$PredictSource = AutoDisposeNotifier<PredictSourceState>;
 String _$clientEventMaterialHash() =>
-    r'550175ba6497ba34cf8c8f0ce7e0bc99a301b256';
+    r'cdbab39d86b3f0355dd210d1b9b72728c59762ab';
 
 /// See also [ClientEventMaterial].
 @ProviderFor(ClientEventMaterial)

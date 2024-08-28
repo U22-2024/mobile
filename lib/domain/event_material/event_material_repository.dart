@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
 import 'package:mobile/domain/event_material/event_material_model.dart';
-import 'package:mobile/domain/geo_locate/geo_locate_repository.dart';
 import 'package:mobile/domain/grpc/auth_interceptor.dart';
 import 'package:mobile/domain/grpc/converter.dart';
 import 'package:mobile/domain/grpc/grpc.dart';
@@ -100,13 +100,22 @@ class ClientEventMaterial extends _$ClientEventMaterial {
 
   set destPos($core.Pos destPos) => state = state.copyWith(destPos: destPos);
 
-  Future<void> updateCurrentPos() async {
-    final geo = await ref.read(geoLocateRepositoryProvider.future);
-    if (geo.position == null) {
-      throw Exception('位置情報が取得できませんでした');
+  Future<Position> updateCurrentPos() async {
+    if (!(await Geolocator.isLocationServiceEnabled())) {
+      throw Exception('位置情報サービスが有効ではありません');
+    }
+    final permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      await Geolocator.requestPermission();
+      final newPermission = await Geolocator.checkPermission();
+      if (newPermission == LocationPermission.denied) {
+        throw Exception('位置情報の許可が得られませんでした');
+      }
     }
 
-    state = state.copyWith(fromPos: geo.position!.toGrpcPos());
+    final pos = await Geolocator.getCurrentPosition();
+    state = state.copyWith(fromPos: pos.toGrpcPos());
+    return pos;
   }
 }
 //#endregion
@@ -186,17 +195,17 @@ Future<List<Place>> predictPlacesByText(
     PredictPlacesByTextRef ref, String placeText) async {
   final client = ref.read(_clientProvider);
   final user = await ref.read(authStateChangeProvider.future);
-  final clientData = ref.read(clientEventMaterialProvider);
 
   // 現在地情報を更新
-  await ref.read(clientEventMaterialProvider.notifier).updateCurrentPos();
+  final currentPos =
+      await ref.read(clientEventMaterialProvider.notifier).updateCurrentPos();
 
   final res = await client.predictPositionsFromText(
     PredictPositionsFromTextRequest(
       text: placeText,
-      fromPos: clientData.fromPos,
+      fromPos: currentPos.toGrpcPos(),
       uid: Uid(value: user?.uid),
     ),
   );
-  return res.place;
+  return res.place.toSet().toList();
 }

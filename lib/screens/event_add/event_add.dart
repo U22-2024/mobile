@@ -38,6 +38,11 @@ class EventAddModal extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // BAD: 時間がないから全部読んでる
+    ref.watch(clientEventMaterialProvider);
+    ref.watch(aiOnlyPredictProvider);
+    ref.watch(predictSourceProvider);
+
     final eventMaterial = ref.watch(eventMaterialRepositoryProvider);
     final textController = useTextEditingController();
     final isFirstPredicted = useState(false);
@@ -57,6 +62,7 @@ class EventAddModal extends HookConsumerWidget {
               hintText: '例: 夏服を買いに行く、友達とお昼ご飯を食べる',
             ),
             maxLines: null,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.multiline,
             validator: (value) {
               if (value?.isEmpty ?? true) {
@@ -75,7 +81,7 @@ class EventAddModal extends HookConsumerWidget {
             alignment: Alignment.centerRight,
             child: ElevatedButton(
               onPressed: () async {
-                if (!_formKey.currentState!.validate()) return;
+                if (!(_formKey.currentState?.validate() ?? false)) return;
                 _formKey.currentState?.save();
                 final future = ref
                     .read(eventMaterialRepositoryProvider.notifier)

@@ -1,9 +1,9 @@
-import 'dart:developer';
-
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/event_material/event_material_repository.dart';
+import 'package:mobile/proto/event/v1/event_material.pb.dart';
 
 class DestinationForm extends HookConsumerWidget {
   const DestinationForm({super.key});
@@ -11,36 +11,119 @@ class DestinationForm extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final predictSource = ref.watch(predictSourceProvider);
-    log(predictSource.toString(), name: 'DestinationForm');
-    if (predictSource.destination?.isNotEmpty ?? false) return const SizedBox();
+    final clientData = ref.watch(clientEventMaterialProvider);
+    if ((predictSource.destination?.isNotEmpty ?? false) &&
+        clientData.destPos != null) return const SizedBox();
 
-    final textController = useTextEditingController();
+    final textController =
+        useTextEditingController(text: predictSource.destination);
+    final places = useState<List<Place>>([]);
+    final pendingPlacesReq = useState<Future<void>?>(null);
+    final snapshot = useFuture(pendingPlacesReq.value);
+    final mediaQuery = MediaQuery.of(context);
+    final lastSearched = useState<String?>(null);
 
     return Column(
       children: [
         TextFormField(
+          enabled: snapshot.connectionState != ConnectionState.waiting,
           controller: textController,
           decoration: const InputDecoration(
             labelText: 'どこに行く？',
-            hintText: '例: 〇〇駅、〇〇公園',
+            hintText: '例: 近くのレストラン、○○駅',
           ),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return '候補選択中...';
+            }
+            if (places.value.isEmpty) {
+              return '行先の候補を選択して';
+            }
             if (value?.isEmpty ?? true) {
               return '行き先は分かりやすく入力しなさい！';
             }
             return null;
           },
-          onSaved: (value) {
-            if (value == null) return;
-            ref.read(predictSourceProvider.notifier).destination = value;
-          },
-          onEditingComplete: () {
-            // if (textController.text.isNotEmpty) {
-            //   ref.read(predictSourceProvider.notifier).destination = textController.text;
-            // }
-          },
         ),
         const SizedBox(height: 16),
+        if (places.value.isEmpty ||
+            lastSearched.value != textController.text) ...[
+          ElevatedButton(
+            onPressed: snapshot.connectionState == ConnectionState.waiting
+                ? null
+                : () async {
+                    if (textController.text.isEmpty) return;
+                    final future = ref.read(predictPlacesByTextProvider
+                        .call(textController.text)
+                        .future);
+                    pendingPlacesReq.value = future;
+                    places.value = await future;
+                    lastSearched.value = textController.text;
+                  },
+            child: snapshot.connectionState == ConnectionState.waiting
+                ? const CircularProgressIndicator()
+                : const Text("候補を検索"),
+          ),
+          const SizedBox(height: 16)
+        ],
+        if (places.value.isNotEmpty &&
+            snapshot.connectionState != ConnectionState.waiting)
+          DropdownButtonFormField2(
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 16),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
+            hint: const Text('候補から行き先を選択'),
+            items: places.value
+                .map(
+                  (place) => DropdownMenuItem(
+                    value: place,
+                    child: SizedBox(
+                      width: mediaQuery.size.width - 96,
+                      child: Text(
+                        "${place.name} | ${place.address}",
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            onChanged: (value) {
+              if (value == null) return;
+              ref.read(predictSourceProvider.notifier).destination = value.name;
+              ref.read(clientEventMaterialProvider.notifier).destPos =
+                  value.pos;
+            },
+            validator: (value) {
+              if (value == null) {
+                return '行き先を選択しなさい！';
+              }
+              return null;
+            },
+            dropdownStyleData: DropdownStyleData(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
+            menuItemStyleData: const MenuItemStyleData(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              height: 80,
+            ),
+            buttonStyleData: const ButtonStyleData(
+              padding: EdgeInsets.only(right: 8),
+            ),
+            iconStyleData: const IconStyleData(
+              icon: Icon(
+                Icons.arrow_drop_down,
+                color: Colors.black45,
+              ),
+              iconSize: 24,
+            ),
+          ),
       ],
     );
   }
