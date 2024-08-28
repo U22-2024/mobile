@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/event_material/event_material_repository.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -27,13 +28,15 @@ Future<T?> showEventAddModal<T>(BuildContext context) {
   );
 }
 
-class EventAddModal extends ConsumerWidget {
+class EventAddModal extends HookConsumerWidget {
   const EventAddModal({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final eventMaterial = ref.watch(eventMaterialRepositoryProvider);
-    final textController = TextEditingController();
+    final textController = useTextEditingController();
+    final pendingRequest = useState<Future<void>?>(null);
+    final snapshot = useFuture(pendingRequest.value);
 
     return Column(
       // mainAxisSize: MainAxisSize.min,
@@ -48,17 +51,19 @@ class EventAddModal extends ConsumerWidget {
           maxLines: null,
           keyboardType: TextInputType.multiline,
         ),
-        Text(eventMaterial?.systemText ?? ""),
+        Text(eventMaterial.toString()),
         const SizedBox(height: 16),
         Align(
           alignment: Alignment.centerRight,
           child: ElevatedButton(
             onPressed: () {
-              ref
+              pendingRequest.value = ref
                   .read(eventMaterialRepositoryProvider.notifier)
-                  .request(textController.text);
+                  .predict(textController.text);
             },
-            child: const Text('保存'),
+            child: snapshot.connectionState == ConnectionState.waiting
+                ? const CircularProgressIndicator()
+                : const Text('保存'),
           ),
         ),
       ],

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
+import 'package:mobile/domain/event_material/event_material_model.dart';
 import 'package:mobile/domain/grpc/auth_interceptor.dart';
 import 'package:mobile/domain/grpc/converter.dart';
 import 'package:mobile/domain/grpc/grpc.dart';
@@ -11,108 +12,163 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'event_material_repository.freezed.dart';
 part 'event_material_repository.g.dart';
 
+@riverpod
+EventMaterialServiceClient _client(_ClientRef ref) {
+  final channel = ref.watch(grpcChannelProvider);
+  return EventMaterialServiceClient(channel, interceptors: [AuthInterceptor()]);
+}
+
+//#region PredictSource
 @freezed
-class State with _$State {
-  const State._();
+class PredictSourceState with _$PredictSourceState {
+  const PredictSourceState._();
+  const factory PredictSourceState({
+    String? destination,
+    $core.MoveType? moveType,
+    $core.DateTime? startAt,
+    $core.DateTime? endAt,
+  }) = _PredictSourceState;
 
-  const factory State({
-    required String systemText,
-    required bool? isOut,
-    required String? remind,
-    required $core.Pos? fromPos,
-    required String? destination,
-    required $core.Pos? destinationPos,
-    required $core.MoveType? moveType,
-    required String? option,
-    required DateTime? start,
-    required DateTime? end,
-  }) = _State;
-
-  factory State.fromEventMaterial(EventMaterial eventMaterial) {
-    return State(
-      systemText: generateSystemText(eventMaterial),
-      isOut: eventMaterial.isOut,
-      remind: eventMaterial.remind,
-      fromPos: eventMaterial.fromPos,
-      destination: eventMaterial.destination,
-      destinationPos: eventMaterial.destinationPos,
-      moveType: eventMaterial.moveType,
-      option: eventMaterial.option,
-      start: eventMaterial.startTime.toDateTime(),
-      end: eventMaterial.endTime.toDateTime(),
-    );
+  @override
+  String toString() {
+    final buffer = StringBuffer();
+    buffer.write('\n<additional_info>');
+    if (destination?.isNotEmpty ?? false) {
+      buffer.write('<destination>$destination</destination>');
+    }
+    if (moveType != null) {
+      buffer.write('<move_type>${moveType!.name}</move_type>');
+    }
+    if (startAt != null) {
+      buffer.write('<start_at>${startAt!.toDateTime()}</start_at>');
+    }
+    if (endAt != null) {
+      buffer.write('<end_at>${endAt!.toDateTime()}</end_at>');
+    }
+    buffer.write('</additional_info>');
+    return buffer.toString();
   }
 
-  static String generateSystemText(EventMaterial mat) {
-    final args = [];
-
-    if (mat.hasIsOut()) {
-      args.add(mat.isOut ? '外出' : '帰宅');
-    }
-    if (mat.hasRemind() && mat.remind.isNotEmpty) {
-      args.add("リマインド: ${mat.remind}");
-    }
-    if (mat.hasDestination() && mat.destination.isNotEmpty) {
-      args.add("目的地: ${mat.destination}");
-    }
-    if (mat.hasMoveType() &&
-        mat.moveType != $core.MoveType.MOVE_TYPE_UNSPECIFIED &&
-        mat.moveType != $core.MoveType.MOVE_TYPE_OTHER) {
-      args.add("移動手段: ${mat.moveType}");
-    }
-    if (mat.hasOption() && mat.option.isNotEmpty) {
-      args.add("移動オプション： ${mat.option}");
-    }
-    if (mat.hasStartTime() && mat.startTime.toDateTime() != null) {
-      args.add("開始時間: ${mat.startTime.toDateTime()}");
-    }
-    if (mat.hasEndTime() && mat.endTime.toDateTime() != null) {
-      args.add("終了時間: ${mat.endTime.toDateTime()}");
-    }
-
-    return args.join('、');
-  }
-
-  EventMaterial toEventMaterial() {
-    return EventMaterial(
-      isOut: isOut,
-      remind: remind,
-      fromPos: fromPos,
-      destination: destination,
-      destinationPos: destinationPos,
-      moveType: moveType,
-      option: option,
-      startTime: start?.toGrpcDateTime(),
-      endTime: end?.toGrpcDateTime(),
-    );
-  }
+  get isFilled =>
+      destination != null &&
+      moveType != null &&
+      startAt != null &&
+      endAt != null;
 }
 
 @riverpod
-EventMaterialServiceClient eventMaterialServiceClient(
-  EventMaterialServiceClientRef ref,
-) {
-  final channel = ref.read(grpcChannelProvider);
-  return EventMaterialServiceClient(channel, interceptors: [AuthInterceptor()]);
+class PredictSource extends _$PredictSource {
+  @override
+  PredictSourceState build() => const PredictSourceState();
+
+  set destination(String destination) =>
+      state = state.copyWith(destination: destination);
+  set moveType($core.MoveType moveType) =>
+      state = state.copyWith(moveType: moveType);
+  set startAt(DateTime startAt) =>
+      state = state.copyWith(startAt: startAt.toGrpcDateTime());
+  set endAt(DateTime endAt) =>
+      state = state.copyWith(endAt: endAt.toGrpcDateTime());
+  set fromEventMaterial(EventMaterial eventMaterial) {
+    state = PredictSourceState(
+      destination: eventMaterial.destination,
+      moveType: eventMaterial.moveType,
+      startAt: eventMaterial.startTime,
+      endAt: eventMaterial.endTime,
+    );
+  }
 }
+//#endregion
+
+//#region Client EventMaterial Data
+@freezed
+class ClientEventMaterialState with _$ClientEventMaterialState {
+  const ClientEventMaterialState._();
+  const factory ClientEventMaterialState({
+    $core.Pos? fromPos,
+    $core.Pos? destPos,
+  }) = _ClientEventMaterialState;
+
+  get isFilled => fromPos != null && destPos != null;
+}
+
+@riverpod
+class ClientEventMaterial extends _$ClientEventMaterial {
+  @override
+  ClientEventMaterialState build() => const ClientEventMaterialState();
+
+  set fromPos($core.Pos fromPos) => state = state.copyWith(fromPos: fromPos);
+  set destPos($core.Pos destPos) => state = state.copyWith(destPos: destPos);
+}
+//#endregion
+
+//#region AI Only Predict Data
+@freezed
+class AiOnlyPredictState with _$AiOnlyPredictState {
+  const AiOnlyPredictState._();
+  const factory AiOnlyPredictState({
+    bool? isOut,
+    String? remind,
+  }) = _AiOnlyPredictState;
+
+  get isFilled => isOut != null && remind != null;
+}
+
+@riverpod
+class AiOnlyPredict extends _$AiOnlyPredict {
+  @override
+  AiOnlyPredictState build() => const AiOnlyPredictState();
+
+  set isOut(bool isOut) => state = state.copyWith(isOut: isOut);
+  set remind(String remind) => state = state.copyWith(remind: remind);
+  set fromEventMaterial(EventMaterial eventMaterial) {
+    state = AiOnlyPredictState(
+      isOut: eventMaterial.isOut,
+      remind: eventMaterial.remind,
+    );
+  }
+}
+//#endregion
 
 @riverpod
 class EventMaterialRepository extends _$EventMaterialRepository {
   @override
-  State? build() => null;
+  EventMaterialModel build() {
+    final source = ref.read(predictSourceProvider);
+    final clientOnly = ref.read(clientEventMaterialProvider);
+    final aiOnly = ref.read(aiOnlyPredictProvider);
 
-  Future<void> request(String text) async {
-    final client = ref.read(eventMaterialServiceClientProvider);
+    return EventMaterialModel.fromSource(
+      source: source,
+      clientOnly: clientOnly,
+      aiOnly: aiOnly,
+    );
+  }
+
+  Future<bool> predict(String userText) async {
+    if (state.isFilled) {
+      return true;
+    }
+
+    final client = ref.read(_clientProvider);
+    final predictSource = ref.read(predictSourceProvider);
     final user = await ref.read(authStateChangeProvider.future);
 
     final res = await client.predictEventMaterialItem(
       PredictEventMaterialItemRequest(
-        text: state?.systemText ?? text,
-        eventMaterial: state?.toEventMaterial(),
+        text: userText + predictSource.toString(),
+        eventMaterial: build().grpcEventMaterial,
         uid: Uid(value: user?.uid),
       ),
     );
 
-    state = State.fromEventMaterial(res.eventMaterial);
+    // レスポンスをもとにして更新
+    ref.read(predictSourceProvider.notifier).fromEventMaterial =
+        res.eventMaterial;
+    ref.read(aiOnlyPredictProvider.notifier).fromEventMaterial =
+        res.eventMaterial;
+    state = EventMaterialModel.fromGrpc(res.eventMaterial);
+
+    return false;
   }
 }

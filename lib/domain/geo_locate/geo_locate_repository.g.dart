@@ -7,7 +7,7 @@ part of 'geo_locate_repository.dart';
 // **************************************************************************
 
 String _$geoLocateRepositoryHash() =>
-    r'a1472d13c2ef2478175d8e085d5c77bc5bfa4352';
+    r'003f4731c5bf93d124450c726800009ce356659c';
 
 /// See also [GeoLocateRepository].
 @ProviderFor(GeoLocateRepository)

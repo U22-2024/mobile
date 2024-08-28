@@ -21,6 +21,10 @@ class GeoLocateRepository extends _$GeoLocateRepository {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     final permission = await Geolocator.checkPermission();
 
+    if (serviceEnabled && permission == LocationPermission.denied) {
+      await Geolocator.requestPermission();
+    }
+
     final position =
         serviceEnabled && permission == LocationPermission.whileInUse ||
                 permission == LocationPermission.always
