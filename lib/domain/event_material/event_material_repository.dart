@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
 import 'package:mobile/domain/event_material/event_material_model.dart';
+import 'package:mobile/domain/geo_locate/geo_locate_repository.dart';
 import 'package:mobile/domain/grpc/auth_interceptor.dart';
 import 'package:mobile/domain/grpc/converter.dart';
 import 'package:mobile/domain/grpc/grpc.dart';
@@ -50,7 +51,7 @@ class PredictSourceState with _$PredictSourceState {
   }
 
   get isFilled =>
-      destination != null &&
+      (destination?.isNotEmpty ?? false) &&
       moveType != null &&
       startAt != null &&
       endAt != null;
@@ -97,8 +98,16 @@ class ClientEventMaterial extends _$ClientEventMaterial {
   @override
   ClientEventMaterialState build() => const ClientEventMaterialState();
 
-  set fromPos($core.Pos fromPos) => state = state.copyWith(fromPos: fromPos);
   set destPos($core.Pos destPos) => state = state.copyWith(destPos: destPos);
+
+  Future<void> updateCurrentPos() async {
+    final geo = await ref.read(geoLocateRepositoryProvider.future);
+    if (geo.position == null) {
+      throw Exception('位置情報が取得できませんでした');
+    }
+
+    state = state.copyWith(fromPos: geo.position!.toGrpcPos());
+  }
 }
 //#endregion
 
@@ -111,7 +120,7 @@ class AiOnlyPredictState with _$AiOnlyPredictState {
     String? remind,
   }) = _AiOnlyPredictState;
 
-  get isFilled => isOut != null && remind != null;
+  get isFilled => isOut != null && (remind?.isNotEmpty ?? false);
 }
 
 @riverpod
@@ -146,9 +155,7 @@ class EventMaterialRepository extends _$EventMaterialRepository {
   }
 
   Future<bool> predict(String userText) async {
-    if (state.isFilled) {
-      return true;
-    }
+    if (state.isFilled) return true;
 
     final client = ref.read(_clientProvider);
     final predictSource = ref.read(predictSourceProvider);
@@ -169,6 +176,27 @@ class EventMaterialRepository extends _$EventMaterialRepository {
         res.eventMaterial;
     state = EventMaterialModel.fromGrpc(res.eventMaterial);
 
+    if (state.isFilled) return true;
     return false;
   }
+}
+
+@riverpod
+Future<List<Place>> predictPlacesByText(
+    PredictPlacesByTextRef ref, String placeText) async {
+  final client = ref.read(_clientProvider);
+  final user = await ref.read(authStateChangeProvider.future);
+  final clientData = ref.read(clientEventMaterialProvider);
+
+  // 現在地情報を更新
+  await ref.read(clientEventMaterialProvider.notifier).updateCurrentPos();
+
+  final res = await client.predictPositionsFromText(
+    PredictPositionsFromTextRequest(
+      text: placeText,
+      fromPos: clientData.fromPos,
+      uid: Uid(value: user?.uid),
+    ),
+  );
+  return res.place;
 }

@@ -50,9 +50,9 @@ class EventMaterialModel with _$EventMaterialModel {
 
   get isFilled =>
       isOut != null &&
-      remind != null &&
+      (remind?.isNotEmpty ?? false) &&
       fromPos != null &&
-      destination != null &&
+      (destination?.isNotEmpty ?? false) &&
       destPos != null &&
       moveType != null &&
       startAt != null &&

@@ -21,6 +21,200 @@ final _clientProvider =
 );
 
 typedef _ClientRef = AutoDisposeProviderRef<EventMaterialServiceClient>;
+String _$predictPlacesByTextHash() =>
+    r'c0bf32e0f536073387a7d62086a088d19f92ee8c';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+/// See also [predictPlacesByText].
+@ProviderFor(predictPlacesByText)
+const predictPlacesByTextProvider = PredictPlacesByTextFamily();
+
+/// See also [predictPlacesByText].
+class PredictPlacesByTextFamily extends Family {
+  /// See also [predictPlacesByText].
+  const PredictPlacesByTextFamily();
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'predictPlacesByTextProvider';
+
+  /// See also [predictPlacesByText].
+  PredictPlacesByTextProvider call(
+    String placeText,
+  ) {
+    return PredictPlacesByTextProvider(
+      placeText,
+    );
+  }
+
+  @visibleForOverriding
+  @override
+  PredictPlacesByTextProvider getProviderOverride(
+    covariant PredictPlacesByTextProvider provider,
+  ) {
+    return call(
+      provider.placeText,
+    );
+  }
+
+  /// Enables overriding the behavior of this provider, no matter the parameters.
+  Override overrideWith(
+      FutureOr<List<Place>> Function(PredictPlacesByTextRef ref) create) {
+    return _$PredictPlacesByTextFamilyOverride(this, create);
+  }
+}
+
+class _$PredictPlacesByTextFamilyOverride implements FamilyOverride {
+  _$PredictPlacesByTextFamilyOverride(this.overriddenFamily, this.create);
+
+  final FutureOr<List<Place>> Function(PredictPlacesByTextRef ref) create;
+
+  @override
+  final PredictPlacesByTextFamily overriddenFamily;
+
+  @override
+  PredictPlacesByTextProvider getProviderOverride(
+    covariant PredictPlacesByTextProvider provider,
+  ) {
+    return provider._copyWith(create);
+  }
+}
+
+/// See also [predictPlacesByText].
+class PredictPlacesByTextProvider
+    extends AutoDisposeFutureProvider<List<Place>> {
+  /// See also [predictPlacesByText].
+  PredictPlacesByTextProvider(
+    String placeText,
+  ) : this._internal(
+          (ref) => predictPlacesByText(
+            ref as PredictPlacesByTextRef,
+            placeText,
+          ),
+          from: predictPlacesByTextProvider,
+          name: r'predictPlacesByTextProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$predictPlacesByTextHash,
+          dependencies: PredictPlacesByTextFamily._dependencies,
+          allTransitiveDependencies:
+              PredictPlacesByTextFamily._allTransitiveDependencies,
+          placeText: placeText,
+        );
+
+  PredictPlacesByTextProvider._internal(
+    super.create, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.placeText,
+  }) : super.internal();
+
+  final String placeText;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<Place>> Function(PredictPlacesByTextRef ref) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: PredictPlacesByTextProvider._internal(
+        (ref) => create(ref as PredictPlacesByTextRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        placeText: placeText,
+      ),
+    );
+  }
+
+  @override
+  (String,) get argument {
+    return (placeText,);
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<Place>> createElement() {
+    return _PredictPlacesByTextProviderElement(this);
+  }
+
+  PredictPlacesByTextProvider _copyWith(
+    FutureOr<List<Place>> Function(PredictPlacesByTextRef ref) create,
+  ) {
+    return PredictPlacesByTextProvider._internal(
+      (ref) => create(ref as PredictPlacesByTextRef),
+      name: name,
+      dependencies: dependencies,
+      allTransitiveDependencies: allTransitiveDependencies,
+      debugGetCreateSourceHash: debugGetCreateSourceHash,
+      from: from,
+      placeText: placeText,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is PredictPlacesByTextProvider && other.placeText == placeText;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, placeText.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin PredictPlacesByTextRef on AutoDisposeFutureProviderRef<List<Place>> {
+  /// The parameter `placeText` of this provider.
+  String get placeText;
+}
+
+class _PredictPlacesByTextProviderElement
+    extends AutoDisposeFutureProviderElement<List<Place>>
+    with PredictPlacesByTextRef {
+  _PredictPlacesByTextProviderElement(super.provider);
+
+  @override
+  String get placeText => (origin as PredictPlacesByTextProvider).placeText;
+}
+
 String _$predictSourceHash() => r'68ab7391102c8e868f4546ecba24a4fc1104e136';
 
 /// See also [PredictSource].
@@ -38,7 +232,7 @@ final predictSourceProvider =
 
 typedef _$PredictSource = AutoDisposeNotifier<PredictSourceState>;
 String _$clientEventMaterialHash() =>
-    r'31488b34c859c9be57e70bb47482b039b335fc65';
+    r'550175ba6497ba34cf8c8f0ce7e0bc99a301b256';
 
 /// See also [ClientEventMaterial].
 @ProviderFor(ClientEventMaterial)
@@ -71,7 +265,7 @@ final aiOnlyPredictProvider =
 
 typedef _$AiOnlyPredict = AutoDisposeNotifier<AiOnlyPredictState>;
 String _$eventMaterialRepositoryHash() =>
-    r'2f15161346ccd4860614ce719081e78aedf8c0e2';
+    r'bb43d3f9c24b60da16c7ffd64e1f3b62e488ad97';
 
 /// See also [EventMaterialRepository].
 @ProviderFor(EventMaterialRepository)
