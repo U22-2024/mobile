@@ -11,9 +11,9 @@ class MoveTypeForm extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final eventMaterial = ref.watch(eventMaterialRepositoryProvider);
     final moveType = eventMaterial.predictSource.moveType;
-    if (moveType != null && moveType != MoveType.MOVE_TYPE_UNSPECIFIED) {
-      return const SizedBox();
-    }
+    // if (moveType != null && moveType != MoveType.MOVE_TYPE_UNSPECIFIED) {
+    //   return const SizedBox();
+    // }
 
     return DropdownButtonFormField2(
       decoration: InputDecoration(
@@ -23,6 +23,9 @@ class MoveTypeForm extends HookConsumerWidget {
           borderRadius: BorderRadius.circular(15),
         ),
       ),
+      value: moveType != null && moveType != MoveType.MOVE_TYPE_UNSPECIFIED
+          ? moveType
+          : null,
       items: const [
         DropdownMenuItem(value: MoveType.MOVE_TYPE_WALK, child: Text('徒歩')),
         DropdownMenuItem(value: MoveType.MOVE_TYPE_CAR, child: Text('車')),

@@ -215,12 +215,12 @@ class _PredictPlacesByTextProviderElement
   String get placeText => (origin as PredictPlacesByTextProvider).placeText;
 }
 
-String _$predictTimeTableHash() => r'5e7522d8774adae812d5c926994f77371fd1eae3';
+String _$predictTimeTableHash() => r'37665b9724bf06efbd9cbbc752c5476995b219ff';
 
 /// See also [predictTimeTable].
 @ProviderFor(predictTimeTable)
 final predictTimeTableProvider =
-    AutoDisposeFutureProvider<List<TimeTableModel>>.internal(
+    AutoDisposeFutureProvider<List<TimeTable>>.internal(
   predictTimeTable,
   name: r'predictTimeTableProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -230,8 +230,7 @@ final predictTimeTableProvider =
   allTransitiveDependencies: null,
 );
 
-typedef PredictTimeTableRef
-    = AutoDisposeFutureProviderRef<List<TimeTableModel>>;
+typedef PredictTimeTableRef = AutoDisposeFutureProviderRef<List<TimeTable>>;
 String _$predictEventItemsHash() => r'9be58a8bc02961928e41ef85b1ef795c13933bd5';
 
 /// See also [predictEventItems].
@@ -405,7 +404,7 @@ class _PredictEventItemsProviderElement
 }
 
 String _$eventMaterialRepositoryHash() =>
-    r'7b8b6969f093fbb3b38bb8878d4f97c91731c2e5';
+    r'c5c11c04adbba17e684d44d06b8f811d2fa62bb3';
 
 /// See also [EventMaterialRepository].
 @ProviderFor(EventMaterialRepository)

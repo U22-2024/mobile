@@ -5,8 +5,8 @@ import 'package:mobile/domain/event/event_model.dart';
 const _pointCardWidth = 200.0;
 const _moveCardWidth = 100.0;
 
-class TimeTable extends StatelessWidget {
-  const TimeTable({super.key, required this.timeTable});
+class TimeTableView extends StatelessWidget {
+  const TimeTableView({super.key, required this.timeTable});
 
   final TimeTableModel timeTable;
 

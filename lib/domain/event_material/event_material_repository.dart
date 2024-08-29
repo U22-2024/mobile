@@ -1,17 +1,15 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
-import 'package:mobile/domain/event/event_model.dart';
-import 'package:mobile/domain/event/event_repository.dart';
 import 'package:mobile/domain/event_material/event_material_model.dart';
 import 'package:mobile/domain/grpc/auth_interceptor.dart';
 import 'package:mobile/domain/grpc/converter.dart';
 import 'package:mobile/domain/grpc/grpc.dart';
 import 'package:mobile/proto/common/v1/common.pb.dart';
 import 'package:mobile/proto/event/v1/core.pb.dart' as $core;
+import 'package:mobile/proto/event/v1/event.pb.dart';
 import 'package:mobile/proto/event/v1/event_material.pbgrpc.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -103,25 +101,6 @@ class EventMaterialRepository extends _$EventMaterialRepository {
   @override
   State build() {
     return const State();
-  }
-
-  Future<void> _createEvent(
-    EventMaterialServiceClient client,
-    User user,
-    String text,
-    TimeTableModel timeTable,
-  ) async {
-    final eventItems = await client.predictEventItem(PredictEventItemRequest(
-      uid: Uid(value: user.uid),
-      text: text,
-    ));
-
-    ref.read(eventRepositoryProvider.notifier).create(
-      text,
-      timeTable,
-      eventItems.eventItem.map((e) => EventItemModel(value: e)).toList(),
-      [],
-    );
   }
 
   Future<bool> predict(String userText) async {
@@ -244,7 +223,7 @@ Future<List<Place>> predictPlacesByText(
 }
 
 @riverpod
-Future<List<TimeTableModel>> predictTimeTable(PredictTimeTableRef ref) async {
+Future<List<TimeTable>> predictTimeTable(PredictTimeTableRef ref) async {
   final client = ref.read(_clientProvider);
   final user = await ref.read(authStateChangeProvider.future);
   final state = ref.read(eventMaterialRepositoryProvider);
@@ -258,9 +237,7 @@ Future<List<TimeTableModel>> predictTimeTable(PredictTimeTableRef ref) async {
     ).grpcEventMaterial,
     isGoing: true,
   ));
-  return timeTable.timeTable
-      .map((e) => TimeTableModel.fromGrpc(timeTable: e))
-      .toList();
+  return timeTable.timeTable;
 }
 
 @riverpod

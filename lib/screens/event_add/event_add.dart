@@ -1,13 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile/domain/event/event_model.dart';
+import 'package:mobile/domain/event/event_repository.dart';
 import 'package:mobile/domain/event_material/event_material_repository.dart';
 import 'package:mobile/screens/event_add/widgets/destination_form.dart';
 import 'package:mobile/screens/event_add/widgets/move_type_form.dart';
 import 'package:mobile/screens/event_add/widgets/time_form.dart';
 import 'package:mobile/screens/event_add/widgets/time_table_modal.dart';
+import 'package:mobile/screens/event_add/widgets/user_item_modal.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 Future<T?> showEventAddModal<T>(BuildContext context) {
@@ -88,7 +89,6 @@ class EventAddModal extends HookConsumerWidget {
               onPressed: () async {
                 if (!(_formKey.currentState?.validate() ?? false)) return;
                 _formKey.currentState!.save();
-                log(eventMaterial.toString(), name: 'EventAddModal');
                 final future = ref
                     .read(eventMaterialRepositoryProvider.notifier)
                     .predict(textController.text);
@@ -115,6 +115,19 @@ class EventAddModal extends HookConsumerWidget {
                   pendingRequest.value = eventItemFuture;
                   final eventItems = await eventItemFuture;
                   if (!context.mounted) return;
+                  // ユーザーアイテムを入力
+                  final userItems = await showUserItemModal(context);
+
+                  await ref.read(eventRepositoryProvider.notifier).create(
+                        eventMaterial.aiOnlyPredict.remind ?? "不明なイベント",
+                        selectedTimeTable,
+                        eventItems
+                            .map((e) => EventItemModel(value: e))
+                            .toList(),
+                        userItems.map((e) => UserItemModel(value: e)).toList(),
+                      );
+                  if (!context.mounted) return;
+                  Navigator.of(context).pop();
                 }
               },
               child: snapshot.connectionState == ConnectionState.waiting

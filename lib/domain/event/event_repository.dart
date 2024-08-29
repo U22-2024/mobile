@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:mobile/domain/auth/user_repository.dart';
 import 'package:mobile/domain/grpc/auth_interceptor.dart';
 import 'package:mobile/domain/grpc/grpc.dart';
@@ -34,21 +36,37 @@ class EventRepository extends _$EventRepository {
 
   Future<void> create(
     String title,
-    TimeTableModel timeTable,
+    TimeTable timeTable,
     List<EventItemModel> items,
     List<UserItemModel> userItems,
   ) async {
     final client = ref.read(_clientProvider);
-    final res = await client.createEvent(CreateEventRequest(
-      uid: Uid(
-        value: (await ref.read(authStateChangeProvider.future))?.uid,
+    log(timeTable.toString(), name: 'timeTable');
+    final res = await client.createEvent(
+      CreateEventRequest(
+        uid: Uid(
+          value: (await ref.read(authStateChangeProvider.future))?.uid,
+        ),
+        timeTable: timeTable,
+        userItems: UserItems(
+          item: userItems.map((e) => e.value).toList(),
+        ),
+        eventItem: items.map((e) => e.value).toList(),
       ),
-      timeTable: timeTable.grpcModel,
-      userItems: UserItems(
-        item: userItems.map((e) => e.value).toList(),
-      ),
-      eventItem: items.map((e) => e.value).toList(),
-    ));
+    );
+
+    if (state.value != null) {
+      state = AsyncValue.data(
+        [
+          EventModel.fromGrpc(event: res.event),
+          ...state.value!,
+        ],
+      );
+    } else {
+      state = AsyncValue.data(
+        [EventModel.fromGrpc(event: res.event)],
+      );
+    }
   }
 }
 

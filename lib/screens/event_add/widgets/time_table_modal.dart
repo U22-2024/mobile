@@ -2,14 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/event/event_model.dart';
+import 'package:mobile/proto/event/v1/event.pb.dart';
 import 'package:mobile/screens/event_detail/widgets/time_table.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-Future<TimeTableModel?> showTimeTableModal(
-    BuildContext context, List<TimeTableModel> timeTables) async {
-  List<TimeTableModel?> selectedTimeTable = [null];
+Future<TimeTable?> showTimeTableModal(
+    BuildContext context, List<TimeTable> timeTables) async {
+  List<TimeTable?> selectedTimeTable = [null];
 
-  await showBarModalBottomSheet<TimeTableModel>(
+  await showBarModalBottomSheet(
     context: context,
     builder: (context) {
       return SafeArea(
@@ -43,8 +44,8 @@ class TimeTableModal extends HookConsumerWidget {
     required this.selectedTimeTable,
   });
 
-  final List<TimeTableModel> timeTables;
-  final List<TimeTableModel?> selectedTimeTable;
+  final List<TimeTable> timeTables;
+  final List<TimeTable?> selectedTimeTable;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -69,7 +70,10 @@ class TimeTableModal extends HookConsumerWidget {
                     Card(
                       child: Padding(
                         padding: const EdgeInsets.all(16),
-                        child: TimeTable(timeTable: timeTable),
+                        child: TimeTableView(
+                          timeTable:
+                              TimeTableModel.fromGrpc(timeTable: timeTable),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
