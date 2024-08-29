@@ -52,6 +52,7 @@ class EventRepository extends _$EventRepository {
           item: userItems.map((e) => e.value).toList(),
         ),
         eventItem: items.map((e) => e.value).toList(),
+        title: title,
       ),
     );
 
@@ -76,11 +77,16 @@ Future<EventModel?> leastEvent(LeastEventRef ref) async {
   return events.isEmpty
       ? null
       : events.reduce((a, b) {
-          final aTimeTable = a.timeTable.items
-              .whereType<TimeTableItemMoveData>()
+          final aMoveData =
+              a.timeTable.items.whereType<TimeTableItemMoveData>();
+          if (aMoveData.isEmpty) return b;
+          final bMoveData =
+              b.timeTable.items.whereType<TimeTableItemMoveData>();
+          if (bMoveData.isEmpty) return a;
+
+          final aTimeTable = aMoveData
               .reduce((a, b) => a.move.from.isBefore(b.move.from) ? a : b);
-          final bTimeTable = b.timeTable.items
-              .whereType<TimeTableItemMoveData>()
+          final bTimeTable = bMoveData
               .reduce((a, b) => a.move.from.isBefore(b.move.from) ? a : b);
           return aTimeTable.move.from.isBefore(bTimeTable.move.from) ? a : b;
         });

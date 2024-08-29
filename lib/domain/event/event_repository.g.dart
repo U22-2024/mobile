@@ -20,7 +20,7 @@ final _clientProvider = AutoDisposeProvider<EventServiceClient>.internal(
 );
 
 typedef _ClientRef = AutoDisposeProviderRef<EventServiceClient>;
-String _$leastEventHash() => r'0fd10d1b97e33644f4c487031e3363172767617d';
+String _$leastEventHash() => r'0650396b0347b4018ae2e39a0fe519c6fcb8872c';
 
 /// See also [leastEvent].
 @ProviderFor(leastEvent)
@@ -34,7 +34,7 @@ final leastEventProvider = AutoDisposeFutureProvider<EventModel?>.internal(
 );
 
 typedef LeastEventRef = AutoDisposeFutureProviderRef<EventModel?>;
-String _$eventRepositoryHash() => r'2635d2cc0024bec616d233f70c0d851e0a28f7dd';
+String _$eventRepositoryHash() => r'e7bdbda00db8e2ecbb655111c6a8a8512657e1ee';
 
 /// See also [EventRepository].
 @ProviderFor(EventRepository)

@@ -73,7 +73,6 @@ class EventAddModal extends HookConsumerWidget {
               return null;
             },
           ),
-          Text(eventMaterial.toString()),
           if (isFirstPredicted.value) ...[
             const SizedBox(height: 16),
             const DestinationForm(),

@@ -21,7 +21,12 @@ class LeastEventCard extends HookConsumerWidget {
                 ),
               ),
             ),
-      error: (err, stackTrace) => const SizedBox(),
+      error: (err, stackTrace) => Card(
+        child: ListTile(
+          title: const Text('エラーが発生しました'),
+          subtitle: Text(stackTrace.toString()),
+        ),
+      ),
       loading: () => const Skeletonizer.zone(
         child: Card(
           child: ListTile(
