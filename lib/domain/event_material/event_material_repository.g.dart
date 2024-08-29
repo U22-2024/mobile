@@ -215,8 +215,197 @@ class _PredictPlacesByTextProviderElement
   String get placeText => (origin as PredictPlacesByTextProvider).placeText;
 }
 
+String _$predictTimeTableHash() => r'5e7522d8774adae812d5c926994f77371fd1eae3';
+
+/// See also [predictTimeTable].
+@ProviderFor(predictTimeTable)
+final predictTimeTableProvider =
+    AutoDisposeFutureProvider<List<TimeTableModel>>.internal(
+  predictTimeTable,
+  name: r'predictTimeTableProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$predictTimeTableHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef PredictTimeTableRef
+    = AutoDisposeFutureProviderRef<List<TimeTableModel>>;
+String _$predictEventItemsHash() => r'9be58a8bc02961928e41ef85b1ef795c13933bd5';
+
+/// See also [predictEventItems].
+@ProviderFor(predictEventItems)
+const predictEventItemsProvider = PredictEventItemsFamily();
+
+/// See also [predictEventItems].
+class PredictEventItemsFamily extends Family {
+  /// See also [predictEventItems].
+  const PredictEventItemsFamily();
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'predictEventItemsProvider';
+
+  /// See also [predictEventItems].
+  PredictEventItemsProvider call(
+    String userText,
+  ) {
+    return PredictEventItemsProvider(
+      userText,
+    );
+  }
+
+  @visibleForOverriding
+  @override
+  PredictEventItemsProvider getProviderOverride(
+    covariant PredictEventItemsProvider provider,
+  ) {
+    return call(
+      provider.userText,
+    );
+  }
+
+  /// Enables overriding the behavior of this provider, no matter the parameters.
+  Override overrideWith(
+      FutureOr<List<String>> Function(PredictEventItemsRef ref) create) {
+    return _$PredictEventItemsFamilyOverride(this, create);
+  }
+}
+
+class _$PredictEventItemsFamilyOverride implements FamilyOverride {
+  _$PredictEventItemsFamilyOverride(this.overriddenFamily, this.create);
+
+  final FutureOr<List<String>> Function(PredictEventItemsRef ref) create;
+
+  @override
+  final PredictEventItemsFamily overriddenFamily;
+
+  @override
+  PredictEventItemsProvider getProviderOverride(
+    covariant PredictEventItemsProvider provider,
+  ) {
+    return provider._copyWith(create);
+  }
+}
+
+/// See also [predictEventItems].
+class PredictEventItemsProvider
+    extends AutoDisposeFutureProvider<List<String>> {
+  /// See also [predictEventItems].
+  PredictEventItemsProvider(
+    String userText,
+  ) : this._internal(
+          (ref) => predictEventItems(
+            ref as PredictEventItemsRef,
+            userText,
+          ),
+          from: predictEventItemsProvider,
+          name: r'predictEventItemsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$predictEventItemsHash,
+          dependencies: PredictEventItemsFamily._dependencies,
+          allTransitiveDependencies:
+              PredictEventItemsFamily._allTransitiveDependencies,
+          userText: userText,
+        );
+
+  PredictEventItemsProvider._internal(
+    super.create, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.userText,
+  }) : super.internal();
+
+  final String userText;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<String>> Function(PredictEventItemsRef ref) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: PredictEventItemsProvider._internal(
+        (ref) => create(ref as PredictEventItemsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        userText: userText,
+      ),
+    );
+  }
+
+  @override
+  (String,) get argument {
+    return (userText,);
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<String>> createElement() {
+    return _PredictEventItemsProviderElement(this);
+  }
+
+  PredictEventItemsProvider _copyWith(
+    FutureOr<List<String>> Function(PredictEventItemsRef ref) create,
+  ) {
+    return PredictEventItemsProvider._internal(
+      (ref) => create(ref as PredictEventItemsRef),
+      name: name,
+      dependencies: dependencies,
+      allTransitiveDependencies: allTransitiveDependencies,
+      debugGetCreateSourceHash: debugGetCreateSourceHash,
+      from: from,
+      userText: userText,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is PredictEventItemsProvider && other.userText == userText;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, userText.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin PredictEventItemsRef on AutoDisposeFutureProviderRef<List<String>> {
+  /// The parameter `userText` of this provider.
+  String get userText;
+}
+
+class _PredictEventItemsProviderElement
+    extends AutoDisposeFutureProviderElement<List<String>>
+    with PredictEventItemsRef {
+  _PredictEventItemsProviderElement(super.provider);
+
+  @override
+  String get userText => (origin as PredictEventItemsProvider).userText;
+}
+
 String _$eventMaterialRepositoryHash() =>
-    r'c5c11c04adbba17e684d44d06b8f811d2fa62bb3';
+    r'7b8b6969f093fbb3b38bb8878d4f97c91731c2e5';
 
 /// See also [EventMaterialRepository].
 @ProviderFor(EventMaterialRepository)

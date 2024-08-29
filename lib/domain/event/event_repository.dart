@@ -31,6 +31,25 @@ class EventRepository extends _$EventRepository {
     ));
     return res.events.map((e) => EventModel.fromGrpc(event: e)).toList();
   }
+
+  Future<void> create(
+    String title,
+    TimeTableModel timeTable,
+    List<EventItemModel> items,
+    List<UserItemModel> userItems,
+  ) async {
+    final client = ref.read(_clientProvider);
+    final res = await client.createEvent(CreateEventRequest(
+      uid: Uid(
+        value: (await ref.read(authStateChangeProvider.future))?.uid,
+      ),
+      timeTable: timeTable.grpcModel,
+      userItems: UserItems(
+        item: userItems.map((e) => e.value).toList(),
+      ),
+      eventItem: items.map((e) => e.value).toList(),
+    ));
+  }
 }
 
 @riverpod

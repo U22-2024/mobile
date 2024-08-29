@@ -7,6 +7,7 @@ import 'package:mobile/domain/event_material/event_material_repository.dart';
 import 'package:mobile/screens/event_add/widgets/destination_form.dart';
 import 'package:mobile/screens/event_add/widgets/move_type_form.dart';
 import 'package:mobile/screens/event_add/widgets/time_form.dart';
+import 'package:mobile/screens/event_add/widgets/time_table_modal.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 Future<T?> showEventAddModal<T>(BuildContext context) {
@@ -45,7 +46,7 @@ class EventAddModal extends HookConsumerWidget {
     final eventMaterial = ref.watch(eventMaterialRepositoryProvider);
     final textController = useTextEditingController();
     final isFirstPredicted = useState(false);
-    final pendingRequest = useState<Future<bool>?>(null);
+    final pendingRequest = useState<Future<void>?>(null);
     final snapshot = useFuture(pendingRequest.value);
 
     return Form(
@@ -60,6 +61,7 @@ class EventAddModal extends HookConsumerWidget {
               labelText: 'イベントの説明',
               hintText: '例: 夏服を買いに行く、友達とお昼ご飯を食べる',
             ),
+            enabled: snapshot.connectionState != ConnectionState.waiting,
             maxLines: null,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.multiline,
@@ -92,8 +94,28 @@ class EventAddModal extends HookConsumerWidget {
                     .predict(textController.text);
                 pendingRequest.value = future;
                 // 初回予測を行ったかのフラグを管理
-                await future;
+                final isFilled = await future;
                 isFirstPredicted.value = true;
+
+                if (isFilled) {
+                  // タイムテーブルの選択モーダルを表示
+                  var future = ref.read(predictTimeTableProvider.future);
+                  pendingRequest.value = future;
+                  final timeTables = await future;
+                  if (!context.mounted) return;
+                  final selectedTimeTable = await showTimeTableModal(
+                    context,
+                    timeTables,
+                  );
+                  if (selectedTimeTable == null) return;
+                  // イベントアイテムの予測
+                  final eventItemFuture = ref.read(
+                    predictEventItemsProvider.call(textController.text).future,
+                  );
+                  pendingRequest.value = eventItemFuture;
+                  final eventItems = await eventItemFuture;
+                  if (!context.mounted) return;
+                }
               },
               child: snapshot.connectionState == ConnectionState.waiting
                   ? const CircularProgressIndicator()

@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobile/domain/auth/user_repository.dart';
+import 'package:mobile/domain/event/event_model.dart';
+import 'package:mobile/domain/event/event_repository.dart';
 import 'package:mobile/domain/event_material/event_material_model.dart';
 import 'package:mobile/domain/grpc/auth_interceptor.dart';
 import 'package:mobile/domain/grpc/converter.dart';
@@ -100,6 +103,25 @@ class EventMaterialRepository extends _$EventMaterialRepository {
   @override
   State build() {
     return const State();
+  }
+
+  Future<void> _createEvent(
+    EventMaterialServiceClient client,
+    User user,
+    String text,
+    TimeTableModel timeTable,
+  ) async {
+    final eventItems = await client.predictEventItem(PredictEventItemRequest(
+      uid: Uid(value: user.uid),
+      text: text,
+    ));
+
+    ref.read(eventRepositoryProvider.notifier).create(
+      text,
+      timeTable,
+      eventItems.eventItem.map((e) => EventItemModel(value: e)).toList(),
+      [],
+    );
   }
 
   Future<bool> predict(String userText) async {
@@ -219,4 +241,40 @@ Future<List<Place>> predictPlacesByText(
     ),
   );
   return res.place.toSet().toList();
+}
+
+@riverpod
+Future<List<TimeTableModel>> predictTimeTable(PredictTimeTableRef ref) async {
+  final client = ref.read(_clientProvider);
+  final user = await ref.read(authStateChangeProvider.future);
+  final state = ref.read(eventMaterialRepositoryProvider);
+
+  final timeTable = await client.predictTimeTable(PredictTimeTableRequest(
+    uid: Uid(value: user?.uid),
+    eventMaterial: EventMaterialModel.fromSource(
+      source: state.predictSource,
+      clientOnly: state.clientOnlyState,
+      aiOnly: state.aiOnlyPredict,
+    ).grpcEventMaterial,
+    isGoing: true,
+  ));
+  return timeTable.timeTable
+      .map((e) => TimeTableModel.fromGrpc(timeTable: e))
+      .toList();
+}
+
+@riverpod
+Future<List<String>> predictEventItems(
+  PredictEventItemsRef ref,
+  String userText,
+) async {
+  final client = ref.read(_clientProvider);
+  final user = await ref.read(authStateChangeProvider.future);
+  final state = ref.read(eventMaterialRepositoryProvider);
+
+  final res = await client.predictEventItem(PredictEventItemRequest(
+    uid: Uid(value: user?.uid),
+    text: userText + state.predictSource.toString(),
+  ));
+  return res.eventItem;
 }

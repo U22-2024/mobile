@@ -6,13 +6,13 @@ const _pointCardWidth = 200.0;
 const _moveCardWidth = 100.0;
 
 class TimeTable extends StatelessWidget {
-  const TimeTable({super.key, required this.event});
+  const TimeTable({super.key, required this.timeTable});
 
-  final EventModel event;
+  final TimeTableModel timeTable;
 
   @override
   Widget build(BuildContext context) {
-    final items = event.timeTable.items;
+    final items = timeTable.items;
     const emptyPointData = TimeTableItemPointData(name: "");
     List<Widget> itemWidgets = [];
 

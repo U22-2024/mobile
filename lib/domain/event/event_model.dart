@@ -66,6 +66,7 @@ class UserItemModel with _$UserItemModel {
 //#region TimeTableModel
 @freezed
 class TimeTableModel with _$TimeTableModel {
+  const TimeTableModel._();
   const factory TimeTableModel({
     required List<TimeTableItemModel> items,
     required int transitCount,
@@ -81,10 +82,18 @@ class TimeTableModel with _$TimeTableModel {
       fare: timeTable.fare,
     );
   }
+
+  TimeTable get grpcModel => TimeTable(
+        item: items.map((e) => e.grpcModel).toList(),
+        transitCount: transitCount,
+        walkDistance: walkDistance,
+        fare: fare,
+      );
 }
 
 @freezed
 sealed class TimeTableItemModel with _$TimeTableItemModel {
+  const TimeTableItemModel._();
   const factory TimeTableItemModel.point({
     required String name,
   }) = TimeTableItemPointData;
@@ -102,10 +111,22 @@ sealed class TimeTableItemModel with _$TimeTableItemModel {
       throw Exception("Invalid TimeTableItem");
     }
   }
+
+  TimeTableItem get grpcModel {
+    if (this is TimeTableItemPointData) {
+      return TimeTableItem(
+        type: $core.TimeTableType.TIME_TABLE_TYPE_POINT,
+        name: (this as TimeTableItemPointData).name,
+      );
+    } else {
+      return (this as TimeTableItemMoveData).grpcModel;
+    }
+  }
 }
 
 @freezed
 sealed class TimeTableMoveData with _$TimeTableMoveData {
+  const TimeTableMoveData._();
   const factory TimeTableMoveData.other({
     required String name,
     required DateTime from,
@@ -143,10 +164,36 @@ sealed class TimeTableMoveData with _$TimeTableMoveData {
       );
     }
   }
+
+  TimeTableItem get grpcModel {
+    if (this is TrainMoveData) {
+      return TimeTableItem(
+        type: $core.TimeTableType.TIME_TABLE_TYPE_MOVE,
+        name: name,
+        fromTime: from.toGrpcDateTime(),
+        endTime: to.toGrpcDateTime(),
+        distance: distance,
+        lineName: lineName,
+        move: "train",
+        transport: (this as TrainMoveData).transport.grpcModel,
+      );
+    } else {
+      return TimeTableItem(
+        type: $core.TimeTableType.TIME_TABLE_TYPE_MOVE,
+        name: name,
+        fromTime: from.toGrpcDateTime(),
+        endTime: to.toGrpcDateTime(),
+        distance: distance,
+        lineName: lineName,
+        move: "other",
+      );
+    }
+  }
 }
 
 @freezed
 class TransportModel with _$TransportModel {
+  const TransportModel._();
   const factory TransportModel({
     required int fare,
     required String trainName,
@@ -164,5 +211,13 @@ class TransportModel with _$TransportModel {
       destination: transport.destination,
     );
   }
+
+  Transport get grpcModel => Transport(
+        fare: fare,
+        trainName: trainName,
+        color: color,
+        direction: direction,
+        destination: destination,
+      );
 }
 //#endregion
