@@ -216,7 +216,7 @@ class _PredictPlacesByTextProviderElement
 }
 
 String _$eventMaterialRepositoryHash() =>
-    r'7ed876d98b57f3a2c3680897de5e97f2557ba7e6';
+    r'c5c11c04adbba17e684d44d06b8f811d2fa62bb3';
 
 /// See also [EventMaterialRepository].
 @ProviderFor(EventMaterialRepository)

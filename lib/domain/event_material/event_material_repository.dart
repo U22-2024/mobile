@@ -182,6 +182,22 @@ class EventMaterialRepository extends _$EventMaterialRepository {
       ),
     );
   }
+
+  void setStartAt(DateTime startAt) {
+    state = state.copyWith(
+      predictSource: state.predictSource.copyWith(
+        startAt: startAt.toGrpcDateTime(),
+      ),
+    );
+  }
+
+  void setEndAt(DateTime endAt) {
+    state = state.copyWith(
+      predictSource: state.predictSource.copyWith(
+        endAt: endAt.toGrpcDateTime(),
+      ),
+    );
+  }
 }
 
 @riverpod
