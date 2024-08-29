@@ -36,8 +36,8 @@ class EventRepository extends _$EventRepository {
 
   Future<void> create(
     String title,
-    TimeTable timeTable,
-    List<EventItemModel> items,
+    TimeTable? timeTable,
+    List<EventItemModel>? items,
     List<UserItemModel> userItems,
   ) async {
     final client = ref.read(_clientProvider);
@@ -51,7 +51,7 @@ class EventRepository extends _$EventRepository {
         userItems: UserItems(
           item: userItems.map((e) => e.value).toList(),
         ),
-        eventItem: items.map((e) => e.value).toList(),
+        eventItem: items?.map((e) => e.value).toList(),
         title: title,
       ),
     );

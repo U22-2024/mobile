@@ -12,6 +12,7 @@ class MainApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: router,
       title: 'Mobile',
       localizationsDelegates: [

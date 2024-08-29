@@ -73,7 +73,8 @@ class EventAddModal extends HookConsumerWidget {
               return null;
             },
           ),
-          if (isFirstPredicted.value) ...[
+          if (isFirstPredicted.value &&
+              (eventMaterial.aiOnlyPredict.isOut ?? false)) ...[
             const SizedBox(height: 16),
             const DestinationForm(),
             const SizedBox(height: 16),
@@ -88,9 +89,28 @@ class EventAddModal extends HookConsumerWidget {
               onPressed: () async {
                 if (!(_formKey.currentState?.validate() ?? false)) return;
                 _formKey.currentState!.save();
-                final future = ref
-                    .read(eventMaterialRepositoryProvider.notifier)
-                    .predict(textController.text);
+                final future =
+                    ref.read(eventMaterialRepositoryProvider.notifier).predict(
+                  textController.text,
+                  (state) async {
+                    // 外出タスクではないなら
+                    if (!context.mounted) return;
+                    final userItems = await showUserItemModal(context);
+                    final future =
+                        ref.read(eventRepositoryProvider.notifier).create(
+                              state.aiOnlyPredict.remind ?? "不明なイベント",
+                              null,
+                              null,
+                              userItems
+                                  .map((e) => UserItemModel(value: e))
+                                  .toList(),
+                            );
+                    pendingRequest.value = future;
+                    await future;
+                    if (!context.mounted) return;
+                    Navigator.of(context).pop();
+                  },
+                );
                 pendingRequest.value = future;
                 // 初回予測を行ったかのフラグを管理
                 final isFilled = await future;

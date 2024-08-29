@@ -35,6 +35,7 @@ class EventCard extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final mediaQuery = MediaQuery.of(context);
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -54,9 +55,13 @@ class EventCard extends HookConsumerWidget {
                     color: theme.colorScheme.onPrimaryContainer,
                   ),
                   const SizedBox(width: 16),
-                  Text(
-                    event.title,
-                    style: theme.textTheme.labelLarge,
+                  SizedBox(
+                    width: mediaQuery.size.width - 300,
+                    child: Text(
+                      event.title,
+                      style: theme.textTheme.labelLarge,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   const Spacer(),
                   const Text("タップして詳細を見る"),

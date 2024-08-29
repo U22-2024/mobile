@@ -103,7 +103,8 @@ class EventMaterialRepository extends _$EventMaterialRepository {
     return const State();
   }
 
-  Future<bool> predict(String userText) async {
+  Future<bool> predict(
+      String userText, Future<void> Function(State) notGoingOutReq) async {
     // 全てのフィールドが埋まっているなら予測せずにtrueを返す
     if (state.isFilled) {
       log("state is filled", name: 'EventMaterialRepository');
@@ -138,6 +139,10 @@ class EventMaterialRepository extends _$EventMaterialRepository {
         remind: res.eventMaterial.remind,
       ),
     );
+
+    if (!res.eventMaterial.isOut) {
+      await notGoingOutReq(state);
+    }
 
     if (state.isFilled) return true;
     return false;

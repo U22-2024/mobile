@@ -28,13 +28,13 @@ class WeatherCard extends ConsumerWidget {
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      '今日の天気アドバイス',
+                      '今の天気アドバイス',
                       style: theme.textTheme.labelLarge,
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
-                Text((data?.isRequireUmbrella ?? false)
+                Text((data?.maxRainfall ?? 0) > 50
                     ? '雨降るから傘を持って行った方が良いよ'
                     : '雨は振らないらしいから傘はいらないかもね'),
                 const SizedBox(height: 16),

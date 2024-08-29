@@ -404,7 +404,7 @@ class _PredictEventItemsProviderElement
 }
 
 String _$eventMaterialRepositoryHash() =>
-    r'c5c11c04adbba17e684d44d06b8f811d2fa62bb3';
+    r'44db161b174c6d538cd0b8ad6abeaecd79abee35';
 
 /// See also [EventMaterialRepository].
 @ProviderFor(EventMaterialRepository)
