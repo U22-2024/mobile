@@ -15,29 +15,29 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'shopping.pb.dart' as $7;
-import 'shopping_item.pb.dart' as $8;
+import 'shopping.pb.dart' as $8;
+import 'shopping_item.pb.dart' as $9;
 
 export 'shopping.pb.dart';
 
 @$pb.GrpcServiceName('shopping.v1.ShoppingService')
 class ShoppingServiceClient extends $grpc.Client {
-  static final _$getShoppingList = $grpc.ClientMethod<$7.GetShoppingListRequest, $7.GetShoppingListResponse>(
+  static final _$getShoppingList = $grpc.ClientMethod<$8.GetShoppingListRequest, $8.GetShoppingListResponse>(
       '/shopping.v1.ShoppingService/GetShoppingList',
-      ($7.GetShoppingListRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $7.GetShoppingListResponse.fromBuffer(value));
-  static final _$createShoppingItem = $grpc.ClientMethod<$8.CreateShoppingItemRequest, $8.CreateShoppingItemResponse>(
+      ($8.GetShoppingListRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.GetShoppingListResponse.fromBuffer(value));
+  static final _$createShoppingItem = $grpc.ClientMethod<$9.CreateShoppingItemRequest, $9.CreateShoppingItemResponse>(
       '/shopping.v1.ShoppingService/CreateShoppingItem',
-      ($8.CreateShoppingItemRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $8.CreateShoppingItemResponse.fromBuffer(value));
-  static final _$updateShoppingItem = $grpc.ClientMethod<$8.UpdateShoppingItemRequest, $8.UpdateShoppingItemResponse>(
+      ($9.CreateShoppingItemRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $9.CreateShoppingItemResponse.fromBuffer(value));
+  static final _$updateShoppingItem = $grpc.ClientMethod<$9.UpdateShoppingItemRequest, $9.UpdateShoppingItemResponse>(
       '/shopping.v1.ShoppingService/UpdateShoppingItem',
-      ($8.UpdateShoppingItemRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $8.UpdateShoppingItemResponse.fromBuffer(value));
-  static final _$deleteShoppingItem = $grpc.ClientMethod<$8.DeleteShoppingItemRequest, $8.DeleteShoppingItemResponse>(
+      ($9.UpdateShoppingItemRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $9.UpdateShoppingItemResponse.fromBuffer(value));
+  static final _$deleteShoppingItem = $grpc.ClientMethod<$9.DeleteShoppingItemRequest, $9.DeleteShoppingItemResponse>(
       '/shopping.v1.ShoppingService/DeleteShoppingItem',
-      ($8.DeleteShoppingItemRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $8.DeleteShoppingItemResponse.fromBuffer(value));
+      ($9.DeleteShoppingItemRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $9.DeleteShoppingItemResponse.fromBuffer(value));
 
   ShoppingServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -45,19 +45,19 @@ class ShoppingServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$7.GetShoppingListResponse> getShoppingList($7.GetShoppingListRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$8.GetShoppingListResponse> getShoppingList($8.GetShoppingListRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getShoppingList, request, options: options);
   }
 
-  $grpc.ResponseFuture<$8.CreateShoppingItemResponse> createShoppingItem($8.CreateShoppingItemRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$9.CreateShoppingItemResponse> createShoppingItem($9.CreateShoppingItemRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createShoppingItem, request, options: options);
   }
 
-  $grpc.ResponseFuture<$8.UpdateShoppingItemResponse> updateShoppingItem($8.UpdateShoppingItemRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$9.UpdateShoppingItemResponse> updateShoppingItem($9.UpdateShoppingItemRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateShoppingItem, request, options: options);
   }
 
-  $grpc.ResponseFuture<$8.DeleteShoppingItemResponse> deleteShoppingItem($8.DeleteShoppingItemRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$9.DeleteShoppingItemResponse> deleteShoppingItem($9.DeleteShoppingItemRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteShoppingItem, request, options: options);
   }
 }
@@ -67,54 +67,54 @@ abstract class ShoppingServiceBase extends $grpc.Service {
   $core.String get $name => 'shopping.v1.ShoppingService';
 
   ShoppingServiceBase() {
-    $addMethod($grpc.ServiceMethod<$7.GetShoppingListRequest, $7.GetShoppingListResponse>(
+    $addMethod($grpc.ServiceMethod<$8.GetShoppingListRequest, $8.GetShoppingListResponse>(
         'GetShoppingList',
         getShoppingList_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $7.GetShoppingListRequest.fromBuffer(value),
-        ($7.GetShoppingListResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$8.CreateShoppingItemRequest, $8.CreateShoppingItemResponse>(
+        ($core.List<$core.int> value) => $8.GetShoppingListRequest.fromBuffer(value),
+        ($8.GetShoppingListResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$9.CreateShoppingItemRequest, $9.CreateShoppingItemResponse>(
         'CreateShoppingItem',
         createShoppingItem_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $8.CreateShoppingItemRequest.fromBuffer(value),
-        ($8.CreateShoppingItemResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$8.UpdateShoppingItemRequest, $8.UpdateShoppingItemResponse>(
+        ($core.List<$core.int> value) => $9.CreateShoppingItemRequest.fromBuffer(value),
+        ($9.CreateShoppingItemResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$9.UpdateShoppingItemRequest, $9.UpdateShoppingItemResponse>(
         'UpdateShoppingItem',
         updateShoppingItem_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $8.UpdateShoppingItemRequest.fromBuffer(value),
-        ($8.UpdateShoppingItemResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$8.DeleteShoppingItemRequest, $8.DeleteShoppingItemResponse>(
+        ($core.List<$core.int> value) => $9.UpdateShoppingItemRequest.fromBuffer(value),
+        ($9.UpdateShoppingItemResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$9.DeleteShoppingItemRequest, $9.DeleteShoppingItemResponse>(
         'DeleteShoppingItem',
         deleteShoppingItem_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $8.DeleteShoppingItemRequest.fromBuffer(value),
-        ($8.DeleteShoppingItemResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $9.DeleteShoppingItemRequest.fromBuffer(value),
+        ($9.DeleteShoppingItemResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$7.GetShoppingListResponse> getShoppingList_Pre($grpc.ServiceCall call, $async.Future<$7.GetShoppingListRequest> request) async {
+  $async.Future<$8.GetShoppingListResponse> getShoppingList_Pre($grpc.ServiceCall call, $async.Future<$8.GetShoppingListRequest> request) async {
     return getShoppingList(call, await request);
   }
 
-  $async.Future<$8.CreateShoppingItemResponse> createShoppingItem_Pre($grpc.ServiceCall call, $async.Future<$8.CreateShoppingItemRequest> request) async {
+  $async.Future<$9.CreateShoppingItemResponse> createShoppingItem_Pre($grpc.ServiceCall call, $async.Future<$9.CreateShoppingItemRequest> request) async {
     return createShoppingItem(call, await request);
   }
 
-  $async.Future<$8.UpdateShoppingItemResponse> updateShoppingItem_Pre($grpc.ServiceCall call, $async.Future<$8.UpdateShoppingItemRequest> request) async {
+  $async.Future<$9.UpdateShoppingItemResponse> updateShoppingItem_Pre($grpc.ServiceCall call, $async.Future<$9.UpdateShoppingItemRequest> request) async {
     return updateShoppingItem(call, await request);
   }
 
-  $async.Future<$8.DeleteShoppingItemResponse> deleteShoppingItem_Pre($grpc.ServiceCall call, $async.Future<$8.DeleteShoppingItemRequest> request) async {
+  $async.Future<$9.DeleteShoppingItemResponse> deleteShoppingItem_Pre($grpc.ServiceCall call, $async.Future<$9.DeleteShoppingItemRequest> request) async {
     return deleteShoppingItem(call, await request);
   }
 
-  $async.Future<$7.GetShoppingListResponse> getShoppingList($grpc.ServiceCall call, $7.GetShoppingListRequest request);
-  $async.Future<$8.CreateShoppingItemResponse> createShoppingItem($grpc.ServiceCall call, $8.CreateShoppingItemRequest request);
-  $async.Future<$8.UpdateShoppingItemResponse> updateShoppingItem($grpc.ServiceCall call, $8.UpdateShoppingItemRequest request);
-  $async.Future<$8.DeleteShoppingItemResponse> deleteShoppingItem($grpc.ServiceCall call, $8.DeleteShoppingItemRequest request);
+  $async.Future<$8.GetShoppingListResponse> getShoppingList($grpc.ServiceCall call, $8.GetShoppingListRequest request);
+  $async.Future<$9.CreateShoppingItemResponse> createShoppingItem($grpc.ServiceCall call, $9.CreateShoppingItemRequest request);
+  $async.Future<$9.UpdateShoppingItemResponse> updateShoppingItem($grpc.ServiceCall call, $9.UpdateShoppingItemRequest request);
+  $async.Future<$9.DeleteShoppingItemResponse> deleteShoppingItem($grpc.ServiceCall call, $9.DeleteShoppingItemRequest request);
 }

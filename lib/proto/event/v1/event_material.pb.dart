@@ -13,16 +13,16 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $9;
-import 'core.pb.dart' as $10;
-import 'core.pbenum.dart' as $10;
-import 'event.pb.dart' as $0;
+import '../../common/v1/common.pb.dart' as $10;
+import 'core.pb.dart' as $11;
+import 'core.pbenum.dart' as $11;
+import 'event.pb.dart' as $1;
 
 class Place extends $pb.GeneratedMessage {
   factory Place({
     $core.String? name,
     $core.String? address,
-    $10.Pos? pos,
+    $11.Pos? pos,
   }) {
     final $result = create();
     if (name != null) {
@@ -43,7 +43,7 @@ class Place extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Place', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'address')
-    ..aOM<$10.Pos>(3, _omitFieldNames ? '' : 'pos', subBuilder: $10.Pos.create)
+    ..aOM<$11.Pos>(3, _omitFieldNames ? '' : 'pos', subBuilder: $11.Pos.create)
     ..hasRequiredFields = false
   ;
 
@@ -87,28 +87,28 @@ class Place extends $pb.GeneratedMessage {
   void clearAddress() => clearField(2);
 
   @$pb.TagNumber(3)
-  $10.Pos get pos => $_getN(2);
+  $11.Pos get pos => $_getN(2);
   @$pb.TagNumber(3)
-  set pos($10.Pos v) { setField(3, v); }
+  set pos($11.Pos v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasPos() => $_has(2);
   @$pb.TagNumber(3)
   void clearPos() => clearField(3);
   @$pb.TagNumber(3)
-  $10.Pos ensurePos() => $_ensure(2);
+  $11.Pos ensurePos() => $_ensure(2);
 }
 
 class EventMaterial extends $pb.GeneratedMessage {
   factory EventMaterial({
     $core.bool? isOut,
     $core.String? remind,
-    $10.Pos? fromPos,
+    $11.Pos? fromPos,
     $core.String? destination,
-    $10.Pos? destinationPos,
-    $10.MoveType? moveType,
+    $11.Pos? destinationPos,
+    $11.MoveType? moveType,
     $core.String? option,
-    $10.DateTime? startTime,
-    $10.DateTime? endTime,
+    $11.DateTime? startTime,
+    $11.DateTime? endTime,
   }) {
     final $result = create();
     if (isOut != null) {
@@ -147,13 +147,13 @@ class EventMaterial extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventMaterial', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isOut')
     ..aOS(2, _omitFieldNames ? '' : 'remind')
-    ..aOM<$10.Pos>(3, _omitFieldNames ? '' : 'fromPos', subBuilder: $10.Pos.create)
+    ..aOM<$11.Pos>(3, _omitFieldNames ? '' : 'fromPos', subBuilder: $11.Pos.create)
     ..aOS(4, _omitFieldNames ? '' : 'destination')
-    ..aOM<$10.Pos>(5, _omitFieldNames ? '' : 'destinationPos', subBuilder: $10.Pos.create)
-    ..e<$10.MoveType>(6, _omitFieldNames ? '' : 'moveType', $pb.PbFieldType.OE, defaultOrMaker: $10.MoveType.MOVE_TYPE_UNSPECIFIED, valueOf: $10.MoveType.valueOf, enumValues: $10.MoveType.values)
+    ..aOM<$11.Pos>(5, _omitFieldNames ? '' : 'destinationPos', subBuilder: $11.Pos.create)
+    ..e<$11.MoveType>(6, _omitFieldNames ? '' : 'moveType', $pb.PbFieldType.OE, defaultOrMaker: $11.MoveType.MOVE_TYPE_UNSPECIFIED, valueOf: $11.MoveType.valueOf, enumValues: $11.MoveType.values)
     ..aOS(7, _omitFieldNames ? '' : 'option')
-    ..aOM<$10.DateTime>(8, _omitFieldNames ? '' : 'startTime', subBuilder: $10.DateTime.create)
-    ..aOM<$10.DateTime>(9, _omitFieldNames ? '' : 'endTime', subBuilder: $10.DateTime.create)
+    ..aOM<$11.DateTime>(8, _omitFieldNames ? '' : 'startTime', subBuilder: $11.DateTime.create)
+    ..aOM<$11.DateTime>(9, _omitFieldNames ? '' : 'endTime', subBuilder: $11.DateTime.create)
     ..hasRequiredFields = false
   ;
 
@@ -201,15 +201,15 @@ class EventMaterial extends $pb.GeneratedMessage {
 
   /// 現在地の緯度経度
   @$pb.TagNumber(3)
-  $10.Pos get fromPos => $_getN(2);
+  $11.Pos get fromPos => $_getN(2);
   @$pb.TagNumber(3)
-  set fromPos($10.Pos v) { setField(3, v); }
+  set fromPos($11.Pos v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasFromPos() => $_has(2);
   @$pb.TagNumber(3)
   void clearFromPos() => clearField(3);
   @$pb.TagNumber(3)
-  $10.Pos ensureFromPos() => $_ensure(2);
+  $11.Pos ensureFromPos() => $_ensure(2);
 
   /// 目的地の名前
   @$pb.TagNumber(4)
@@ -224,22 +224,22 @@ class EventMaterial extends $pb.GeneratedMessage {
   /// 目的地の緯度経度
   /// PredictPositionsFromTextで取得したものを使う
   @$pb.TagNumber(5)
-  $10.Pos get destinationPos => $_getN(4);
+  $11.Pos get destinationPos => $_getN(4);
   @$pb.TagNumber(5)
-  set destinationPos($10.Pos v) { setField(5, v); }
+  set destinationPos($11.Pos v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasDestinationPos() => $_has(4);
   @$pb.TagNumber(5)
   void clearDestinationPos() => clearField(5);
   @$pb.TagNumber(5)
-  $10.Pos ensureDestinationPos() => $_ensure(4);
+  $11.Pos ensureDestinationPos() => $_ensure(4);
 
   /// 移動手段
   /// リクエスト時には設定しなくてよい
   @$pb.TagNumber(6)
-  $10.MoveType get moveType => $_getN(5);
+  $11.MoveType get moveType => $_getN(5);
   @$pb.TagNumber(6)
-  set moveType($10.MoveType v) { setField(6, v); }
+  set moveType($11.MoveType v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasMoveType() => $_has(5);
   @$pb.TagNumber(6)
@@ -257,32 +257,32 @@ class EventMaterial extends $pb.GeneratedMessage {
 
   /// イベントの開始時間
   @$pb.TagNumber(8)
-  $10.DateTime get startTime => $_getN(7);
+  $11.DateTime get startTime => $_getN(7);
   @$pb.TagNumber(8)
-  set startTime($10.DateTime v) { setField(8, v); }
+  set startTime($11.DateTime v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasStartTime() => $_has(7);
   @$pb.TagNumber(8)
   void clearStartTime() => clearField(8);
   @$pb.TagNumber(8)
-  $10.DateTime ensureStartTime() => $_ensure(7);
+  $11.DateTime ensureStartTime() => $_ensure(7);
 
   /// イベントの終了時間
   @$pb.TagNumber(9)
-  $10.DateTime get endTime => $_getN(8);
+  $11.DateTime get endTime => $_getN(8);
   @$pb.TagNumber(9)
-  set endTime($10.DateTime v) { setField(9, v); }
+  set endTime($11.DateTime v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasEndTime() => $_has(8);
   @$pb.TagNumber(9)
   void clearEndTime() => clearField(9);
   @$pb.TagNumber(9)
-  $10.DateTime ensureEndTime() => $_ensure(8);
+  $11.DateTime ensureEndTime() => $_ensure(8);
 }
 
 class PredictEventMaterialItemRequest extends $pb.GeneratedMessage {
   factory PredictEventMaterialItemRequest({
-    $9.Uid? uid,
+    $10.Uid? uid,
     EventMaterial? eventMaterial,
     $core.String? text,
   }) {
@@ -303,7 +303,7 @@ class PredictEventMaterialItemRequest extends $pb.GeneratedMessage {
   factory PredictEventMaterialItemRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PredictEventMaterialItemRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
     ..aOM<EventMaterial>(2, _omitFieldNames ? '' : 'eventMaterial', subBuilder: EventMaterial.create)
     ..aOS(3, _omitFieldNames ? '' : 'text')
     ..hasRequiredFields = false
@@ -331,15 +331,15 @@ class PredictEventMaterialItemRequest extends $pb.GeneratedMessage {
   static PredictEventMaterialItemRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Uid get uid => $_getN(0);
+  $10.Uid get uid => $_getN(0);
   @$pb.TagNumber(1)
-  set uid($9.Uid v) { setField(1, v); }
+  set uid($10.Uid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUid() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Uid ensureUid() => $_ensure(0);
+  $10.Uid ensureUid() => $_ensure(0);
 
   /// 初回は空でリクエスト
   @$pb.TagNumber(2)
@@ -418,9 +418,9 @@ class PredictEventMaterialItemResponse extends $pb.GeneratedMessage {
 
 class PredictPositionsFromTextRequest extends $pb.GeneratedMessage {
   factory PredictPositionsFromTextRequest({
-    $9.Uid? uid,
+    $10.Uid? uid,
     $core.String? text,
-    $10.Pos? fromPos,
+    $11.Pos? fromPos,
   }) {
     final $result = create();
     if (uid != null) {
@@ -439,9 +439,9 @@ class PredictPositionsFromTextRequest extends $pb.GeneratedMessage {
   factory PredictPositionsFromTextRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PredictPositionsFromTextRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
     ..aOS(2, _omitFieldNames ? '' : 'text')
-    ..aOM<$10.Pos>(3, _omitFieldNames ? '' : 'fromPos', subBuilder: $10.Pos.create)
+    ..aOM<$11.Pos>(3, _omitFieldNames ? '' : 'fromPos', subBuilder: $11.Pos.create)
     ..hasRequiredFields = false
   ;
 
@@ -467,15 +467,15 @@ class PredictPositionsFromTextRequest extends $pb.GeneratedMessage {
   static PredictPositionsFromTextRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Uid get uid => $_getN(0);
+  $10.Uid get uid => $_getN(0);
   @$pb.TagNumber(1)
-  set uid($9.Uid v) { setField(1, v); }
+  set uid($10.Uid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUid() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Uid ensureUid() => $_ensure(0);
+  $10.Uid ensureUid() => $_ensure(0);
 
   /// ex.) イオン、スターバックス、東京駅
   @$pb.TagNumber(2)
@@ -489,15 +489,15 @@ class PredictPositionsFromTextRequest extends $pb.GeneratedMessage {
 
   /// 現在地の緯度経度
   @$pb.TagNumber(3)
-  $10.Pos get fromPos => $_getN(2);
+  $11.Pos get fromPos => $_getN(2);
   @$pb.TagNumber(3)
-  set fromPos($10.Pos v) { setField(3, v); }
+  set fromPos($11.Pos v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasFromPos() => $_has(2);
   @$pb.TagNumber(3)
   void clearFromPos() => clearField(3);
   @$pb.TagNumber(3)
-  $10.Pos ensureFromPos() => $_ensure(2);
+  $11.Pos ensureFromPos() => $_ensure(2);
 }
 
 class PredictPositionsFromTextResponse extends $pb.GeneratedMessage {
@@ -547,7 +547,7 @@ class PredictPositionsFromTextResponse extends $pb.GeneratedMessage {
 
 class PredictTimeTableRequest extends $pb.GeneratedMessage {
   factory PredictTimeTableRequest({
-    $9.Uid? uid,
+    $10.Uid? uid,
     EventMaterial? eventMaterial,
     $core.bool? isGoing,
   }) {
@@ -568,7 +568,7 @@ class PredictTimeTableRequest extends $pb.GeneratedMessage {
   factory PredictTimeTableRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PredictTimeTableRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
     ..aOM<EventMaterial>(2, _omitFieldNames ? '' : 'eventMaterial', subBuilder: EventMaterial.create)
     ..aOB(3, _omitFieldNames ? '' : 'isGoing')
     ..hasRequiredFields = false
@@ -596,15 +596,15 @@ class PredictTimeTableRequest extends $pb.GeneratedMessage {
   static PredictTimeTableRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Uid get uid => $_getN(0);
+  $10.Uid get uid => $_getN(0);
   @$pb.TagNumber(1)
-  set uid($9.Uid v) { setField(1, v); }
+  set uid($10.Uid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUid() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Uid ensureUid() => $_ensure(0);
+  $10.Uid ensureUid() => $_ensure(0);
 
   /// 全て埋まった状態でリクエスト
   @$pb.TagNumber(2)
@@ -631,7 +631,7 @@ class PredictTimeTableRequest extends $pb.GeneratedMessage {
 
 class PredictTimeTableResponse extends $pb.GeneratedMessage {
   factory PredictTimeTableResponse({
-    $core.Iterable<$0.TimeTable>? timeTable,
+    $core.Iterable<$1.TimeTable>? timeTable,
   }) {
     final $result = create();
     if (timeTable != null) {
@@ -644,7 +644,7 @@ class PredictTimeTableResponse extends $pb.GeneratedMessage {
   factory PredictTimeTableResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PredictTimeTableResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..pc<$0.TimeTable>(1, _omitFieldNames ? '' : 'timeTable', $pb.PbFieldType.PM, subBuilder: $0.TimeTable.create)
+    ..pc<$1.TimeTable>(1, _omitFieldNames ? '' : 'timeTable', $pb.PbFieldType.PM, subBuilder: $1.TimeTable.create)
     ..hasRequiredFields = false
   ;
 
@@ -670,7 +670,117 @@ class PredictTimeTableResponse extends $pb.GeneratedMessage {
   static PredictTimeTableResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$0.TimeTable> get timeTable => $_getList(0);
+  $core.List<$1.TimeTable> get timeTable => $_getList(0);
+}
+
+class PredictEventItemRequest extends $pb.GeneratedMessage {
+  factory PredictEventItemRequest({
+    $10.Uid? uid,
+    $core.String? text,
+  }) {
+    final $result = create();
+    if (uid != null) {
+      $result.uid = uid;
+    }
+    if (text != null) {
+      $result.text = text;
+    }
+    return $result;
+  }
+  PredictEventItemRequest._() : super();
+  factory PredictEventItemRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PredictEventItemRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PredictEventItemRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
+    ..aOS(2, _omitFieldNames ? '' : 'text')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PredictEventItemRequest clone() => PredictEventItemRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PredictEventItemRequest copyWith(void Function(PredictEventItemRequest) updates) => super.copyWith((message) => updates(message as PredictEventItemRequest)) as PredictEventItemRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PredictEventItemRequest create() => PredictEventItemRequest._();
+  PredictEventItemRequest createEmptyInstance() => create();
+  static $pb.PbList<PredictEventItemRequest> createRepeated() => $pb.PbList<PredictEventItemRequest>();
+  @$core.pragma('dart2js:noInline')
+  static PredictEventItemRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PredictEventItemRequest>(create);
+  static PredictEventItemRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $10.Uid get uid => $_getN(0);
+  @$pb.TagNumber(1)
+  set uid($10.Uid v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUid() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUid() => clearField(1);
+  @$pb.TagNumber(1)
+  $10.Uid ensureUid() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get text => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set text($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasText() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearText() => clearField(2);
+}
+
+class PredictEventItemResponse extends $pb.GeneratedMessage {
+  factory PredictEventItemResponse({
+    $core.Iterable<$core.String>? eventItem,
+  }) {
+    final $result = create();
+    if (eventItem != null) {
+      $result.eventItem.addAll(eventItem);
+    }
+    return $result;
+  }
+  PredictEventItemResponse._() : super();
+  factory PredictEventItemResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PredictEventItemResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PredictEventItemResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'eventItem')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PredictEventItemResponse clone() => PredictEventItemResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PredictEventItemResponse copyWith(void Function(PredictEventItemResponse) updates) => super.copyWith((message) => updates(message as PredictEventItemResponse)) as PredictEventItemResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PredictEventItemResponse create() => PredictEventItemResponse._();
+  PredictEventItemResponse createEmptyInstance() => create();
+  static $pb.PbList<PredictEventItemResponse> createRepeated() => $pb.PbList<PredictEventItemResponse>();
+  @$core.pragma('dart2js:noInline')
+  static PredictEventItemResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PredictEventItemResponse>(create);
+  static PredictEventItemResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.String> get eventItem => $_getList(0);
 }
 
 
