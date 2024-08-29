@@ -808,13 +808,14 @@ class __$$TimeTableModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TimeTableModelImpl implements _TimeTableModel {
+class _$TimeTableModelImpl extends _TimeTableModel {
   const _$TimeTableModelImpl(
       {required final List<TimeTableItemModel> items,
       required this.transitCount,
       required this.walkDistance,
       required this.fare})
-      : _items = items;
+      : _items = items,
+        super._();
 
   final List<TimeTableItemModel> _items;
   @override
@@ -867,12 +868,13 @@ class _$TimeTableModelImpl implements _TimeTableModel {
           this, _$identity);
 }
 
-abstract class _TimeTableModel implements TimeTableModel {
+abstract class _TimeTableModel extends TimeTableModel {
   const factory _TimeTableModel(
       {required final List<TimeTableItemModel> items,
       required final int transitCount,
       required final int walkDistance,
       required final int fare}) = _$TimeTableModelImpl;
+  const _TimeTableModel._() : super._();
 
   @override
   List<TimeTableItemModel> get items;
@@ -991,8 +993,8 @@ class __$$TimeTableItemPointDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TimeTableItemPointDataImpl implements TimeTableItemPointData {
-  const _$TimeTableItemPointDataImpl({required this.name});
+class _$TimeTableItemPointDataImpl extends TimeTableItemPointData {
+  const _$TimeTableItemPointDataImpl({required this.name}) : super._();
 
   @override
   final String name;
@@ -1085,9 +1087,10 @@ class _$TimeTableItemPointDataImpl implements TimeTableItemPointData {
   }
 }
 
-abstract class TimeTableItemPointData implements TimeTableItemModel {
+abstract class TimeTableItemPointData extends TimeTableItemModel {
   const factory TimeTableItemPointData({required final String name}) =
       _$TimeTableItemPointDataImpl;
+  const TimeTableItemPointData._() : super._();
 
   String get name;
 
@@ -1146,8 +1149,8 @@ class __$$TimeTableItemMoveDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TimeTableItemMoveDataImpl implements TimeTableItemMoveData {
-  const _$TimeTableItemMoveDataImpl({required this.move});
+class _$TimeTableItemMoveDataImpl extends TimeTableItemMoveData {
+  const _$TimeTableItemMoveDataImpl({required this.move}) : super._();
 
   @override
   final TimeTableMoveData move;
@@ -1240,9 +1243,10 @@ class _$TimeTableItemMoveDataImpl implements TimeTableItemMoveData {
   }
 }
 
-abstract class TimeTableItemMoveData implements TimeTableItemModel {
+abstract class TimeTableItemMoveData extends TimeTableItemModel {
   const factory TimeTableItemMoveData({required final TimeTableMoveData move}) =
       _$TimeTableItemMoveDataImpl;
+  const TimeTableItemMoveData._() : super._();
 
   TimeTableMoveData get move;
 
@@ -1432,13 +1436,14 @@ class __$$OtherMoveDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OtherMoveDataImpl implements OtherMoveData {
+class _$OtherMoveDataImpl extends OtherMoveData {
   const _$OtherMoveDataImpl(
       {required this.name,
       required this.from,
       required this.to,
       required this.distance,
-      required this.lineName});
+      required this.lineName})
+      : super._();
 
   @override
   final String name;
@@ -1557,13 +1562,14 @@ class _$OtherMoveDataImpl implements OtherMoveData {
   }
 }
 
-abstract class OtherMoveData implements TimeTableMoveData {
+abstract class OtherMoveData extends TimeTableMoveData {
   const factory OtherMoveData(
       {required final String name,
       required final DateTime from,
       required final DateTime to,
       required final int distance,
       required final String lineName}) = _$OtherMoveDataImpl;
+  const OtherMoveData._() : super._();
 
   @override
   String get name;
@@ -1664,14 +1670,15 @@ class __$$TrainMoveDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrainMoveDataImpl implements TrainMoveData {
+class _$TrainMoveDataImpl extends TrainMoveData {
   const _$TrainMoveDataImpl(
       {required this.name,
       required this.from,
       required this.to,
       required this.distance,
       required this.lineName,
-      required this.transport});
+      required this.transport})
+      : super._();
 
   @override
   final String name;
@@ -1794,7 +1801,7 @@ class _$TrainMoveDataImpl implements TrainMoveData {
   }
 }
 
-abstract class TrainMoveData implements TimeTableMoveData {
+abstract class TrainMoveData extends TimeTableMoveData {
   const factory TrainMoveData(
       {required final String name,
       required final DateTime from,
@@ -1802,6 +1809,7 @@ abstract class TrainMoveData implements TimeTableMoveData {
       required final int distance,
       required final String lineName,
       required final TransportModel transport}) = _$TrainMoveDataImpl;
+  const TrainMoveData._() : super._();
 
   @override
   String get name;
@@ -1960,13 +1968,14 @@ class __$$TransportModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransportModelImpl implements _TransportModel {
+class _$TransportModelImpl extends _TransportModel {
   const _$TransportModelImpl(
       {required this.fare,
       required this.trainName,
       required this.color,
       required this.direction,
-      required this.destination});
+      required this.destination})
+      : super._();
 
   @override
   final int fare;
@@ -2013,13 +2022,14 @@ class _$TransportModelImpl implements _TransportModel {
           this, _$identity);
 }
 
-abstract class _TransportModel implements TransportModel {
+abstract class _TransportModel extends TransportModel {
   const factory _TransportModel(
       {required final int fare,
       required final String trainName,
       required final String color,
       required final String direction,
       required final String destination}) = _$TransportModelImpl;
+  const _TransportModel._() : super._();
 
   @override
   int get fare;

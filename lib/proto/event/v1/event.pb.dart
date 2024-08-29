@@ -13,19 +13,19 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../common/v1/common.pb.dart' as $9;
-import 'core.pb.dart' as $10;
-import 'core.pbenum.dart' as $10;
+import '../../common/v1/common.pb.dart' as $10;
+import 'core.pb.dart' as $11;
+import 'core.pbenum.dart' as $11;
 
 class Event extends $pb.GeneratedMessage {
   factory Event({
-    $9.Guid? id,
+    $10.Guid? id,
     $core.String? title,
     $core.String? description,
     $core.Iterable<$core.String>? eventItem,
     TimeTable? timeTable,
     UserItems? userItems,
-    $9.Uid? uid,
+    $10.Uid? uid,
   }) {
     final $result = create();
     if (id != null) {
@@ -56,13 +56,13 @@ class Event extends $pb.GeneratedMessage {
   factory Event.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Event', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $9.Guid.create)
+    ..aOM<$10.Guid>(1, _omitFieldNames ? '' : 'id', subBuilder: $10.Guid.create)
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..pPS(4, _omitFieldNames ? '' : 'eventItem')
     ..aOM<TimeTable>(5, _omitFieldNames ? '' : 'timeTable', subBuilder: TimeTable.create)
     ..aOM<UserItems>(6, _omitFieldNames ? '' : 'userItems', subBuilder: UserItems.create)
-    ..aOM<$9.Uid>(7, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
+    ..aOM<$10.Uid>(7, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
     ..hasRequiredFields = false
   ;
 
@@ -88,15 +88,15 @@ class Event extends $pb.GeneratedMessage {
   static Event? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Guid get id => $_getN(0);
+  $10.Guid get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Guid v) { setField(1, v); }
+  set id($10.Guid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Guid ensureId() => $_ensure(0);
+  $10.Guid ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get title => $_getSZ(1);
@@ -142,15 +142,15 @@ class Event extends $pb.GeneratedMessage {
   UserItems ensureUserItems() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $9.Uid get uid => $_getN(6);
+  $10.Uid get uid => $_getN(6);
   @$pb.TagNumber(7)
-  set uid($9.Uid v) { setField(7, v); }
+  set uid($10.Uid v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasUid() => $_has(6);
   @$pb.TagNumber(7)
   void clearUid() => clearField(7);
   @$pb.TagNumber(7)
-  $9.Uid ensureUid() => $_ensure(6);
+  $10.Uid ensureUid() => $_ensure(6);
 }
 
 class TimeTable extends $pb.GeneratedMessage {
@@ -241,11 +241,11 @@ class TimeTable extends $pb.GeneratedMessage {
 
 class TimeTableItem extends $pb.GeneratedMessage {
   factory TimeTableItem({
-    $10.TimeTableType? type,
+    $11.TimeTableType? type,
     $core.String? name,
     $core.String? move,
-    $10.DateTime? fromTime,
-    $10.DateTime? endTime,
+    $11.DateTime? fromTime,
+    $11.DateTime? endTime,
     $core.int? distance,
     $core.String? lineName,
     Transport? transport,
@@ -282,11 +282,11 @@ class TimeTableItem extends $pb.GeneratedMessage {
   factory TimeTableItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TimeTableItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..e<$10.TimeTableType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: $10.TimeTableType.TIME_TABLE_TYPE_UNSPECIFIED, valueOf: $10.TimeTableType.valueOf, enumValues: $10.TimeTableType.values)
+    ..e<$11.TimeTableType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: $11.TimeTableType.TIME_TABLE_TYPE_UNSPECIFIED, valueOf: $11.TimeTableType.valueOf, enumValues: $11.TimeTableType.values)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'move')
-    ..aOM<$10.DateTime>(4, _omitFieldNames ? '' : 'fromTime', subBuilder: $10.DateTime.create)
-    ..aOM<$10.DateTime>(5, _omitFieldNames ? '' : 'endTime', subBuilder: $10.DateTime.create)
+    ..aOM<$11.DateTime>(4, _omitFieldNames ? '' : 'fromTime', subBuilder: $11.DateTime.create)
+    ..aOM<$11.DateTime>(5, _omitFieldNames ? '' : 'endTime', subBuilder: $11.DateTime.create)
     ..a<$core.int>(6, _omitFieldNames ? '' : 'distance', $pb.PbFieldType.OU3)
     ..aOS(7, _omitFieldNames ? '' : 'lineName')
     ..aOM<Transport>(8, _omitFieldNames ? '' : 'transport', subBuilder: Transport.create)
@@ -315,9 +315,9 @@ class TimeTableItem extends $pb.GeneratedMessage {
   static TimeTableItem? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.TimeTableType get type => $_getN(0);
+  $11.TimeTableType get type => $_getN(0);
   @$pb.TagNumber(1)
-  set type($10.TimeTableType v) { setField(1, v); }
+  set type($11.TimeTableType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasType() => $_has(0);
   @$pb.TagNumber(1)
@@ -344,26 +344,26 @@ class TimeTableItem extends $pb.GeneratedMessage {
   void clearMove() => clearField(3);
 
   @$pb.TagNumber(4)
-  $10.DateTime get fromTime => $_getN(3);
+  $11.DateTime get fromTime => $_getN(3);
   @$pb.TagNumber(4)
-  set fromTime($10.DateTime v) { setField(4, v); }
+  set fromTime($11.DateTime v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasFromTime() => $_has(3);
   @$pb.TagNumber(4)
   void clearFromTime() => clearField(4);
   @$pb.TagNumber(4)
-  $10.DateTime ensureFromTime() => $_ensure(3);
+  $11.DateTime ensureFromTime() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $10.DateTime get endTime => $_getN(4);
+  $11.DateTime get endTime => $_getN(4);
   @$pb.TagNumber(5)
-  set endTime($10.DateTime v) { setField(5, v); }
+  set endTime($11.DateTime v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasEndTime() => $_has(4);
   @$pb.TagNumber(5)
   void clearEndTime() => clearField(5);
   @$pb.TagNumber(5)
-  $10.DateTime ensureEndTime() => $_ensure(4);
+  $11.DateTime ensureEndTime() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $core.int get distance => $_getIZ(5);
@@ -548,8 +548,8 @@ class UserItems extends $pb.GeneratedMessage {
 
 class GetEventRequest extends $pb.GeneratedMessage {
   factory GetEventRequest({
-    $9.Uid? uid,
-    $9.Guid? id,
+    $10.Uid? uid,
+    $10.Guid? id,
   }) {
     final $result = create();
     if (uid != null) {
@@ -565,8 +565,8 @@ class GetEventRequest extends $pb.GeneratedMessage {
   factory GetEventRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEventRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
-    ..aOM<$9.Guid>(2, _omitFieldNames ? '' : 'id', subBuilder: $9.Guid.create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
+    ..aOM<$10.Guid>(2, _omitFieldNames ? '' : 'id', subBuilder: $10.Guid.create)
     ..hasRequiredFields = false
   ;
 
@@ -592,26 +592,26 @@ class GetEventRequest extends $pb.GeneratedMessage {
   static GetEventRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Uid get uid => $_getN(0);
+  $10.Uid get uid => $_getN(0);
   @$pb.TagNumber(1)
-  set uid($9.Uid v) { setField(1, v); }
+  set uid($10.Uid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUid() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Uid ensureUid() => $_ensure(0);
+  $10.Uid ensureUid() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $9.Guid get id => $_getN(1);
+  $10.Guid get id => $_getN(1);
   @$pb.TagNumber(2)
-  set id($9.Guid v) { setField(2, v); }
+  set id($10.Guid v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasId() => $_has(1);
   @$pb.TagNumber(2)
   void clearId() => clearField(2);
   @$pb.TagNumber(2)
-  $9.Guid ensureId() => $_ensure(1);
+  $10.Guid ensureId() => $_ensure(1);
 }
 
 class GetEventResponse extends $pb.GeneratedMessage {
@@ -668,7 +668,7 @@ class GetEventResponse extends $pb.GeneratedMessage {
 
 class GetEventsRequest extends $pb.GeneratedMessage {
   factory GetEventsRequest({
-    $9.Uid? uid,
+    $10.Uid? uid,
   }) {
     final $result = create();
     if (uid != null) {
@@ -681,7 +681,7 @@ class GetEventsRequest extends $pb.GeneratedMessage {
   factory GetEventsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEventsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
     ..hasRequiredFields = false
   ;
 
@@ -707,15 +707,15 @@ class GetEventsRequest extends $pb.GeneratedMessage {
   static GetEventsRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Uid get uid => $_getN(0);
+  $10.Uid get uid => $_getN(0);
   @$pb.TagNumber(1)
-  set uid($9.Uid v) { setField(1, v); }
+  set uid($10.Uid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUid() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Uid ensureUid() => $_ensure(0);
+  $10.Uid ensureUid() => $_ensure(0);
 }
 
 class GetEventsResponse extends $pb.GeneratedMessage {
@@ -764,7 +764,7 @@ class GetEventsResponse extends $pb.GeneratedMessage {
 
 class CreateEventRequest extends $pb.GeneratedMessage {
   factory CreateEventRequest({
-    $9.Uid? uid,
+    $10.Uid? uid,
     $core.String? title,
     $core.String? description,
     $core.Iterable<$core.String>? eventItem,
@@ -797,7 +797,7 @@ class CreateEventRequest extends $pb.GeneratedMessage {
   factory CreateEventRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateEventRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..pPS(4, _omitFieldNames ? '' : 'eventItem')
@@ -828,15 +828,15 @@ class CreateEventRequest extends $pb.GeneratedMessage {
   static CreateEventRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Uid get uid => $_getN(0);
+  $10.Uid get uid => $_getN(0);
   @$pb.TagNumber(1)
-  set uid($9.Uid v) { setField(1, v); }
+  set uid($10.Uid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUid() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Uid ensureUid() => $_ensure(0);
+  $10.Uid ensureUid() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get title => $_getSZ(1);
@@ -936,8 +936,8 @@ class CreateEventResponse extends $pb.GeneratedMessage {
 
 class UpdateEventRequest extends $pb.GeneratedMessage {
   factory UpdateEventRequest({
-    $9.Uid? uid,
-    $9.Guid? id,
+    $10.Uid? uid,
+    $10.Guid? id,
     Event? event,
   }) {
     final $result = create();
@@ -957,8 +957,8 @@ class UpdateEventRequest extends $pb.GeneratedMessage {
   factory UpdateEventRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEventRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
-    ..aOM<$9.Guid>(2, _omitFieldNames ? '' : 'id', subBuilder: $9.Guid.create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
+    ..aOM<$10.Guid>(2, _omitFieldNames ? '' : 'id', subBuilder: $10.Guid.create)
     ..aOM<Event>(3, _omitFieldNames ? '' : 'event', subBuilder: Event.create)
     ..hasRequiredFields = false
   ;
@@ -985,26 +985,26 @@ class UpdateEventRequest extends $pb.GeneratedMessage {
   static UpdateEventRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Uid get uid => $_getN(0);
+  $10.Uid get uid => $_getN(0);
   @$pb.TagNumber(1)
-  set uid($9.Uid v) { setField(1, v); }
+  set uid($10.Uid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUid() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Uid ensureUid() => $_ensure(0);
+  $10.Uid ensureUid() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $9.Guid get id => $_getN(1);
+  $10.Guid get id => $_getN(1);
   @$pb.TagNumber(2)
-  set id($9.Guid v) { setField(2, v); }
+  set id($10.Guid v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasId() => $_has(1);
   @$pb.TagNumber(2)
   void clearId() => clearField(2);
   @$pb.TagNumber(2)
-  $9.Guid ensureId() => $_ensure(1);
+  $10.Guid ensureId() => $_ensure(1);
 
   @$pb.TagNumber(3)
   Event get event => $_getN(2);
@@ -1072,15 +1072,15 @@ class UpdateEventResponse extends $pb.GeneratedMessage {
 
 class DeleteEventRequest extends $pb.GeneratedMessage {
   factory DeleteEventRequest({
-    $9.Uid? uid,
-    $9.Guid? guid,
+    $10.Uid? uid,
+    $10.Guid? id,
   }) {
     final $result = create();
     if (uid != null) {
       $result.uid = uid;
     }
-    if (guid != null) {
-      $result.guid = guid;
+    if (id != null) {
+      $result.id = id;
     }
     return $result;
   }
@@ -1089,8 +1089,8 @@ class DeleteEventRequest extends $pb.GeneratedMessage {
   factory DeleteEventRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteEventRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'event.v1'), createEmptyInstance: create)
-    ..aOM<$9.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $9.Uid.create)
-    ..aOM<$9.Guid>(2, _omitFieldNames ? '' : 'guid', subBuilder: $9.Guid.create)
+    ..aOM<$10.Uid>(1, _omitFieldNames ? '' : 'uid', subBuilder: $10.Uid.create)
+    ..aOM<$10.Guid>(2, _omitFieldNames ? '' : 'id', subBuilder: $10.Guid.create)
     ..hasRequiredFields = false
   ;
 
@@ -1116,26 +1116,26 @@ class DeleteEventRequest extends $pb.GeneratedMessage {
   static DeleteEventRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Uid get uid => $_getN(0);
+  $10.Uid get uid => $_getN(0);
   @$pb.TagNumber(1)
-  set uid($9.Uid v) { setField(1, v); }
+  set uid($10.Uid v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUid() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Uid ensureUid() => $_ensure(0);
+  $10.Uid ensureUid() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $9.Guid get guid => $_getN(1);
+  $10.Guid get id => $_getN(1);
   @$pb.TagNumber(2)
-  set guid($9.Guid v) { setField(2, v); }
+  set id($10.Guid v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasGuid() => $_has(1);
+  $core.bool hasId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearGuid() => clearField(2);
+  void clearId() => clearField(2);
   @$pb.TagNumber(2)
-  $9.Guid ensureGuid() => $_ensure(1);
+  $10.Guid ensureId() => $_ensure(1);
 }
 
 class DeleteEventResponse extends $pb.GeneratedMessage {

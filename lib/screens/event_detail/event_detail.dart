@@ -34,7 +34,7 @@ class EventDetailScreen extends ConsumerWidget {
           children: [
             if (event != null) ...[
               const SizedBox(height: 20),
-              TimeTable(event: event),
+              TimeTableView(timeTable: event.timeTable),
               const SizedBox(height: 20),
               EventItemList(event: event),
               const SizedBox(height: 40),

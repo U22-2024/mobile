@@ -15,32 +15,32 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'event.pb.dart' as $0;
+import 'event.pb.dart' as $1;
 
 export 'event.pb.dart';
 
 @$pb.GrpcServiceName('event.v1.EventService')
 class EventServiceClient extends $grpc.Client {
-  static final _$getEvent = $grpc.ClientMethod<$0.GetEventRequest, $0.GetEventResponse>(
+  static final _$getEvent = $grpc.ClientMethod<$1.GetEventRequest, $1.GetEventResponse>(
       '/event.v1.EventService/GetEvent',
-      ($0.GetEventRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.GetEventResponse.fromBuffer(value));
-  static final _$getEvents = $grpc.ClientMethod<$0.GetEventsRequest, $0.GetEventsResponse>(
+      ($1.GetEventRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.GetEventResponse.fromBuffer(value));
+  static final _$getEvents = $grpc.ClientMethod<$1.GetEventsRequest, $1.GetEventsResponse>(
       '/event.v1.EventService/GetEvents',
-      ($0.GetEventsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.GetEventsResponse.fromBuffer(value));
-  static final _$createEvent = $grpc.ClientMethod<$0.CreateEventRequest, $0.CreateEventResponse>(
+      ($1.GetEventsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.GetEventsResponse.fromBuffer(value));
+  static final _$createEvent = $grpc.ClientMethod<$1.CreateEventRequest, $1.CreateEventResponse>(
       '/event.v1.EventService/CreateEvent',
-      ($0.CreateEventRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.CreateEventResponse.fromBuffer(value));
-  static final _$updateEvent = $grpc.ClientMethod<$0.UpdateEventRequest, $0.UpdateEventResponse>(
+      ($1.CreateEventRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.CreateEventResponse.fromBuffer(value));
+  static final _$updateEvent = $grpc.ClientMethod<$1.UpdateEventRequest, $1.UpdateEventResponse>(
       '/event.v1.EventService/UpdateEvent',
-      ($0.UpdateEventRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.UpdateEventResponse.fromBuffer(value));
-  static final _$deleteEvent = $grpc.ClientMethod<$0.DeleteEventRequest, $0.DeleteEventResponse>(
+      ($1.UpdateEventRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.UpdateEventResponse.fromBuffer(value));
+  static final _$deleteEvent = $grpc.ClientMethod<$1.DeleteEventRequest, $1.DeleteEventResponse>(
       '/event.v1.EventService/DeleteEvent',
-      ($0.DeleteEventRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.DeleteEventResponse.fromBuffer(value));
+      ($1.DeleteEventRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.DeleteEventResponse.fromBuffer(value));
 
   EventServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -48,23 +48,23 @@ class EventServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$0.GetEventResponse> getEvent($0.GetEventRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$1.GetEventResponse> getEvent($1.GetEventRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getEvent, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.GetEventsResponse> getEvents($0.GetEventsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$1.GetEventsResponse> getEvents($1.GetEventsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getEvents, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.CreateEventResponse> createEvent($0.CreateEventRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$1.CreateEventResponse> createEvent($1.CreateEventRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createEvent, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.UpdateEventResponse> updateEvent($0.UpdateEventRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$1.UpdateEventResponse> updateEvent($1.UpdateEventRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateEvent, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.DeleteEventResponse> deleteEvent($0.DeleteEventRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$1.DeleteEventResponse> deleteEvent($1.DeleteEventRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteEvent, request, options: options);
   }
 }
@@ -74,66 +74,66 @@ abstract class EventServiceBase extends $grpc.Service {
   $core.String get $name => 'event.v1.EventService';
 
   EventServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.GetEventRequest, $0.GetEventResponse>(
+    $addMethod($grpc.ServiceMethod<$1.GetEventRequest, $1.GetEventResponse>(
         'GetEvent',
         getEvent_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetEventRequest.fromBuffer(value),
-        ($0.GetEventResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetEventsRequest, $0.GetEventsResponse>(
+        ($core.List<$core.int> value) => $1.GetEventRequest.fromBuffer(value),
+        ($1.GetEventResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.GetEventsRequest, $1.GetEventsResponse>(
         'GetEvents',
         getEvents_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetEventsRequest.fromBuffer(value),
-        ($0.GetEventsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.CreateEventRequest, $0.CreateEventResponse>(
+        ($core.List<$core.int> value) => $1.GetEventsRequest.fromBuffer(value),
+        ($1.GetEventsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.CreateEventRequest, $1.CreateEventResponse>(
         'CreateEvent',
         createEvent_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.CreateEventRequest.fromBuffer(value),
-        ($0.CreateEventResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateEventRequest, $0.UpdateEventResponse>(
+        ($core.List<$core.int> value) => $1.CreateEventRequest.fromBuffer(value),
+        ($1.CreateEventResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.UpdateEventRequest, $1.UpdateEventResponse>(
         'UpdateEvent',
         updateEvent_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.UpdateEventRequest.fromBuffer(value),
-        ($0.UpdateEventResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.DeleteEventRequest, $0.DeleteEventResponse>(
+        ($core.List<$core.int> value) => $1.UpdateEventRequest.fromBuffer(value),
+        ($1.UpdateEventResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.DeleteEventRequest, $1.DeleteEventResponse>(
         'DeleteEvent',
         deleteEvent_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.DeleteEventRequest.fromBuffer(value),
-        ($0.DeleteEventResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $1.DeleteEventRequest.fromBuffer(value),
+        ($1.DeleteEventResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.GetEventResponse> getEvent_Pre($grpc.ServiceCall call, $async.Future<$0.GetEventRequest> request) async {
+  $async.Future<$1.GetEventResponse> getEvent_Pre($grpc.ServiceCall call, $async.Future<$1.GetEventRequest> request) async {
     return getEvent(call, await request);
   }
 
-  $async.Future<$0.GetEventsResponse> getEvents_Pre($grpc.ServiceCall call, $async.Future<$0.GetEventsRequest> request) async {
+  $async.Future<$1.GetEventsResponse> getEvents_Pre($grpc.ServiceCall call, $async.Future<$1.GetEventsRequest> request) async {
     return getEvents(call, await request);
   }
 
-  $async.Future<$0.CreateEventResponse> createEvent_Pre($grpc.ServiceCall call, $async.Future<$0.CreateEventRequest> request) async {
+  $async.Future<$1.CreateEventResponse> createEvent_Pre($grpc.ServiceCall call, $async.Future<$1.CreateEventRequest> request) async {
     return createEvent(call, await request);
   }
 
-  $async.Future<$0.UpdateEventResponse> updateEvent_Pre($grpc.ServiceCall call, $async.Future<$0.UpdateEventRequest> request) async {
+  $async.Future<$1.UpdateEventResponse> updateEvent_Pre($grpc.ServiceCall call, $async.Future<$1.UpdateEventRequest> request) async {
     return updateEvent(call, await request);
   }
 
-  $async.Future<$0.DeleteEventResponse> deleteEvent_Pre($grpc.ServiceCall call, $async.Future<$0.DeleteEventRequest> request) async {
+  $async.Future<$1.DeleteEventResponse> deleteEvent_Pre($grpc.ServiceCall call, $async.Future<$1.DeleteEventRequest> request) async {
     return deleteEvent(call, await request);
   }
 
-  $async.Future<$0.GetEventResponse> getEvent($grpc.ServiceCall call, $0.GetEventRequest request);
-  $async.Future<$0.GetEventsResponse> getEvents($grpc.ServiceCall call, $0.GetEventsRequest request);
-  $async.Future<$0.CreateEventResponse> createEvent($grpc.ServiceCall call, $0.CreateEventRequest request);
-  $async.Future<$0.UpdateEventResponse> updateEvent($grpc.ServiceCall call, $0.UpdateEventRequest request);
-  $async.Future<$0.DeleteEventResponse> deleteEvent($grpc.ServiceCall call, $0.DeleteEventRequest request);
+  $async.Future<$1.GetEventResponse> getEvent($grpc.ServiceCall call, $1.GetEventRequest request);
+  $async.Future<$1.GetEventsResponse> getEvents($grpc.ServiceCall call, $1.GetEventsRequest request);
+  $async.Future<$1.CreateEventResponse> createEvent($grpc.ServiceCall call, $1.CreateEventRequest request);
+  $async.Future<$1.UpdateEventResponse> updateEvent($grpc.ServiceCall call, $1.UpdateEventRequest request);
+  $async.Future<$1.DeleteEventResponse> deleteEvent($grpc.ServiceCall call, $1.DeleteEventRequest request);
 }

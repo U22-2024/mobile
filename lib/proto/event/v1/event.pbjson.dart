@@ -226,14 +226,14 @@ const DeleteEventRequest$json = {
   '1': 'DeleteEventRequest',
   '2': [
     {'1': 'uid', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Uid', '10': 'uid'},
-    {'1': 'guid', '3': 2, '4': 1, '5': 11, '6': '.common.v1.Guid', '10': 'guid'},
+    {'1': 'id', '3': 2, '4': 1, '5': 11, '6': '.common.v1.Guid', '10': 'id'},
   ],
 };
 
 /// Descriptor for `DeleteEventRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteEventRequestDescriptor = $convert.base64Decode(
-    'ChJEZWxldGVFdmVudFJlcXVlc3QSIAoDdWlkGAEgASgLMg4uY29tbW9uLnYxLlVpZFIDdWlkEi'
-    'MKBGd1aWQYAiABKAsyDy5jb21tb24udjEuR3VpZFIEZ3VpZA==');
+    'ChJEZWxldGVFdmVudFJlcXVlc3QSIAoDdWlkGAEgASgLMg4uY29tbW9uLnYxLlVpZFIDdWlkEh'
+    '8KAmlkGAIgASgLMg8uY29tbW9uLnYxLkd1aWRSAmlk');
 
 @$core.Deprecated('Use deleteEventResponseDescriptor instead')
 const DeleteEventResponse$json = {

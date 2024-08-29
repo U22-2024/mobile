@@ -141,3 +141,30 @@ final $typed_data.Uint8List predictTimeTableResponseDescriptor = $convert.base64
     'ChhQcmVkaWN0VGltZVRhYmxlUmVzcG9uc2USMgoKdGltZV90YWJsZRgBIAMoCzITLmV2ZW50Ln'
     'YxLlRpbWVUYWJsZVIJdGltZVRhYmxl');
 
+@$core.Deprecated('Use predictEventItemRequestDescriptor instead')
+const PredictEventItemRequest$json = {
+  '1': 'PredictEventItemRequest',
+  '2': [
+    {'1': 'uid', '3': 1, '4': 1, '5': 11, '6': '.common.v1.Uid', '10': 'uid'},
+    {'1': 'text', '3': 2, '4': 1, '5': 9, '10': 'text'},
+  ],
+};
+
+/// Descriptor for `PredictEventItemRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List predictEventItemRequestDescriptor = $convert.base64Decode(
+    'ChdQcmVkaWN0RXZlbnRJdGVtUmVxdWVzdBIgCgN1aWQYASABKAsyDi5jb21tb24udjEuVWlkUg'
+    'N1aWQSEgoEdGV4dBgCIAEoCVIEdGV4dA==');
+
+@$core.Deprecated('Use predictEventItemResponseDescriptor instead')
+const PredictEventItemResponse$json = {
+  '1': 'PredictEventItemResponse',
+  '2': [
+    {'1': 'event_item', '3': 1, '4': 3, '5': 9, '10': 'eventItem'},
+  ],
+};
+
+/// Descriptor for `PredictEventItemResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List predictEventItemResponseDescriptor = $convert.base64Decode(
+    'ChhQcmVkaWN0RXZlbnRJdGVtUmVzcG9uc2USHQoKZXZlbnRfaXRlbRgBIAMoCVIJZXZlbnRJdG'
+    'Vt');
+

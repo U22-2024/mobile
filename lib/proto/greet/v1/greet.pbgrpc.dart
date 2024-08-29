@@ -15,16 +15,16 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'greet.pb.dart' as $2;
+import 'greet.pb.dart' as $3;
 
 export 'greet.pb.dart';
 
 @$pb.GrpcServiceName('greet.v1.GreetService')
 class GreetServiceClient extends $grpc.Client {
-  static final _$getGreet = $grpc.ClientMethod<$2.GetGreetRequest, $2.GetGreetResponse>(
+  static final _$getGreet = $grpc.ClientMethod<$3.GetGreetRequest, $3.GetGreetResponse>(
       '/greet.v1.GreetService/GetGreet',
-      ($2.GetGreetRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $2.GetGreetResponse.fromBuffer(value));
+      ($3.GetGreetRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $3.GetGreetResponse.fromBuffer(value));
 
   GreetServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -32,7 +32,7 @@ class GreetServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$2.GetGreetResponse> getGreet($2.GetGreetRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$3.GetGreetResponse> getGreet($3.GetGreetRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getGreet, request, options: options);
   }
 }
@@ -42,18 +42,18 @@ abstract class GreetServiceBase extends $grpc.Service {
   $core.String get $name => 'greet.v1.GreetService';
 
   GreetServiceBase() {
-    $addMethod($grpc.ServiceMethod<$2.GetGreetRequest, $2.GetGreetResponse>(
+    $addMethod($grpc.ServiceMethod<$3.GetGreetRequest, $3.GetGreetResponse>(
         'GetGreet',
         getGreet_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $2.GetGreetRequest.fromBuffer(value),
-        ($2.GetGreetResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $3.GetGreetRequest.fromBuffer(value),
+        ($3.GetGreetResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$2.GetGreetResponse> getGreet_Pre($grpc.ServiceCall call, $async.Future<$2.GetGreetRequest> request) async {
+  $async.Future<$3.GetGreetResponse> getGreet_Pre($grpc.ServiceCall call, $async.Future<$3.GetGreetRequest> request) async {
     return getGreet(call, await request);
   }
 
-  $async.Future<$2.GetGreetResponse> getGreet($grpc.ServiceCall call, $2.GetGreetRequest request);
+  $async.Future<$3.GetGreetResponse> getGreet($grpc.ServiceCall call, $3.GetGreetRequest request);
 }

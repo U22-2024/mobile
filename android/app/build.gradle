@@ -28,7 +28,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "jp.ac.kagawa_nct.sr.mobile"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
