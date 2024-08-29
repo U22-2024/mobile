@@ -6,6 +6,20 @@ part of 'event_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$clientHash() => r'c16a36c76fdb9fe96e43f6b7606a58ab321ed5e0';
+
+/// See also [_client].
+@ProviderFor(_client)
+final _clientProvider = AutoDisposeProvider<EventServiceClient>.internal(
+  _client,
+  name: r'_clientProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$clientHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _ClientRef = AutoDisposeProviderRef<EventServiceClient>;
 String _$leastEventHash() => r'0fd10d1b97e33644f4c487031e3363172767617d';
 
 /// See also [leastEvent].
@@ -20,7 +34,7 @@ final leastEventProvider = AutoDisposeFutureProvider<EventModel?>.internal(
 );
 
 typedef LeastEventRef = AutoDisposeFutureProviderRef<EventModel?>;
-String _$eventRepositoryHash() => r'0d1adbf3aa95924985e469e2d10a296acbe9a764';
+String _$eventRepositoryHash() => r'8c40514a6c1965e2be781e99eb2bcb9296adeea8';
 
 /// See also [EventRepository].
 @ProviderFor(EventRepository)

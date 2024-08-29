@@ -1,8 +1,19 @@
+import 'package:mobile/domain/auth/user_repository.dart';
+import 'package:mobile/domain/grpc/auth_interceptor.dart';
+import 'package:mobile/domain/grpc/grpc.dart';
+import 'package:mobile/proto/common/v1/common.pb.dart';
+import 'package:mobile/proto/event/v1/event.pbgrpc.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'event_model.dart';
 
 part 'event_repository.g.dart';
+
+@riverpod
+EventServiceClient _client(_ClientRef ref) {
+  final channel = ref.watch(grpcChannelProvider);
+  return EventServiceClient(channel, interceptors: [AuthInterceptor()]);
+}
 
 @riverpod
 class EventRepository extends _$EventRepository {
@@ -12,135 +23,13 @@ class EventRepository extends _$EventRepository {
   }
 
   Future<List<EventModel>> _fetch() async {
-    await Future.delayed(const Duration(seconds: 1));
-
-    // TODO: 仮データを返す
-    return [
-      EventModel(
-        id: const EventModelId('1'),
-        title: '講演会',
-        items: const [
-          EventItemModel(value: '10:00に出発、電車とバスを乗り継いで会場に向かう'),
-          EventItemModel(value: '持ち物：筆記用具、飲み物'),
-          EventItemModel(value: "アドバイス：会場には10分前につくようにした方が良いよ"),
-        ],
-        userItems: const [
-          UserItemModel(value: '水筒には水を入れておく'),
-          UserItemModel(value: '筆記用具は黒ボールペンを持参する'),
-          UserItemModel(value: '水筒には水を入れておく'),
-          UserItemModel(value: '筆記用具は黒ボールペンを持参する'),
-        ],
-        timeTable: TimeTableModel(
-          items: [
-            const TimeTableItemModel.point(
-              name: '自宅',
-            ),
-            TimeTableItemModel.move(
-              move: TimeTableMoveData.train(
-                name: '電車',
-                from: DateTime.now(),
-                to: DateTime.now(),
-                distance: 0,
-                lineName: '山手線',
-                transport: const TransportModel(
-                  fare: 0,
-                  trainName: '山手線',
-                  color: 'green',
-                  direction: '内回り',
-                  destination: '新宿',
-                ),
-              ),
-            ),
-            TimeTableItemModel.move(
-              move: TimeTableMoveData.other(
-                name: '新宿駅',
-                from: DateTime.now(),
-                to: DateTime.now(),
-                distance: 0,
-                lineName: '山手線',
-              ),
-            ),
-            const TimeTableItemModel.point(
-              name: '新宿駅',
-            ),
-            TimeTableItemModel.move(
-              move: TimeTableMoveData.other(
-                name: 'バス',
-                from: DateTime.now(),
-                to: DateTime.now(),
-                distance: 0,
-                lineName: 'バス',
-              ),
-            ),
-          ],
-          transitCount: 0,
-          walkDistance: 0,
-          fare: 0,
-        ),
+    final client = ref.read(_clientProvider);
+    final res = await client.getEvents(GetEventsRequest(
+      uid: Uid(
+        value: (await ref.read(authStateChangeProvider.future))?.uid,
       ),
-      EventModel(
-        id: const EventModelId('2'),
-        title: '打ち合わせ',
-        items: const [
-          EventItemModel(value: '13:00に出発、電車で会社に向かう'),
-          EventItemModel(value: '持ち物：資料、PC'),
-          EventItemModel(value: "アドバイス：会社には10分前につくようにした方が良いよ"),
-        ],
-        userItems: const [
-          UserItemModel(value: 'PCはバッテリーが十分に充電されているか確認する'),
-          UserItemModel(value: '資料はメールで送っておく'),
-          UserItemModel(value: "アドバイス：会社には10分前につくようにした方が良いよ"),
-          UserItemModel(value: "アドバイス：会社には10分前につくようにした方が良いよ"),
-        ],
-        timeTable: TimeTableModel(
-          items: [
-            const TimeTableItemModel.point(
-              name: '自宅',
-            ),
-            TimeTableItemModel.move(
-              move: TimeTableMoveData.train(
-                name: '電車',
-                from: DateTime.now(),
-                to: DateTime.now(),
-                distance: 0,
-                lineName: '山手線',
-                transport: const TransportModel(
-                  fare: 0,
-                  trainName: '山手線',
-                  color: 'green',
-                  direction: '内回り',
-                  destination: '新宿',
-                ),
-              ),
-            ),
-            TimeTableItemModel.move(
-              move: TimeTableMoveData.other(
-                name: '新宿駅',
-                from: DateTime.now(),
-                to: DateTime.now(),
-                distance: 0,
-                lineName: '山手線',
-              ),
-            ),
-            const TimeTableItemModel.point(
-              name: '新宿駅',
-            ),
-            TimeTableItemModel.move(
-              move: TimeTableMoveData.other(
-                name: '会社',
-                from: DateTime.now(),
-                to: DateTime.now(),
-                distance: 0,
-                lineName: 'バス',
-              ),
-            ),
-          ],
-          transitCount: 0,
-          walkDistance: 0,
-          fare: 0,
-        ),
-      ),
-    ];
+    ));
+    return res.events.map((e) => EventModel.fromGrpc(event: e)).toList();
   }
 }
 

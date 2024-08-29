@@ -1,4 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mobile/domain/grpc/converter.dart';
+import 'package:mobile/proto/event/v1/core.pb.dart' as $core;
+import 'package:mobile/proto/event/v1/event.pb.dart';
 
 part 'event_model.freezed.dart';
 
@@ -18,6 +21,18 @@ class EventModel with _$EventModel {
     required TimeTableModel timeTable,
     required List<UserItemModel> userItems,
   }) = _EventModel;
+
+  factory EventModel.fromGrpc({required Event event}) {
+    return EventModel(
+      id: EventModelId(event.id.value),
+      title: event.title,
+      description: event.description,
+      items: event.eventItem.map((e) => EventItemModel(value: e)).toList(),
+      timeTable: TimeTableModel.fromGrpc(timeTable: event.timeTable),
+      userItems:
+          event.userItems.item.map((e) => UserItemModel(value: e)).toList(),
+    );
+  }
 
   static EventModel empty() => const EventModel(
         id: EventModelId(""),
@@ -57,6 +72,15 @@ class TimeTableModel with _$TimeTableModel {
     required int walkDistance,
     required int fare,
   }) = _TimeTableModel;
+
+  factory TimeTableModel.fromGrpc({required TimeTable timeTable}) {
+    return TimeTableModel(
+      items: timeTable.item.map((e) => TimeTableItemModel.fromGrpc(e)).toList(),
+      transitCount: timeTable.transitCount,
+      walkDistance: timeTable.walkDistance,
+      fare: timeTable.fare,
+    );
+  }
 }
 
 @freezed
@@ -68,6 +92,16 @@ sealed class TimeTableItemModel with _$TimeTableItemModel {
   const factory TimeTableItemModel.move({
     required TimeTableMoveData move,
   }) = TimeTableItemMoveData;
+
+  factory TimeTableItemModel.fromGrpc(TimeTableItem item) {
+    if (item.type == $core.TimeTableType.TIME_TABLE_TYPE_POINT) {
+      return TimeTableItemModel.point(name: item.name);
+    } else if (item.type == $core.TimeTableType.TIME_TABLE_TYPE_MOVE) {
+      return TimeTableItemModel.move(move: TimeTableMoveData.fromGrpc(item));
+    } else {
+      throw Exception("Invalid TimeTableItem");
+    }
+  }
 }
 
 @freezed
@@ -88,6 +122,27 @@ sealed class TimeTableMoveData with _$TimeTableMoveData {
     required String lineName,
     required TransportModel transport,
   }) = TrainMoveData;
+
+  factory TimeTableMoveData.fromGrpc(TimeTableItem item) {
+    if (item.move == "train") {
+      return TimeTableMoveData.train(
+        name: item.name,
+        from: item.fromTime.toDateTime()!,
+        to: item.endTime.toDateTime()!,
+        distance: item.distance,
+        lineName: item.lineName,
+        transport: TransportModel.fromGrpc(item.transport),
+      );
+    } else {
+      return TimeTableMoveData.other(
+        name: item.name,
+        from: item.fromTime.toDateTime()!,
+        to: item.endTime.toDateTime()!,
+        distance: item.distance,
+        lineName: item.lineName,
+      );
+    }
+  }
 }
 
 @freezed
@@ -99,5 +154,15 @@ class TransportModel with _$TransportModel {
     required String direction,
     required String destination,
   }) = _TransportModel;
+
+  factory TransportModel.fromGrpc(Transport transport) {
+    return TransportModel(
+      fare: transport.fare,
+      trainName: transport.trainName,
+      color: transport.color,
+      direction: transport.direction,
+      destination: transport.destination,
+    );
+  }
 }
 //#endregion
