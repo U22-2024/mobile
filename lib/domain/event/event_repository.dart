@@ -69,6 +69,23 @@ class EventRepository extends _$EventRepository {
       );
     }
   }
+
+  Future<void> delete(EventModelId eventId) async {
+    final client = ref.read(_clientProvider);
+    final user = await ref.read(authStateChangeProvider.future);
+    await client.deleteEvent(DeleteEventRequest(
+      uid: Uid(value: user?.uid),
+      id: Guid(value: eventId.value),
+    ));
+
+    if (state.value != null) {
+      state = AsyncValue.data(
+        state.value!.where((e) => e.id != eventId).toList(),
+      );
+    } else {
+      state = const AsyncValue.data([]);
+    }
+  }
 }
 
 @riverpod

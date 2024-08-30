@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/event/event_model.dart';
 import 'package:mobile/domain/event/event_repository.dart';
+import 'package:mobile/screens/event_detail/widgets/detail_setting.dart';
 import 'package:mobile/screens/event_detail/widgets/event_item_list.dart';
 
 import 'widgets/time_table.dart';
@@ -27,6 +28,9 @@ class EventDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(event?.title ?? "不明なイベント"),
+        actions: [
+          DetailSetting(eventId: eventId),
+        ],
       ),
       body: Container(
         alignment: Alignment.topCenter,
