@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile/domain/event/event_model.dart';
 import 'package:mobile/domain/event/event_repository.dart';
+import 'package:mobile/screens/event_detail/widgets/event_item_list.dart';
 
-import 'widgets/event_item_list.dart';
 import 'widgets/time_table.dart';
 
 class EventDetailScreen extends ConsumerWidget {
@@ -30,16 +30,19 @@ class EventDetailScreen extends ConsumerWidget {
       ),
       body: Container(
         alignment: Alignment.topCenter,
-        child: Column(
-          children: [
-            if (event != null) ...[
-              const SizedBox(height: 20),
-              TimeTableView(timeTable: event.timeTable),
-              const SizedBox(height: 20),
-              EventItemList(event: event),
-              const SizedBox(height: 40),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (event != null) ...[
+                const SizedBox(height: 20),
+                TimeTableView(timeTable: event.timeTable),
+                const SizedBox(height: 20),
+                EventItemList(event: event),
+                const SizedBox(height: 40),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

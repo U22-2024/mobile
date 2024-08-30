@@ -13,6 +13,9 @@ class TimeTableView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = timeTable.items;
+    if (items.isEmpty) {
+      return const SizedBox();
+    }
     const emptyPointData = TimeTableItemPointData(name: "");
     List<Widget> itemWidgets = [];
 
