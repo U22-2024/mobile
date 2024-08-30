@@ -62,6 +62,10 @@ class StartAndEndTimeForm extends HookConsumerWidget {
                       selectedStart.value!.isAfter(selectedEnd.value!)) {
                     return '開始時間は終了時間より前にしてください';
                   }
+                  if (selectedStart.value != null &&
+                      selectedStart.value!.isBefore(DateTime.now())) {
+                    return '開始時間は現在時刻より後にしてください';
+                  }
                   return null;
                 },
                 onTap: () async {
@@ -124,6 +128,10 @@ class StartAndEndTimeForm extends HookConsumerWidget {
                   if (selectedStart.value != null &&
                       selectedEnd.value!.isBefore(selectedStart.value!)) {
                     return '終了時間は開始時間より後にしてください';
+                  }
+                  if (selectedEnd.value != null &&
+                      selectedEnd.value!.isBefore(DateTime.now())) {
+                    return '終了時間は現在時刻より後にしてください';
                   }
                   return null;
                 },
